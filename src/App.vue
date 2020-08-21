@@ -1,28 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div id="status">
+      <ForcePoints />
+      <MagicPoints />
+      <GoldPoints />
+      <Dices />
+    </div>
+
+    <PlayerCards />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ForcePoints from './components/points/Force.vue'
+import MagicPoints from './components/points/Magic.vue'
+import GoldPoints from './components/points/Gold.vue'
+import Dices from './components/Dices.vue'
+import PlayerCards from './components/PlayerCards.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ForcePoints, MagicPoints, GoldPoints, Dices, PlayerCards
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  #status {
+    float: left;
+  }
 </style>
