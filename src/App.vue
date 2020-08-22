@@ -5,6 +5,7 @@
       <Dices />
     </div>
 
+    <Board />
     <Hand />
   </div>
 </template>
@@ -13,11 +14,12 @@
 import Dices from './components/Dices'
 import Resources from './components/resources/Resources'
 import Hand from './components/player/Hand'
+import Board from './components/board/Board'
 
 export default {
   name: 'App',
   components: {
-    Resources, Dices, Hand
+    Resources, Dices, Hand, Board
   }
 }
 </script>

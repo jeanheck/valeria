@@ -11,6 +11,11 @@ const store = new Vuex.Store({
         force: 0
       },
       hand: []
+    },
+    board: {
+      citizens: [],
+      monsters: [],
+      domains: []
     }
   },
   mutations: {
@@ -25,6 +30,10 @@ const store = new Vuex.Store({
     addCitizenToHand(state, card) {
       state.player.hand.push(card);
       console.log(`A carta ${card.name} foi adicionada a mão do jogador!`);
+    },
+    addCitizenToBoard(state, card) {
+      state.board.citizens.push(card);
+      console.log(`A carta ${card.name} foi adicionada ao board!`);
     },
   }
 })

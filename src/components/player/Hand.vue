@@ -1,5 +1,5 @@
 <template>
-  <div id="player-cards">
+  <div id="hand">
     <h1>Player cards</h1>
 	
 		<ul v-for="card in this.$store.state.player.hand" :card="card" :key="card.id">
@@ -49,9 +49,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-	#player-cards {
+	#hand {
 		border: 1px solid black;
-		width: 50%;
+		width: 20%;
 		float: right;
 	}
 </style>
