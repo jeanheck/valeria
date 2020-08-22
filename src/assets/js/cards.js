@@ -6,8 +6,8 @@ export const citizens = {
     name: "Camponês Inicial",
     diceValues: [5],
     rewardDescription: "+1 Gold",
-    reward: (PlayerCards) => {
-      PlayerCards.$parent.$emit('add-gold-points', 1)
+    reward: (store) => {
+      store.commit('addResource', {type: 'gold', value: 1})
     }
   },
   INIT_KNIGHT: {
@@ -15,8 +15,8 @@ export const citizens = {
     type: 'INIT',
     name: "Cavaleiro Inicial",
     diceValues: [6],
-    reward: (PlayerCards) => {
-      PlayerCards.$parent.$emit('add-force-points', 1)
+    reward: (store) => {
+      store.commit('addResource', {type: 'force', value: 1})
     }
   },
   //Another citizen cards
@@ -26,8 +26,8 @@ export const citizens = {
     name: "Clérigo",
     diceValues: [1],
     rewardDescription: "+3 Magic",
-    reward: (PlayerCards) => {
-      PlayerCards.$parent.$emit('add-magic-points', 3)
+    reward: (store) => {
+      store.commit('addResource', {type: 'magic', value: 3})
     }
   },
   MONK: {
@@ -36,9 +36,9 @@ export const citizens = {
     name: "Monge",
     diceValues: [1],
     rewardDescription: "+1 Gold & +2 Magic",
-    reward: (PlayerCards) => {
-      PlayerCards.$parent.$emit('add-gold-points', 1)
-      PlayerCards.$parent.$emit('add-magic-points', 2)
+    reward: (store) => {
+      store.commit('addResource', {type: 'gold', value: 1})
+      store.commit('addResource', {type: 'magic', value: 2})
     }
   },
   MERCHANT: {
@@ -47,17 +47,17 @@ export const citizens = {
     name: "Mercador",
     diceValues: [2],
     rewardDescription: "+2 Gold OR +2 Magic",
-    reward: (PlayerCards) => {
+    reward: (store) => {
       const user_choice = prompt('Type GOLD if you want +2 Gold. Type MAGIC if you want +2 Magic. Other values will consider you choiced the gold option.');
       switch (user_choice) {
         case 'GOLD':
-          PlayerCards.$parent.$emit('add-gold-points', 2)
+          store.commit('addResource', {type: 'gold', value: 2})
           break;
         case 'MAGIC':
-          PlayerCards.$parent.$emit('add-magic-points', 2)
+          store.commit('addResource', {type: 'magic', value: 2})
           break;
         default:
-          PlayerCards.$parent.$emit('add-gold-points', 2)
+          store.commit('addResource', {type: 'gold', value: 2})
           break;
       }
     }
@@ -68,10 +68,10 @@ export const citizens = {
     name: "Ferreiro",
     diceValues: [2],
     rewardDescription: "+1 Gold by each SOLDIER citizen you have",
-    reward: (PlayerCards) => {
-      const soldiers_count = PlayerCards.playerCardList.filter(card => card.type === 'SOLDIER').length;
-      const pointsToAdd = soldiers_count * 1;
-      PlayerCards.$parent.$emit('add-gold-points', pointsToAdd)
+    reward: (store) => {
+      const soldiers_count = store.state.player.hand.filter(card => card.type === 'SOLDIER').length;
+      const resourcesToAdd = soldiers_count * 1;
+      store.commit('addResource', {type: 'gold', value: resourcesToAdd})
     }
   },
   MERCENARY: {
@@ -80,9 +80,9 @@ export const citizens = {
     name: "Mercenário",
     diceValues: [3],
     rewardDescription: "+1 Force & +1 Gold",
-    reward: (PlayerCards) => {
-      PlayerCards.$parent.$emit('add-force-points', 1)
-      PlayerCards.$parent.$emit('add-gold-points', 1)
+    reward: (store) => {
+      store.commit('addResource', {type: 'force', value: 1})
+      store.commit('addResource', {type: 'gold', value: 1})
     }
   },
   ALCHEMIST: {
@@ -91,12 +91,15 @@ export const citizens = {
     name: "Alquimista",
     diceValues: [3],
     rewardDescription: "Possibility to change 1 Gold by 3 Magic",
-    reward: (PlayerCards) => {
-      /*const player_gold = 3;
-      const user_choice = prompt(`You have ${player_gold}. Want you change 1 gold by 3 magic?`);*/
-
-      PlayerCards.$parent.$emit('add-gold-points', 1)
-      PlayerCards.$parent.$emit('add-magic-points', 3)
+    reward: (store) => {
+      if(store.state.player.resources.gold > 0){
+        const changeGoldByMagic = confirm(`You have ${store.state.player.resources.gold} Gold(s). Want you change 1 gold by 3 magic?`);
+        
+        if(changeGoldByMagic){
+          store.commit('removeResource', {type: 'gold', value: 1})
+          store.commit('addResource', {type: 'magic', value: 3})
+        }
+      }
     }
   },
   ARCHER: {
@@ -105,8 +108,8 @@ export const citizens = {
     name: "Arqueiro",
     diceValues: [4],
     rewardDescription: "+2 Force",
-    reward: (PlayerCards) => {
-      PlayerCards.$parent.$emit('add-force-points', 2)
+    reward: (store) => {
+      store.commit('addResource', {type: 'force', value: 2})
     }
   },
   SORCERER: {
@@ -115,9 +118,9 @@ export const citizens = {
     name: "Feiticeiro",
     diceValues: [4],
     rewardDescription: "+1 Magic & +1 Force",
-    reward: (PlayerCards) => {
-      PlayerCards.$parent.$emit('add-magic-points', 1)
-      PlayerCards.$parent.$emit('add-force-points', 1)
+    reward: (store) => {
+      store.commit('addResource', {type: 'magic', value: 1})
+      store.commit('addResource', {type: 'force', value: 1})
     }
   },
   FARMER: {
@@ -126,8 +129,8 @@ export const citizens = {
     name: "Camponês",
     diceValues: [5],
     rewardDescription: "+1 Gold",
-    reward: (PlayerCards) => {
-      PlayerCards.$parent.$emit('add-gold-points', 1)
+    reward: (store) => {
+      store.commit('addResource', {type: 'gold', value: 1})
     }
   },
   KNIGHT: {
@@ -136,8 +139,8 @@ export const citizens = {
     name: "Cavaleiro",
     diceValues: [6],
     rewardDescription: "+1 Force",
-    reward: (PlayerCards) => {
-      PlayerCards.$parent.$emit('add-force-points', 1)
+    reward: (store) => {
+      store.commit('addResource', {type: 'force', value: 1})
     }
   },
   ROGUE: {
@@ -146,9 +149,9 @@ export const citizens = {
     name: "Ladino",
     diceValues: [7],
     rewardDescription: "+2 Force & +2 Gold",
-    reward: (PlayerCards) => {
-      PlayerCards.$parent.$emit('add-force-points', 2)
-      PlayerCards.$parent.$emit('add-gold-points', 2)
+    reward: (store) => {
+      store.commit('addResource', {type: 'force', value: 2})
+      store.commit('addResource', {type: 'gold', value: 2})
     }
   },
   THIEF: {
@@ -157,17 +160,17 @@ export const citizens = {
     name: "ladrão",
     diceValues: [7],
     rewardDescription: "+3 Gold OR +3 Magic",
-    reward: (PlayerCards) => {
+    reward: (store) => {
       const user_choice = prompt('Type GOLD if you want +3 Gold. Type MAGIC if you want +3 Magic. Other values will consider you choiced the gold option.');
       switch (user_choice) {
         case 'GOLD':
-          PlayerCards.$parent.$emit('add-gold-points', 3)
+          store.commit('addResource', {type: 'gold', value: 3})
           break;
         case 'MAGIC':
-          PlayerCards.$parent.$emit('add-magic-points', 3)
+          store.commit('addResource', {type: 'magic', value: 3})
           break;
         default:
-          PlayerCards.$parent.$emit('add-gold-points', 3)
+          store.commit('addResource', {type: 'gold', value: 3})
           break;
       }
     }
@@ -178,8 +181,8 @@ export const citizens = {
     name: "Campeão",
     diceValues: [8],
     rewardDescription: "+4 Force",
-    reward: (PlayerCards) => {
-      PlayerCards.$parent.$emit('add-force-points', 4)
+    reward: (store) => {
+      store.commit('addResource', {type: 'force', value: 4})
     }
   },
   LORD_OF_WAR: {
@@ -188,10 +191,10 @@ export const citizens = {
     name: "Senhor da Guerra",
     diceValues: [8],
     rewardDescription: "+1 Force by each SOLDIER citizen you have",
-    reward: (PlayerCards) => {
-      const soldiers_count = PlayerCards.playerCardList.filter(card => card.type === 'SOLDIER').length;
-      const pointsToAdd = soldiers_count * 1;
-      PlayerCards.$parent.$emit('add-force-points', pointsToAdd);
+    reward: (store) => {
+      const soldiers_count = store.state.player.hand.filter(card => card.type === 'SOLDIER').length;
+      const resourcesToAdd = soldiers_count * 1;
+      store.commit('addResource', {type: 'force', value: resourcesToAdd})
     }
   },
   PALADIN: {
@@ -200,9 +203,9 @@ export const citizens = {
     name: "Paladino",
     diceValues: [9, 10],
     rewardDescription: "+1 Force & +2 Magic",
-    reward: (PlayerCards) => {
-      PlayerCards.$parent.$emit('add-force-points', 1)
-      PlayerCards.$parent.$emit('add-magic-points', 2)
+    reward: (store) => {
+      store.commit('addResource', {type: 'force', value: 1})
+      store.commit('addResource', {type: 'magic', value: 2})
     }
   },
   PRIESTESS: {
@@ -211,9 +214,9 @@ export const citizens = {
     name: "Sacerdotisa",
     diceValues: [9, 10],
     rewardDescription: "+2 Force & +1 Magic",
-    reward: (PlayerCards) => {
-      PlayerCards.$parent.$emit('add-force-points', 2)
-      PlayerCards.$parent.$emit('add-magic-points', 1)
+    reward: (store) => {
+      store.commit('addResource', {type: 'force', value: 2})
+      store.commit('addResource', {type: 'magic', value: 1})
     }
   },
   BUTCHER: {
@@ -222,10 +225,10 @@ export const citizens = {
     name: "Açougueiro",
     diceValues: [11, 12],
     rewardDescription: "+2 Gold by each CONSTRUCTOR citizen you have",
-    reward: (PlayerCards) => {
-      const constructors_count = PlayerCards.playerCardList.filter(card => card.type === 'CONSTRUCTOR').length;
-      const pointsToAdd = constructors_count * 2;
-      PlayerCards.$parent.$emit('add-gold-points', pointsToAdd)
+    reward: (store) => {
+      const constructors_count = store.state.player.hand.filter(card => card.type === 'CONSTRUCTOR').length;
+      const resourcesToAdd = constructors_count * 2;
+      store.commit('addResource', {type: 'gold', value: resourcesToAdd})
     }
   },
   MINER: {
@@ -234,8 +237,8 @@ export const citizens = {
     name: "Minerador",
     diceValues: [11, 12],
     rewardDescription: "+2 Gold",
-    reward: (PlayerCards) => {
-      PlayerCards.$parent.$emit('add-gold-points', 2)
+    reward: (store) => {
+      store.commit('addResource', {type: 'gold', value: 2})
     }
   }
 }

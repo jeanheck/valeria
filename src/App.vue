@@ -1,27 +1,23 @@
 <template>
   <div id="app">
     <div id="status">
-      <ForcePoints />
-      <MagicPoints />
-      <GoldPoints />
+      <Resources />
       <Dices />
     </div>
 
-    <PlayerCards />
+    <Hand />
   </div>
 </template>
 
 <script>
-import ForcePoints from './components/points/Force.vue'
-import MagicPoints from './components/points/Magic.vue'
-import GoldPoints from './components/points/Gold.vue'
-import Dices from './components/Dices.vue'
-import PlayerCards from './components/PlayerCards.vue'
+import Dices from './components/Dices'
+import Resources from './components/resources/Resources'
+import Hand from './components/player/Hand'
 
 export default {
   name: 'App',
   components: {
-    ForcePoints, MagicPoints, GoldPoints, Dices, PlayerCards
+    Resources, Dices, Hand
   }
 }
 </script>
