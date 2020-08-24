@@ -102,7 +102,7 @@ export const citizens = {
     reward: (store) => {
       if(store.state.player.resources.gold > 0){
         const changeGoldByMagic = confirm(`You have ${store.state.player.resources.gold} Gold(s). Want you change 1 gold by 3 magic?`);
-        
+
         if(changeGoldByMagic){
           store.commit('removeResource', {type: 'gold', value: 1})
           store.commit('addResource', {type: 'magic', value: 3})
@@ -261,4 +261,188 @@ export const citizens = {
       store.commit('addResource', {type: 'gold', value: 2})
     }
   }
+}
+
+export const monsters = {
+  //RUINS MONSTERS
+  SKELETON: {
+    area: 'RUINS',
+    type: 'SERVANT',
+    name: 'Esqueleto',
+    force: 2,
+    victoryPoints: 2,
+    reward: (store) => {
+      store.commit('addResource', {type: 'gold', value: 1})
+    }
+  },
+  FLAMING_SKELETON: {
+    area: 'RUINS',
+    type: 'TITAN',
+    name: 'Esqueleto Flamejante',
+    force: 5,
+    victoryPoints: 3,
+    reward: (store) => {
+      store.commit('addResource', {type: 'gold', value: 1})
+      store.commit('addResource', {type: 'magic', value: 1})
+    },
+  },
+  SKELETON_KING: {
+    area: 'RUINS',
+    type: 'BOSS',
+    name: 'Rei Esqueleto',
+    force: 8,
+    victoryPoints: 4,
+    reward: () => {
+      //2 de ouro pra cada um de ruina que vc tenha matado
+    },
+  },
+  //MOUNTAIN MONSTERS
+  HORRENDOUS_BEAR: {
+    area: 'MOUNTAIN',
+    type: 'BEAST',
+    name: 'Urso Horrendo',
+    force: 5,
+    victoryPoints: 3,
+    reward: (store) => {
+      const user_choice = prompt('Type GOLD if you want +2 Gold. Type MAGIC if you want +2 Magic. Other values will consider you choiced the gold option.');
+      switch (user_choice) {
+        case 'GOLD':
+          store.commit('addResource', {type: 'gold', value: 2})
+          break;
+        case 'MAGIC':
+          store.commit('addResource', {type: 'magic', value: 2})
+          break;
+        default:
+          store.commit('addResource', {type: 'gold', value: 2})
+          break;
+      }
+    },
+  },
+  ORC_WARRIOR: {
+    area: 'MOUNTAIN',
+    type: 'SERVANT',
+    name: 'Guerreiro Orc',
+    force: 9,
+    victoryPoints: 3,
+    reward: () => {
+      //Um cidadão que custe <=3 gold (desconsiderando o custo adicional)
+    },
+  },
+  ORC_BOSS: {
+    area: 'MOUNTAIN',
+    type: 'BOSS',
+    name: 'Orc Chefe',
+    force: 14,
+    victoryPoints: 6,
+    reward: () => {
+      //2 de ouro pra cada um de montanha que vc tenha matado
+    },
+  },
+  //FOREST MONSTERS
+  TREANT: {
+    area: 'FOREST',
+    type: 'SERVANT',
+    name: 'Treant',
+    force: 3,
+    victoryPoints: 1,
+    reward: (store) => {
+      store.commit('addResource', {type: 'gold', value: 1})
+      store.commit('addResource', {type: 'magic', value: 1})
+    },
+  },
+  CURSED_SPIDER: {
+    area: 'FOREST',
+    type: 'BEAST',
+    name: 'Aranha Amaldiçoada',
+    force: 6,
+    victoryPoints: 2,
+    reward: () => {
+      //3 de ouro ou um cavaleiro
+    },
+  },
+  SPIDER_QUEEN: {
+    area: 'FOREST',
+    type: 'BOSS',
+    name: 'Rainha Aranha',
+    force: 10,
+    victoryPoints: 5,
+    reward: () => {
+      //esse monstro precisa de 10 de força + 3 de magia pra ser morto
+      //2 de ouro pra cada um do tipo floresta morte OU um cidadão + 1 ponto de vitória
+    },
+  },
+  //VALLEY
+  BEAR_OWL: {
+    area: 'VALLEY',
+    type: 'BEAST',
+    name: 'Urso-Coruja',
+    force: 4,
+    victoryPoints: 2,
+    reward: (store) => {
+      store.commit('addResource', {type: 'magic', value: 2})
+    },
+  },
+  GIANT: {
+    area: 'VALLEY',
+    type: 'TITAN',
+    name: 'Gigante',
+    force: 8,
+    victoryPoints: 3,
+    reward: (store) => {
+      store.commit('addResource', {type: 'gold', value: 1})
+      store.commit('addResource', {type: 'magic', value: 2})
+    },
+  },
+  TROLL: {
+    area: 'VALLEY',
+    type: 'BOSS',
+    name: 'Troll',
+    force: 12,
+    victoryPoints: 6,
+    reward: () => {
+      //2 de magica para cada monstro do vale que vc tenha matado
+    },
+  },
+  //HILLS
+  GOBLIN: {
+    area: 'HILLS',
+    type: 'SERVANT',
+    name: 'Goblin',
+    force: 1,
+    victoryPoints: 1,
+    reward: (store) => {
+      store.commit('addResource', {type: 'gold', value: 1})
+    },
+  },
+  MAGE_GOBLIN: {
+    area: 'HILLS',
+    type: 'TITAN',
+    name: 'Goblin Mago',
+    force: 3,
+    victoryPoints: 2,
+    reward: (store) => {
+      const user_choice = prompt('Type GOLD if you want +1 Gold. Type MAGIC if you want +1 Magic. Other values will consider you choiced the gold option.');
+      switch (user_choice) {
+        case 'GOLD':
+          store.commit('addResource', {type: 'gold', value: 1})
+          break;
+        case 'MAGIC':
+          store.commit('addResource', {type: 'magic', value: 1})
+          break;
+        default:
+          store.commit('addResource', {type: 'gold', value: 1})
+          break;
+      }
+    },
+  },
+  GOBLIN_KING: {
+    area: 'HILLS',
+    type: 'BOSS',
+    name: 'Rei Goblin',
+    force: 6,
+    victoryPoints: 4,
+    reward: () => {
+      //1 de ouro para cada monstro das colinas que vc tenha matado
+    },
+  },
 }

@@ -21,8 +21,11 @@ export default {
     subtractPlayerResources(cost){
       this.$store.commit('removeResource', {type: 'gold', value: cost})
     },
+    getAditionalValueToBuy(card){
+      return this.$store.state.player.hand.filter(item => item.id === card.id).length;
+    },
     buy(card){
-      const cost = card.cost;
+      const cost = card.cost + this.getAditionalValueToBuy(card);
 
       if(this.playerHaveResourcesToBuy(cost)){
         this.subtractPlayerResources(cost);

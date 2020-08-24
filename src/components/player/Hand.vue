@@ -1,7 +1,7 @@
 <template>
   <div id="hand">
     <h1>Player cards</h1>
-	
+
 		<ul v-for="card in this.$store.state.player.hand" :card="card" :key="card.id + Math.random()">
 			<li>{{card.name}}</li>
 		</ul>
@@ -29,15 +29,15 @@ export default {
       this.$store.state.player.hand.forEach((card) => {
         card.diceValues.forEach((value) => {
           if(value === diceOne) {
-            card.reward(this.$store); 
+            card.reward(this.$store);
             this.log(card);
           }
           if(value === diceTwo) {
-            card.reward(this.$store); 
+            card.reward(this.$store);
             this.log(card);
           }
           if(value === sumDices) {
-            card.reward(this.$store); 
+            card.reward(this.$store);
             this.log(card);
           }
         });
