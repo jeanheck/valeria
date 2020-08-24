@@ -2,7 +2,7 @@
   <div id="hand">
     <h1>Player cards</h1>
 	
-		<ul v-for="card in this.$store.state.player.hand" :card="card" :key="card.id">
+		<ul v-for="card in this.$store.state.player.hand" :card="card" :key="card.id + Math.random()">
 			<li>{{card.name}}</li>
 		</ul>
   </div>

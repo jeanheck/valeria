@@ -6,6 +6,7 @@ export const citizens = {
     name: "Camponês Inicial",
     diceValues: [5],
     rewardDescription: "+1 Gold",
+    cost: 0,
     reward: (store) => {
       store.commit('addResource', {type: 'gold', value: 1})
     }
@@ -15,6 +16,7 @@ export const citizens = {
     type: 'INIT',
     name: "Cavaleiro Inicial",
     diceValues: [6],
+    cost: 0,
     reward: (store) => {
       store.commit('addResource', {type: 'force', value: 1})
     }
@@ -26,6 +28,7 @@ export const citizens = {
     name: "Clérigo",
     diceValues: [1],
     rewardDescription: "+3 Magic",
+    cost: 3,
     reward: (store) => {
       store.commit('addResource', {type: 'magic', value: 3})
     }
@@ -36,6 +39,7 @@ export const citizens = {
     name: "Monge",
     diceValues: [1],
     rewardDescription: "+1 Gold & +2 Magic",
+    cost: 3,
     reward: (store) => {
       store.commit('addResource', {type: 'gold', value: 1})
       store.commit('addResource', {type: 'magic', value: 2})
@@ -47,6 +51,7 @@ export const citizens = {
     name: "Mercador",
     diceValues: [2],
     rewardDescription: "+2 Gold OR +2 Magic",
+    cost: 2,
     reward: (store) => {
       const user_choice = prompt('Type GOLD if you want +2 Gold. Type MAGIC if you want +2 Magic. Other values will consider you choiced the gold option.');
       switch (user_choice) {
@@ -68,6 +73,7 @@ export const citizens = {
     name: "Ferreiro",
     diceValues: [2],
     rewardDescription: "+1 Gold by each SOLDIER citizen you have",
+    cost: 3,
     reward: (store) => {
       const soldiers_count = store.state.player.hand.filter(card => card.type === 'SOLDIER').length;
       const resourcesToAdd = soldiers_count * 1;
@@ -80,6 +86,7 @@ export const citizens = {
     name: "Mercenário",
     diceValues: [3],
     rewardDescription: "+1 Force & +1 Gold",
+    cost: 3,
     reward: (store) => {
       store.commit('addResource', {type: 'force', value: 1})
       store.commit('addResource', {type: 'gold', value: 1})
@@ -91,6 +98,7 @@ export const citizens = {
     name: "Alquimista",
     diceValues: [3],
     rewardDescription: "Possibility to change 1 Gold by 3 Magic",
+    cost: 3,
     reward: (store) => {
       if(store.state.player.resources.gold > 0){
         const changeGoldByMagic = confirm(`You have ${store.state.player.resources.gold} Gold(s). Want you change 1 gold by 3 magic?`);
@@ -108,6 +116,7 @@ export const citizens = {
     name: "Arqueiro",
     diceValues: [4],
     rewardDescription: "+2 Force",
+    cost: 4,
     reward: (store) => {
       store.commit('addResource', {type: 'force', value: 2})
     }
@@ -118,6 +127,7 @@ export const citizens = {
     name: "Feiticeiro",
     diceValues: [4],
     rewardDescription: "+1 Magic & +1 Force",
+    cost: 4,
     reward: (store) => {
       store.commit('addResource', {type: 'magic', value: 1})
       store.commit('addResource', {type: 'force', value: 1})
@@ -129,6 +139,7 @@ export const citizens = {
     name: "Camponês",
     diceValues: [5],
     rewardDescription: "+1 Gold",
+    cost: 2,
     reward: (store) => {
       store.commit('addResource', {type: 'gold', value: 1})
     }
@@ -139,6 +150,7 @@ export const citizens = {
     name: "Cavaleiro",
     diceValues: [6],
     rewardDescription: "+1 Force",
+    cost: 2,
     reward: (store) => {
       store.commit('addResource', {type: 'force', value: 1})
     }
@@ -149,6 +161,7 @@ export const citizens = {
     name: "Ladino",
     diceValues: [7],
     rewardDescription: "+2 Force & +2 Gold",
+    cost: 2,
     reward: (store) => {
       store.commit('addResource', {type: 'force', value: 2})
       store.commit('addResource', {type: 'gold', value: 2})
@@ -160,6 +173,7 @@ export const citizens = {
     name: "ladrão",
     diceValues: [7],
     rewardDescription: "+3 Gold OR +3 Magic",
+    cost: 2,
     reward: (store) => {
       const user_choice = prompt('Type GOLD if you want +3 Gold. Type MAGIC if you want +3 Magic. Other values will consider you choiced the gold option.');
       switch (user_choice) {
@@ -181,6 +195,7 @@ export const citizens = {
     name: "Campeão",
     diceValues: [8],
     rewardDescription: "+4 Force",
+    cost: 2,
     reward: (store) => {
       store.commit('addResource', {type: 'force', value: 4})
     }
@@ -191,6 +206,7 @@ export const citizens = {
     name: "Senhor da Guerra",
     diceValues: [8],
     rewardDescription: "+1 Force by each SOLDIER citizen you have",
+    cost: 2,
     reward: (store) => {
       const soldiers_count = store.state.player.hand.filter(card => card.type === 'SOLDIER').length;
       const resourcesToAdd = soldiers_count * 1;
@@ -203,6 +219,7 @@ export const citizens = {
     name: "Paladino",
     diceValues: [9, 10],
     rewardDescription: "+1 Force & +2 Magic",
+    cost: 2,
     reward: (store) => {
       store.commit('addResource', {type: 'force', value: 1})
       store.commit('addResource', {type: 'magic', value: 2})
@@ -214,6 +231,7 @@ export const citizens = {
     name: "Sacerdotisa",
     diceValues: [9, 10],
     rewardDescription: "+2 Force & +1 Magic",
+    cost: 2,
     reward: (store) => {
       store.commit('addResource', {type: 'force', value: 2})
       store.commit('addResource', {type: 'magic', value: 1})
@@ -225,6 +243,7 @@ export const citizens = {
     name: "Açougueiro",
     diceValues: [11, 12],
     rewardDescription: "+2 Gold by each CONSTRUCTOR citizen you have",
+    cost: 1,
     reward: (store) => {
       const constructors_count = store.state.player.hand.filter(card => card.type === 'CONSTRUCTOR').length;
       const resourcesToAdd = constructors_count * 2;
@@ -237,6 +256,7 @@ export const citizens = {
     name: "Minerador",
     diceValues: [11, 12],
     rewardDescription: "+2 Gold",
+    cost: 1,
     reward: (store) => {
       store.commit('addResource', {type: 'gold', value: 2})
     }

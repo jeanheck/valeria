@@ -2,8 +2,9 @@
   <div>
     <h1>Pile</h1>
 
-    <span>Name: {{card.name}}</span>
-    <button v-on:click="counter += 1">Buy</button>
+    <span>Name: {{card.name}}</span>&nbsp;
+    <span>Cost: {{card.cost}}</span>&nbsp;
+    <button v-on:click="buy(card)">Buy</button>
   </div>
 </template>
 
@@ -14,8 +15,21 @@ export default {
     card: Object
   },
   methods: {
-    buy(){
-      
+    playerHaveResourcesToBuy(cost){
+      return this.$store.state.player.resources.gold >= cost;
+    },
+    subtractPlayerResources(cost){
+      this.$store.commit('removeResource', {type: 'gold', value: cost})
+    },
+    buy(card){
+      const cost = card.cost;
+
+      if(this.playerHaveResourcesToBuy(cost)){
+        this.subtractPlayerResources(cost);
+        this.$store.commit('addCitizenToHand', card)
+      }else{
+        console.log('não tem recurso pra comprar a carta')
+      }
     }
   }
 }

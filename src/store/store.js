@@ -24,6 +24,8 @@ const store = new Vuex.Store({
       console.log(`O player ganhou ${payload.value} ${payload.type}(s)!`);
     },
     removeResource(state, payload) {
+      console.log('payload > ', payload)
+
       state.player.resources[payload.type] -= payload.value;
       console.log(`O player perdeu ${payload.value} ${payload.type}(s)!`);
     },
