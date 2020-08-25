@@ -1,10 +1,9 @@
 <template>
-  <div>
-    <h1>Pile</h1>
-
-    <span>Name: {{card.name}}</span>&nbsp;
-    <span>Cost: {{card.cost}}</span>&nbsp;
-    <button v-on:click="buy(card)">Buy</button>
+  <div v-if="pile.length > 0">
+    <h1>Pile ({{pile.length}})</h1>
+    <span>Name: {{getCardAtTheTop().name}}</span>&nbsp;
+    <span>Cost: {{getCardAtTheTop().cost}} (+{{getAditionalValueToBuy()}})</span>&nbsp;
+    <button v-on:click="buy()">Buy</button>
   </div>
 </template>
 
@@ -12,7 +11,7 @@
 export default {
   name: 'Pile',
   props: {
-    card: Object
+    pile: Array
   },
   methods: {
     playerHaveResourcesToBuy(cost){
@@ -21,15 +20,23 @@ export default {
     subtractPlayerResources(cost){
       this.$store.commit('removeResource', {type: 'gold', value: cost})
     },
-    getAditionalValueToBuy(card){
-      return this.$store.state.player.hand.filter(item => item.id === card.id).length;
+    getAditionalValueToBuy(){
+      return this.$store.state.player.hand.filter(item => item.id === this.getCardAtTheTop().id).length;
     },
-    buy(card){
-      const cost = card.cost + this.getAditionalValueToBuy(card);
+    getCardAtTheTop(){
+      return this.pile[0];
+    },
+    removeCardAtTop(){
+      this.pile.shift();
+    },
+    buy(){
+      const cardAtTheTop = this.getCardAtTheTop();
+      const cost = cardAtTheTop.cost + this.getAditionalValueToBuy();
 
       if(this.playerHaveResourcesToBuy(cost)){
         this.subtractPlayerResources(cost);
-        this.$store.commit('addCitizenToHand', card)
+        this.$store.commit('addCitizenToHand', cardAtTheTop);
+        this.removeCardAtTop();
       }else{
         console.log('não tem recurso pra comprar a carta')
       }

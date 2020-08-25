@@ -33,9 +33,13 @@ const store = new Vuex.Store({
       state.player.hand.push(card);
       console.log(`A carta ${card.name} foi adicionada a mão do jogador!`);
     },
-    addCitizenToBoard(state, card) {
-      state.board.citizens.push(card);
-      console.log(`A carta ${card.name} foi adicionada ao board!`);
+    addCitizenPileToBoard(state, pile) {
+      state.board.citizens.push(pile);
+      console.log(`Uma pilha de cidadãos foi adicionada ao board!`);
+    },
+    addMonsterPileToBoard(state, pile) {
+      state.board.citizens.push(pile);
+      console.log(`Uma pilha de monstros foi adicionada ao board!`);
     },
   }
 })

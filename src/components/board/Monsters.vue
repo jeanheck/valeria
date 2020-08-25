@@ -1,8 +1,8 @@
 <template>
-  <div id="monsters">
+  <div id="citizens">
     <h1>Monsters</h1>
 
-    <Pile v-for="card in this.$store.state.board.citizens" :key="card.id" :card="card" />
+    <Pile v-for="pile in this.$store.state.board.monsters" :key="pile.id" :pile="pile" />
   </div>
 </template>
 
@@ -12,25 +12,53 @@ import * as cards from '../../assets/js/cards.js'
 import Pile from './Pile'
 
 export default {
-  name: 'Citizens',
+  name: 'Monsters',
   components: {
     Pile
   },
   methods: {
     setInitialPiles(){
-      this.$store.commit('addCitizenToBoard', cards.citizens.CLERIC)
-      this.$store.commit('addCitizenToBoard', cards.citizens.MERCHANT)
-      this.$store.commit('addCitizenToBoard', cards.citizens.MERCENARY)
-      this.$store.commit('addCitizenToBoard', cards.citizens.ARCHER)
-      this.$store.commit('addCitizenToBoard', cards.citizens.FARMER)
-      this.$store.commit('addCitizenToBoard', cards.citizens.KNIGHT)
-      this.$store.commit('addCitizenToBoard', cards.citizens.ROGUE)
-      this.$store.commit('addCitizenToBoard', cards.citizens.CHAMPION)
-      this.$store.commit('addCitizenToBoard', cards.citizens.PALADIN)
-      this.$store.commit('addCitizenToBoard', cards.citizens.BUTCHER)
+      const ruins_monsters = [ 
+        cards.monsters.SKELETON,
+        cards.monsters.SKELETON,
+        cards.monsters.SKELETON,
+        cards.monsters.FLAMING_SKELETON,
+        cards.monsters.SKELETON_KING,
+      ];
+      const mountain_monsters = [ 
+        cards.monsters.HORRENDOUS_BEAR,
+        cards.monsters.HORRENDOUS_BEAR,
+        cards.monsters.ORC_WARRIOR,
+        cards.monsters.ORC_WARRIOR,
+        cards.monsters.ORC_BOSS,
+      ];
+      const forest_monsters = [ 
+        cards.monsters.TREANT,
+        cards.monsters.TREANT,
+        cards.monsters.CURSED_SPIDER,
+        cards.monsters.CURSED_SPIDER,
+        cards.monsters.SPIDER_QUEEN,
+      ];
+      const valley_monsters = [ 
+        cards.monsters.BEAR_OWL,
+        cards.monsters.BEAR_OWL,
+        cards.monsters.BEAR_OWL,
+        cards.monsters.GIANT,
+        cards.monsters.TROLL,
+      ];
+      const hills_monsters = [ 
+        cards.monsters.GOBLIN,
+        cards.monsters.GOBLIN,
+        cards.monsters.GOBLIN,
+        cards.monsters.MAGE_GOBLIN,
+        cards.monsters.GOBLIN_KING,
+      ];
+
+      this.addMonstersToBoard(cards.monsters);
     }
   },
   mounted(){
+    console.log('cards > ', cards)
     this.setInitialPiles();
   }
 }
@@ -38,8 +66,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  #monsters {
+  #citizens {
 		border: 1px solid red;
+    float: left;
 		height: 50%;
+    width: 30%;
 	}
 </style>

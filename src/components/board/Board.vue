@@ -3,16 +3,18 @@
     <h1>Board</h1>
 
     <Citizens />
+    <Monsters />
   </div>
 </template>
 
 <script>
 import Citizens from './Citizens'
+import Monsters from './Monsters'
 
 export default {
   name: 'Board',
   components: {
-    Citizens
+    Citizens, Monsters
   }
 }
 </script>

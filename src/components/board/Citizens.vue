@@ -2,7 +2,7 @@
   <div id="citizens">
     <h1>Citizens</h1>
 
-    <Pile v-for="card in this.$store.state.board.citizens" :key="card.id" :card="card" />
+    <Pile v-for="pile in this.$store.state.board.citizens" :key="pile.id" :pile="pile" />
   </div>
 </template>
 
@@ -17,17 +17,33 @@ export default {
     Pile
   },
   methods: {
+    createCitizenPile(citizen){
+      let pile = [];
+      while(pile.length < 5){
+        pile.push(citizen);
+      }
+      return pile;
+    },
+    addCitizensToBoard(citizens){
+      citizens.forEach((citizen) => {
+        this.$store.commit('addCitizenPileToBoard', this.createCitizenPile(citizen));
+      })
+    },
     setInitialPiles(){
-      this.$store.commit('addCitizenToBoard', cards.citizens.CLERIC)
-      this.$store.commit('addCitizenToBoard', cards.citizens.MERCHANT)
-      this.$store.commit('addCitizenToBoard', cards.citizens.MERCENARY)
-      this.$store.commit('addCitizenToBoard', cards.citizens.ARCHER)
-      this.$store.commit('addCitizenToBoard', cards.citizens.FARMER)
-      this.$store.commit('addCitizenToBoard', cards.citizens.KNIGHT)
-      this.$store.commit('addCitizenToBoard', cards.citizens.ROGUE)
-      this.$store.commit('addCitizenToBoard', cards.citizens.CHAMPION)
-      this.$store.commit('addCitizenToBoard', cards.citizens.PALADIN)
-      this.$store.commit('addCitizenToBoard', cards.citizens.BUTCHER)
+      const citizens = [ 
+        cards.citizens.CLERIC,
+        cards.citizens.MERCHANT,
+        cards.citizens.MERCENARY,
+        cards.citizens.ARCHER,
+        cards.citizens.FARMER,
+        cards.citizens.KNIGHT,
+        cards.citizens.ROGUE,
+        cards.citizens.CHAMPION,
+        cards.citizens.PALADIN,
+        cards.citizens.BUTCHER
+      ];
+
+      this.addCitizensToBoard(citizens);
     }
   },
   mounted(){
@@ -40,6 +56,8 @@ export default {
 <style scoped>
   #citizens {
 		border: 1px solid blue;
+    float: left;
 		height: 50%;
+    width: 30%;
 	}
 </style>
