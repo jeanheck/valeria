@@ -8,9 +8,13 @@ const store = new Vuex.Store({
       resources: {
         gold: 0,
         magic: 0,
-        force: 0
+        force: 0,
+        victory: 0
       },
-      hand: []
+      hand: [],
+      killedMonsters: [],
+      buildedDomains: [],
+      duke: {}
     },
     board: {
       citizens: [],
@@ -24,8 +28,6 @@ const store = new Vuex.Store({
       console.log(`O player ganhou ${payload.value} ${payload.type}(s)!`);
     },
     removeResource(state, payload) {
-      console.log('payload > ', payload)
-
       state.player.resources[payload.type] -= payload.value;
       console.log(`O player perdeu ${payload.value} ${payload.type}(s)!`);
     },
@@ -37,8 +39,16 @@ const store = new Vuex.Store({
       state.board.citizens.push(pile);
       console.log(`Uma pilha de cidadãos foi adicionada ao board!`);
     },
+    removeCitizenFromPile(state, pileId) {
+      state.board.citizens.find(pile => pile.id === pileId).itens.shift();
+      console.log(`Um cidadão foi retirado da pilha!`);
+    },
+    addKilledMonster(state, card) {
+      state.player.killedMonsters.push(card);
+      console.log(`A carta ${card.name} foi adicionada a pilha de monstros mortos!`);
+    },
     addMonsterPileToBoard(state, pile) {
-      state.board.citizens.push(pile);
+      state.board.monsters.push(pile);
       console.log(`Uma pilha de monstros foi adicionada ao board!`);
     },
   }

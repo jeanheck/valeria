@@ -1,6 +1,6 @@
 <template>
-  <div v-if="pile.length > 0">
-    <h1>Pile ({{pile.length}})</h1>
+  <div v-if="pile.itens.length > 0">
+    <h1>Pile ({{pile.itens.length}})</h1>
     <span>Name: {{getCardAtTheTop().name}}</span>&nbsp;
     <span>Cost: {{getCardAtTheTop().cost}} (+{{getAditionalValueToBuy()}})</span>&nbsp;
     <button v-on:click="buy()">Buy</button>
@@ -11,7 +11,7 @@
 export default {
   name: 'Pile',
   props: {
-    pile: Array
+    pile: Object
   },
   methods: {
     playerHaveResourcesToBuy(cost){
@@ -24,10 +24,10 @@ export default {
       return this.$store.state.player.hand.filter(item => item.id === this.getCardAtTheTop().id).length;
     },
     getCardAtTheTop(){
-      return this.pile[0];
+      return this.pile.itens[0];
     },
     removeCardAtTop(){
-      this.pile.shift();
+      this.pile.itens.shift();
     },
     buy(){
       const cardAtTheTop = this.getCardAtTheTop();

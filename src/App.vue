@@ -6,7 +6,9 @@
     </div>
 
     <Board />
+
     <Hand />
+    <KilledMonsters />
   </div>
 </template>
 
@@ -15,11 +17,12 @@ import Dices from './components/Dices'
 import Resources from './components/resources/Resources'
 import Hand from './components/player/Hand'
 import Board from './components/board/Board'
+import KilledMonsters from './components/player/KilledMonsters'
 
 export default {
   name: 'App',
   components: {
-    Resources, Dices, Hand, Board
+    Resources, Dices, Hand, Board, KilledMonsters
   }
 }
 </script>

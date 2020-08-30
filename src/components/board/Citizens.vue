@@ -2,25 +2,28 @@
   <div id="citizens">
     <h1>Citizens</h1>
 
-    <Pile v-for="pile in this.$store.state.board.citizens" :key="pile.id" :pile="pile" />
+    <CitizenPile v-for="pile in this.$store.state.board.citizens" :key="pile.id" :pile="pile" />
   </div>
 </template>
 
 <script>
 import * as cards from '../../assets/js/cards.js'
 
-import Pile from './Pile'
+import CitizenPile from './piles/CitizenPile'
 
 export default {
   name: 'Citizens',
   components: {
-    Pile
+    CitizenPile
   },
   methods: {
     createCitizenPile(citizen){
-      let pile = [];
-      while(pile.length < 5){
-        pile.push(citizen);
+      let pile = {
+        id: citizen.id,
+        itens: []
+      };
+      while(pile.itens.length < 5){
+        pile.itens.push(citizen);
       }
       return pile;
     },

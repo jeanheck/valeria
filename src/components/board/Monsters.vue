@@ -2,23 +2,28 @@
   <div id="citizens">
     <h1>Monsters</h1>
 
-    <Pile v-for="pile in this.$store.state.board.monsters" :key="pile.id" :pile="pile" />
+    <MonsterPile v-for="pile in this.$store.state.board.monsters" :key="pile.id" :pile="pile" />
   </div>
 </template>
 
 <script>
 import * as cards from '../../assets/js/cards.js'
 
-import Pile from './Pile'
+import MonsterPile from './piles/MonsterPile'
 
 export default {
   name: 'Monsters',
   components: {
-    Pile
+    MonsterPile
   },
   methods: {
+    addMonstersToBoard(monstersPiles){
+      monstersPiles.forEach((pile) => {
+        this.$store.commit('addMonsterPileToBoard', pile);
+      })
+    },
     setInitialPiles(){
-      const ruins_monsters = [ 
+      const ruins_monsters = [
         cards.monsters.SKELETON,
         cards.monsters.SKELETON,
         cards.monsters.SKELETON,
@@ -54,7 +59,7 @@ export default {
         cards.monsters.GOBLIN_KING,
       ];
 
-      this.addMonstersToBoard(cards.monsters);
+      this.addMonstersToBoard([ruins_monsters, mountain_monsters, forest_monsters, valley_monsters, hills_monsters]);
     }
   },
   mounted(){
