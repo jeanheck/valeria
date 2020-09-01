@@ -527,3 +527,166 @@ export const monsters = {
     },
   },
 }
+
+/******************************************************************************************************************* */
+/****************************************** DOMAINS CARDS ********************************************************** */
+/******************************************************************************************************************* */
+
+//SOLDIER, HEAVENLY, CONSTRUCTOR, FIGHTER
+
+export const domains = {
+  COLISEUM: {
+    id: 'COLISEUM',
+    name: 'Coliseu',
+    requirements: ['SOLDIER', 'SOLDIER', 'FIGHTER'],
+    cost: 15,
+    victoryPoints: 5,
+    rewardDescription: 'Imediatamente ganhe um 1 de força para cada cidadão que possuir',
+    reward: () => {
+
+    }
+  },
+  GRIMMWATER_FORT: {
+    id: 'GRIMMWATER_FORT',
+    name: 'Forte de Grimmwater',
+    requirements: ['CONSTRUCTOR', 'CONSTRUCTOR', 'FIGHTER'],
+    cost: 10,
+    victoryPoints: 4,
+    rewardDescription: 'Imediatamente ganhe um cidadão que custe 3 ou menos',
+    reward: () => {
+
+    }
+  },
+  GARGAN_HUGHE: {
+    id: 'GARGAN_HUGHE',
+    name: 'Abraço de Gargan',
+    requirements: ['SOLDIER', 'SOLDIER'],
+    cost: 7,
+    victoryPoints: 2,
+    rewardDescription: 'Durante qualquer fase de Rolagem ganhe 1 ponto de virória sempre que sairem dois dados iguais',
+    reward: () => {
+
+    }
+  },
+  SHATTERED_HAND: {
+    id: 'SHATTERED_HAND',
+    name: 'Mão Despedaçada',
+    requirements: ['HEAVENLY', 'CONSTRUCTOR'],
+    cost: 7,
+    victoryPoints: 3,
+    rewardDescription: 'Imediatamente ganhe um cidadão do tipo HEAVENLY da pilha central',
+    reward: () => {
+
+    }
+  },
+  AQUA_OBSERVER: {
+    id: 'AQUA_OBSERVER',
+    name: 'Observador na Água',
+    requirements: ['SOLDIER', 'SOLDIER'],
+    cost: 6,
+    victoryPoints: 3,
+    rewardDescription: 'Você pode imediatamente retornar um monstro para a sua pilha para ganhar 3 pontos de vitória',
+    reward: () => {
+
+    }
+  },
+  BLOOD_CROW_ARMY: {
+    id: 'BLOOD_CROW_ARMY',
+    name: 'Exército do Corvo Sangrento',
+    requirements: ['SOLDIER', 'SOLDIER', 'SOLDIER'],
+    cost: 5,
+    victoryPoints: 2,
+    rewardDescription: 'No início da sua fase de ação você ganha 1 ponto de força',
+    reward: () => {
+
+    }
+  },
+  SHADOWTIDE_HARBOR: { 
+    id: 'SHADOWTIDE_HARBOR',
+    name: 'Porto da Maré Sombria',
+    requirements: ['FIGHTER', 'CONSTRUCTOR', 'SOLDIER'],
+    cost: 6,
+    victoryPoints: 2,
+    rewardDescription: 'Imediatamente ganhe um cidadão do tipo FIGHTER das pilhas centrais',
+    reward: () => {
+
+    }
+  },
+  ASTERATEN_EYE: { 
+    id: 'ASTERATEN_EYE',
+    name: 'Olho de Asteraten',
+    requirements: ['HEAVENLY', 'SOLDIER'],
+    cost: 8,
+    victoryPoints: 1,
+    rewardDescription: 'Imediatamente ganhe 5 pontos de vitória de você pode derrotar um monstro',
+    reward: () => {
+
+    }
+  },
+  ROGUES_LANDING: { 
+    id: 'ROGUES_LANDING',
+    name: 'Pouso do Ladino',
+    requirements: ['CONSTRUCTOR', 'FIGHTER'],
+    cost: 7,
+    victoryPoints: 3,
+    rewardDescription: 'Imediatamente ganhe um cidadão do tipo CONSTRUCTOR das pilhas centrais',
+    reward: () => {
+
+    }
+  },
+  THE_URDR_ORB: { 
+    id: 'THE_URDR_ORB',
+    name: 'A Orbe de Urdr',
+    requirements: ['FIGHTER', 'HEAVENLY'],
+    cost: 6,
+    victoryPoints: 1,
+    rewardDescription: 'No final da sua fase de ação, você pode pegar um ponto de magia de um jogador',
+    reward: () => {
+
+    }
+  },
+  FOX_GROVE_PALACE: { 
+    id: 'FOX_GROVE_PALACE',
+    name: 'Paladiça do Arvoredo da Raposa',
+    requirements: ['SOLDIER', 'FIGHTER'],
+    cost: 9,
+    victoryPoints: 3,
+    rewardDescription: 'Durante sua fase de rolagem você pode pagar 2 de ouro para tornar um dado em 6',
+    reward: () => {
+
+    }
+  },
+  THE_TOWER: { 
+    id: 'THE_TOWER',
+    name: 'A Torre',
+    requirements: ['CONSTRUCTOR', 'SOLDIER', 'FIGHTER', 'HEAVENLY'],
+    cost: 10,
+    victoryPoints: 2,
+    rewardDescription: 'No final de sua fase de Ação você pode trocar dois pontos de mágica por um de vitória',
+    reward: () => {
+
+    }
+  },
+  PLATEAU_PRATCHETT: { 
+    id: 'PLATEAU_PRATCHETT',
+    name: 'Platô de Pratchett',
+    requirements: ['CONSTRUCTOR', 'HEAVENLY'],
+    cost: 8,
+    victoryPoints: 3,
+    rewardDescription: 'Durante sua Fase de Ação Dominios custam a você 1 de ouro a menos',
+    reward: () => {
+
+    }
+  },
+  HALFPENNNY_HILL: { 
+    id: 'HALFPENNNY_HILL',
+    name: 'Colina Halfpenny',
+    requirements: ['CONSTRUCTOR', 'CONSTRUCTOR', 'CONSTRUCTOR'],
+    cost: 6,
+    victoryPoints: 2,
+    rewardDescription: 'No inicio da sua Fase de Ação você ganha 1 de ouro',
+    reward: () => {
+
+    }
+  },
+}
