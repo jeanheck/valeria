@@ -689,4 +689,158 @@ export const domains = {
 
     }
   },
+  TRUCE_CUT_THROAT: { 
+    id: 'TRUCE_CUT_THROAT',
+    name: 'Trégua da Garganta Cortada',
+    requirements: ['FIGHTER', 'HEAVENLY'],
+    cost: 5,
+    victoryPoints: 1,
+    rewardDescription: 'Imediatamente ganhe 3 de ouro de outro jogador',
+    reward: () => {
+
+    }
+  },
+  ULLAMALIZATLI_COURT: { 
+    id: 'ULLAMALIZATLI_COURT',
+    name: 'Quadra de Ullamalizatli',
+    requirements: ['CONSTRUCTOR', 'CONSTRUCTOR', 'HEAVENLY'],
+    cost: 11,
+    victoryPoints: 3,
+    rewardDescription: 'Imediatamente ganhe 1 de magia para cada cidadão que possuir',
+    reward: () => {
+
+    }
+  },
+  ST_AQUILA_CHURCH: { 
+    id: 'ST_AQUILA_CHURCH',
+    name: 'Catedral de St. Aquila',
+    requirements: ['HEAVENLY', 'HEAVENLY'],
+    cost: 8,
+    victoryPoints: 3,
+    rewardDescription: 'No final de sua fase de ação ganhe 1 ouro de outro jogador',
+    reward: () => {
+
+    }
+  },
+  NAE_GOLDEN_OBELISK: { 
+    id: 'NAE_GOLDEN_OBELISK',
+    name: 'Obelisco Dourado de Nae',
+    requirements: ['CONSTRUCTOR', 'HEAVENLY'],
+    cost: 6,
+    victoryPoints: 3,
+    rewardDescription: 'Você pode imediatamente trocar 3 de magia por 3 pontos de vitória',
+    reward: () => {
+
+    }
+  },
+  EMERALD_FORTRESS: { 
+    id: 'EMERALD_FORTRESS',
+    name: 'Fortaleza Esmeralda',
+    requirements: ['CONSTRUCTOR', 'SOLDIER', 'HEAVENLY'],
+    cost: 12,
+    victoryPoints: 5,
+    rewardDescription: 'Durante sua fase de ação, ignore o (+) ao comprar os cidadãos',
+    reward: () => {
+
+    }
+  },
+  CLOUDRIDER_CAMPING: { 
+    id: 'CLOUDRIDER_CAMPING',
+    name: 'Acampamento Cloudrider',
+    requirements: ['SOLDIER', 'HEAVENLY'],
+    cost: 8,
+    victoryPoints: 2,
+    rewardDescription: 'Imediatamente ganhe 3 pontos de força e um cidadão do tipo soldado com custo menor ou igual a 2',
+    reward: () => {
+
+    }
+  },
+  DESERT_ORCHID: { 
+    id: 'DESERT_ORCHID',
+    name: 'A Orquídia do Deserto',
+    requirements: ['HEAVENLY', 'FIGHTER'],
+    cost: 9,
+    victoryPoints: 3,
+    rewardDescription: 'Durante sua fase de rolagem você pode pagar 1 de ouro pra cada cidadão do tipo heavenly que possuir, para transformar um dado em 1',
+    reward: () => {
+
+    }
+  },
+  JUSTA_FIELD: { 
+    id: 'JUSTA_FIELD',
+    name: 'Campo de Justa',
+    requirements: ['SOLDIER', 'CONSTRUCTOR', 'FIGHTER'],
+    cost: 13,
+    victoryPoints: 3,
+    rewardDescription: 'Durante sua fase de colheita ganhe 1 ouro para cada cavaleiro que possuir',
+    reward: () => {
+
+    }
+  },
+  VIOLET_THORN: { 
+    id: 'VIOLET_THORN',
+    name: 'O Espinho Violeta',
+    requirements: ['SOLDIER', 'HEAVENLY'],
+    cost: 7,
+    victoryPoints: 3,
+    rewardDescription: 'Durante sua fase de ação, quando você derrotar um monstro ganhe 1 de magia.',
+    reward: () => {
+
+    }
+  },
+  OSTENDAR_MONOLITH: { 
+    id: 'OSTENDAR_MONOLITH',
+    name: 'Monolito de Ostendaar',
+    requirements: ['CONSTRUCTOR', 'SOLDIER'],
+    cost: 9,
+    victoryPoints: 3,
+    rewardDescription: 'No início de sua fase de ação você ganha 1 ponto de magia.',
+    reward: () => {
+
+    }
+  },
+  FORGOTTEN_SORROWS: { 
+    id: 'FORGOTTEN_SORROWS',
+    name: 'Mágoas Esquecidas',
+    requirements: ['CONSTRUCTOR', 'FIGHTER'],
+    cost: 9,
+    victoryPoints: 3,
+    rewardDescription: 'Durante sua fase de ação ganhe 1 ponto de magia toda vez que ganhar um cidadão.',
+    reward: () => {
+
+    }
+  },
+  WEAVING_WITCHS_NEST: { 
+    id: 'WEAVING_WITCHS_NEST',
+    name: 'Ninho da Bruxa Tecelã',
+    requirements: ['CONSTRUCTOR', 'CONSTRUCTOR'],
+    cost: 6,
+    victoryPoints: 3,
+    rewardDescription: 'Você pode imediatamente retornar um cidadão para sua pilha para ganhar 3 pontos de vitória.',
+    reward: () => {
+
+    }
+  },
+  DAWN_PALACE: { 
+    id: 'DAWN_PALACE',
+    name: 'Palácio do Amanhecer',
+    requirements: ['CONSTRUCTOR', 'SOLDIER', 'SOLDIER'],
+    cost: 11,
+    victoryPoints: 4,
+    rewardDescription: 'Durante sua fase de rolagem você pode mudar um dado em -1.',
+    reward: () => {
+
+    }
+  },
+  PURLOINER_PERCH: { 
+    id: 'PURLOINER_PERCH',
+    name: 'Poleiro do Purloiner',
+    requirements: ['FIGHTER', 'FIGHTER'],
+    cost: 10,
+    victoryPoints: 2,
+    rewardDescription: 'Imediatamente pegue um monstro de outro jogador aleatóriamente.',
+    reward: () => {
+
+    }
+  },
 }
