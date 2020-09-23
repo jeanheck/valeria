@@ -4,17 +4,19 @@
 
     <Citizens />
     <Monsters />
+    <Domains />
   </div>
 </template>
 
 <script>
 import Citizens from './Citizens'
 import Monsters from './Monsters'
+import Domains from './Domains'
 
 export default {
   name: 'Board',
   components: {
-    Citizens, Monsters
+    Citizens, Monsters, Domains
   }
 }
 </script>

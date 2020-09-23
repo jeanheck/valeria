@@ -51,6 +51,10 @@ const store = new Vuex.Store({
       state.board.monsters.push(pile);
       console.log(`Uma pilha de monstros foi adicionada ao board!`);
     },
+    addDomainPileToBoard(state, pile) {
+      state.board.domains.push(pile);
+      console.log(`Uma pilha de domínios foi adicionada ao board!`);
+    },
   }
 })
 export default store;

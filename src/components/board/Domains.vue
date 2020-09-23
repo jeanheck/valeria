@@ -23,43 +23,46 @@ export default {
       })
     },
     setInitialPiles(){
-      const ruins_monsters = [
-        cards.monsters.SKELETON,
-        cards.monsters.SKELETON,
-        cards.monsters.SKELETON,
-        cards.monsters.FLAMING_SKELETON,
-        cards.monsters.SKELETON_KING,
-      ];
-      const mountain_monsters = [ 
-        cards.monsters.HORRENDOUS_BEAR,
-        cards.monsters.HORRENDOUS_BEAR,
-        cards.monsters.ORC_WARRIOR,
-        cards.monsters.ORC_WARRIOR,
-        cards.monsters.ORC_BOSS,
-      ];
-      const forest_monsters = [ 
-        cards.monsters.TREANT,
-        cards.monsters.TREANT,
-        cards.monsters.CURSED_SPIDER,
-        cards.monsters.CURSED_SPIDER,
-        cards.monsters.SPIDER_QUEEN,
-      ];
-      const valley_monsters = [ 
-        cards.monsters.BEAR_OWL,
-        cards.monsters.BEAR_OWL,
-        cards.monsters.BEAR_OWL,
-        cards.monsters.GIANT,
-        cards.monsters.TROLL,
-      ];
-      const hills_monsters = [ 
-        cards.monsters.GOBLIN,
-        cards.monsters.GOBLIN,
-        cards.monsters.GOBLIN,
-        cards.monsters.MAGE_GOBLIN,
-        cards.monsters.GOBLIN_KING,
+      const domains = [
+        [
+          cards.domains.AQUA_OBSERVER,
+          cards.domains.ASTERATEN_EYE,
+          cards.domains.ST_AQUILA_CHURCH,
+          cards.domains.BLOOD_CROW_ARMY,
+          cards.domains.COLISEUM,
+          cards.domains.CLOUDRIDER_CAMPING,
+          cards.domains.TRUCE_CUT_THROAT
+        ],
+        [
+          cards.domains.ULLAMALIZATLI_COURT,
+          cards.domains.DESERT_ORCHID,
+          cards.domains.DAWN_PALACE,
+          cards.domains.EMERALD_FORTRESS,
+          cards.domains.ASTERATEN_EYE,
+          cards.domains.FOX_GROVE_PALACE,
+          cards.domains.FORGOTTEN_SORROWS
+        ],
+        [
+          cards.domains.GRIMMWATER_FORT,
+          cards.domains.JUSTA_FIELD,
+          cards.domains.GARGAN_HUGHE,
+          cards.domains.NAE_GOLDEN_OBELISK,
+          cards.domains.HALFPENNNY_HILL,
+          cards.domains.SHATTERED_HAND,
+          cards.domains.SHADOWTIDE_HARBOR
+        ],
+        [
+          cards.domains.ROGUES_LANDING,
+          cards.domains.OSTENDAR_MONOLITH,
+          cards.domains.WEAVING_WITCHS_NEST,
+          cards.domains.THE_URDR_ORB,
+          cards.domains.PLATEAU_PRATCHETT,
+          cards.domains.PURLOINER_PERCH,
+          cards.domains.THE_TOWER
+        ],
       ];
 
-      this.addDomainsToBoard([ruins_monsters, mountain_monsters, forest_monsters, valley_monsters, hills_monsters]);
+      this.addDomainsToBoard(domains);
     }
   },
   mounted(){
