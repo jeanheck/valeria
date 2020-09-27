@@ -15,11 +15,22 @@ export default {
     pile: Array
   },
   methods: {
+    haveRequirementsToBuild(domainRequirements){
+      const cardsInHandTypes = this.$store.state.player.hand.map((citizen)=>{
+        return citizen.type;
+      })
+
+      console.log('const > ', cardsInHandTypes)
+
+      return domainRequirements.every((requirement) => {
+        return cardsInHandTypes.some((cardType) => {
+          return requirement === cardType;
+        })
+      })
+    },
     playerHaveResourcesToBuild(domain){
       const haveGoldEnough = this.$store.state.player.resources.gold >= domain.cost;
-      const haveRequirements = true;
-
-      return haveGoldEnough && haveRequirements;
+      return haveGoldEnough && this.haveRequirementsToBuild(domain.requirements);
     },
     subtractPlayerResources(domain){
       this.$store.commit('removeResource', {type: 'gold', value: domain.cost})

@@ -20,6 +20,9 @@ const store = new Vuex.Store({
       citizens: [],
       monsters: [],
       domains: []
+    },
+    game: {
+      phase: 'NOT_INITIATED'
     }
   },
   mutations: {
@@ -55,6 +58,10 @@ const store = new Vuex.Store({
       state.board.domains.push(pile);
       console.log(`Uma pilha de domínios foi adicionada ao board!`);
     },
+    addBuildedDomain(state, card){
+      state.player.buildedDomains.push(card);
+      console.log(`A carta ${card.name} foi adicionada a pilha de domínios construiídos!`);
+    }
   }
 })
 export default store;

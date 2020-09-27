@@ -22,10 +22,10 @@ export default {
   },
   methods: {
     setInitialResources(){
-      this.$store.commit('addResource', {type: 'gold', value: 2})
-      this.$store.commit('addResource', {type: 'magic', value: 1})
+      this.$store.commit('addResource', {type: 'gold', value: 300})
+      this.$store.commit('addResource', {type: 'magic', value: 300})
 
-      this.$store.commit('addResource', {type: 'force', value: 30})
+      this.$store.commit('addResource', {type: 'force', value: 300})
     }
   },
   mounted(){

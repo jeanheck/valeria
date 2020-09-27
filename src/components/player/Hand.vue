@@ -17,6 +17,23 @@ export default {
     setInitialHand() {
       this.$store.commit('addCitizenToHand', cards.citizens.INIT_FARMER)
       this.$store.commit('addCitizenToHand', cards.citizens.INIT_KNIGHT)
+      this.$store.commit('addCitizenToHand', cards.citizens.CLERIC)
+      this.$store.commit('addCitizenToHand', cards.citizens.MONK)
+      this.$store.commit('addCitizenToHand', cards.citizens.MERCHANT)
+      this.$store.commit('addCitizenToHand', cards.citizens.BLACKSMITH)
+      this.$store.commit('addCitizenToHand', cards.citizens.MERCENARY)
+      this.$store.commit('addCitizenToHand', cards.citizens.ALCHEMIST)
+      this.$store.commit('addCitizenToHand', cards.citizens.ARCHER)
+      this.$store.commit('addCitizenToHand', cards.citizens.SORCERER)
+      this.$store.commit('addCitizenToHand', cards.citizens.FARMER)
+      this.$store.commit('addCitizenToHand', cards.citizens.KNIGHT)
+      this.$store.commit('addCitizenToHand', cards.citizens.THIEF)
+      this.$store.commit('addCitizenToHand', cards.citizens.CHAMPION)
+      this.$store.commit('addCitizenToHand', cards.citizens.LORD_OF_WAR)
+      this.$store.commit('addCitizenToHand', cards.citizens.PALADIN)
+      this.$store.commit('addCitizenToHand', cards.citizens.PRIESTESS)
+      this.$store.commit('addCitizenToHand', cards.citizens.BUTCHER)
+      this.$store.commit('addCitizenToHand', cards.citizens.MINER)
     },
     log(card) {
       console.log(`O efeito da carta ${card.name} foi ativado!`)

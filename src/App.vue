@@ -9,6 +9,7 @@
 
     <Hand />
     <KilledMonsters />
+    <BuildedDomains />
   </div>
 </template>
 
@@ -18,11 +19,17 @@ import Resources from './components/resources/Resources'
 import Hand from './components/player/Hand'
 import Board from './components/board/Board'
 import KilledMonsters from './components/player/KilledMonsters'
+import BuildedDomains from './components/player/BuildedDomains'
+
+import { startGame } from './assets/js/phasesController.js'
 
 export default {
   name: 'App',
   components: {
-    Resources, Dices, Hand, Board, KilledMonsters
+    Resources, Dices, Hand, Board, KilledMonsters, BuildedDomains
+  },
+  mounted(){
+    startGame(this.$store)
   }
 }
 </script>
