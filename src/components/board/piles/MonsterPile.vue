@@ -3,11 +3,13 @@
     <h1>Pile ({{pile.length}})</h1>
     <span>Name: {{getCardAtTheTop().name}}</span>&nbsp;
     <span>Force: {{getCardAtTheTop().force}}</span>&nbsp;
-    <button v-on:click="kill()">Kill</button>
+    <button v-on:click="kill()" :disabled="this.$store.state.game.phase != 'ACTION_PHASE'">Kill</button>
   </div>
 </template>
 
 <script>
+import { doingOneAction } from '../../../assets/js/phasesController.js'
+
 export default {
   name: 'Pile',
   props: {
@@ -38,6 +40,7 @@ export default {
         this.$store.commit('addKilledMonster', killedMonster);
         killedMonster.reward(this.$store);
         this.removeCardAtTop();
+        doingOneAction(this.$store);
       }else{
         console.log('Não tem recurso pra matar o monstro')
       }

@@ -20,7 +20,6 @@ import Hand from './components/player/Hand'
 import Board from './components/board/Board'
 import KilledMonsters from './components/player/KilledMonsters'
 import BuildedDomains from './components/player/BuildedDomains'
-
 import { startGame } from './assets/js/phasesController.js'
 
 export default {
@@ -29,7 +28,7 @@ export default {
     Resources, Dices, Hand, Board, KilledMonsters, BuildedDomains
   },
   mounted(){
-    startGame(this.$store)
+    startGame(this.$store);
   }
 }
 </script>

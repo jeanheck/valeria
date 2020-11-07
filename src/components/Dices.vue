@@ -2,36 +2,25 @@
   <div>
     <h1>Dices</h1>
     <p>
-      Dice One: {{ diceOne }}
-      Dice Two: {{ diceTwo }}
-      Sum Dices: {{ sumDices }}
+      Dice One: {{ this.$store.state.game.diceOne }}
+      Dice Two: {{ this.$store.state.game.diceTwo }}
+      Sum Dices: {{ this.$store.state.game.sumDices }}
     </p>
-    <button v-on:click="rollDices">Roll Dices</button>
+    <button v-on:click="getDicesValues()" :disabled="this.$store.state.game.phase != 'ROLLING_PHASE'">Roll Dices</button>
   </div>
 </template>
 
 <script>
+import { rollDices } from '../assets/js/phasesController.js'
+
 export default {
   name: 'Dice',
   props: {
     name: String
   },
-  data () {
-    return {
-      diceOne: '',
-      diceTwo: '',
-      sumDices: ''
-    }
-  },
   methods: {
-    rollDices() {
-      this.diceOne = this.rollDice();
-      this.diceTwo = this.rollDice();
-      this.sumDices = this.diceOne + this.diceTwo;
-      this.$parent.$emit('update-resources', this.diceOne, this.diceTwo, this.sumDices)
-    },
-    rollDice(){
-      return Math.floor(Math.random() * 6) + 1; 
+    getDicesValues() {
+      rollDices(this.$store);
     }
   }
 }

@@ -19,17 +19,6 @@ export default {
   name: 'Resources',
   components: {
     Gold, Force, Magic, Victory
-  },
-  methods: {
-    setInitialResources(){
-      this.$store.commit('addResource', {type: 'gold', value: 300})
-      this.$store.commit('addResource', {type: 'magic', value: 300})
-
-      this.$store.commit('addResource', {type: 'force', value: 300})
-    }
-  },
-  mounted(){
-    this.setInitialResources();
   }
 }
 </script>

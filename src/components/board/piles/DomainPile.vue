@@ -4,11 +4,13 @@
     <span>Name: {{getCardAtTheTop().name}}</span>&nbsp;
     <span>Cost: {{getCardAtTheTop().cost}}</span>&nbsp;
     <span>Requirements: {{getCardAtTheTop().requirements}}</span>&nbsp;
-    <button v-on:click="build()">Build</button>
+    <button v-on:click="build()" :disabled="this.$store.state.game.phase != 'ACTION_PHASE'">Build</button>
   </div>
 </template>
 
 <script>
+import { doingOneAction } from '../../../assets/js/phasesController.js'
+
 export default {
   name: 'Pile',
   props: {
@@ -48,6 +50,7 @@ export default {
         this.subtractPlayerResources(buildedDomain);
         this.$store.commit('addBuildedDomain', buildedDomain);
         this.removeCardAtTop();
+        doingOneAction(this.$store);
       }else{
         console.log('Não tem recurso/requisitos mínimos para construir o domínio')
       }

@@ -3,11 +3,13 @@
     <h1>Pile ({{pile.itens.length}})</h1>
     <span>Name: {{getCardAtTheTop().name}}</span>&nbsp;
     <span>Cost: {{getCardAtTheTop().cost}} (+{{getAditionalValueToBuy()}})</span>&nbsp;
-    <button v-on:click="buy()">Buy</button>
+    <button v-on:click="buy()" :disabled="this.$store.state.game.phase != 'ACTION_PHASE'">Buy</button>
   </div>
 </template>
 
 <script>
+import { doingOneAction } from '../../../assets/js/phasesController.js'
+
 export default {
   name: 'Pile',
   props: {
@@ -37,6 +39,7 @@ export default {
         this.subtractPlayerResources(cost);
         this.$store.commit('addCitizenToHand', cardAtTheTop);
         this.removeCardAtTop();
+        doingOneAction(this.$store);
       }else{
         console.log('não tem recurso pra comprar a carta')
       }

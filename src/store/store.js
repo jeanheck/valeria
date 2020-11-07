@@ -22,10 +22,15 @@ const store = new Vuex.Store({
       domains: []
     },
     game: {
-      phase: 'NOT_INITIATED'
+      phase: 'NOT_INITIATED',
+      diceOne: '',
+      diceTwo: '',
+      sumDices: '',
+      actionsCounter: 0
     }
   },
   mutations: {
+    //Resources mutations
     addResource(state, payload) {
       state.player.resources[payload.type] += payload.value;
       console.log(`O player ganhou ${payload.value} ${payload.type}(s)!`);
@@ -38,6 +43,7 @@ const store = new Vuex.Store({
       state.player.hand.push(card);
       console.log(`A carta ${card.name} foi adicionada a mão do jogador!`);
     },
+    //Citizen Mutations
     addCitizenPileToBoard(state, pile) {
       state.board.citizens.push(pile);
       console.log(`Uma pilha de cidadãos foi adicionada ao board!`);
@@ -46,6 +52,7 @@ const store = new Vuex.Store({
       state.board.citizens.find(pile => pile.id === pileId).itens.shift();
       console.log(`Um cidadão foi retirado da pilha!`);
     },
+    //Monster Mutations
     addKilledMonster(state, card) {
       state.player.killedMonsters.push(card);
       console.log(`A carta ${card.name} foi adicionada a pilha de monstros mortos!`);
@@ -54,13 +61,14 @@ const store = new Vuex.Store({
       state.board.monsters.push(pile);
       console.log(`Uma pilha de monstros foi adicionada ao board!`);
     },
+    //Domain mutations
     addDomainPileToBoard(state, pile) {
       state.board.domains.push(pile);
       console.log(`Uma pilha de domínios foi adicionada ao board!`);
     },
     addBuildedDomain(state, card){
       state.player.buildedDomains.push(card);
-      console.log(`A carta ${card.name} foi adicionada a pilha de domínios construiídos!`);
+      console.log(`A carta ${card.name} foi adicionada a pilha de domínios construidos!`);
     }
   }
 })
