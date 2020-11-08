@@ -49,6 +49,9 @@ export default {
       if(this.playerHaveResourcesToBuild(buildedDomain)){
         this.subtractPlayerResources(buildedDomain);
         this.$store.commit('addBuildedDomain', buildedDomain);
+        if(buildedDomain.rewardType === 'IMMEDIATELY'){
+          buildedDomain.reward(this.$store);
+        }
         this.removeCardAtTop();
         doingOneAction(this.$store);
       }else{

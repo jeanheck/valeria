@@ -532,8 +532,6 @@ export const monsters = {
 /****************************************** DOMAINS CARDS ********************************************************** */
 /******************************************************************************************************************* */
 
-//SOLDIER, HEAVENLY, CONSTRUCTOR, FIGHTER
-
 export const domains = {
   COLISEUM: {
     id: 'COLISEUM',
@@ -542,8 +540,9 @@ export const domains = {
     cost: 15,
     victoryPoints: 5,
     rewardDescription: 'Imediatamente ganhe um 1 de força para cada cidadão que possuir',
-    reward: () => {
-
+    rewardType: 'IMMEDIATELY',
+    reward: (store) => {
+      store.commit('addResource', {type: 'force', value: store.state.player.hand.length})
     }
   },
   GRIMMWATER_FORT: {
@@ -553,6 +552,7 @@ export const domains = {
     cost: 10,
     victoryPoints: 4,
     rewardDescription: 'Imediatamente ganhe um cidadão que custe 3 ou menos',
+    rewardType: 'IMMEDIATELY',
     reward: () => {
 
     }
@@ -563,9 +563,12 @@ export const domains = {
     requirements: ['SOLDIER', 'SOLDIER'],
     cost: 7,
     victoryPoints: 2,
-    rewardDescription: 'Durante qualquer fase de Rolagem ganhe 1 ponto de virória sempre que sairem dois dados iguais',
-    reward: () => {
-
+    rewardDescription: 'Durante qualquer fase de Rolagem ganhe 1 ponto de vitória sempre que sairem dois dados iguais',
+    rewardType: 'ROLLING_DICES_PHASE',
+    reward: (store) => {
+      if(store.state.game.diceOne == store.state.game.diceTwo){
+        store.commit('addResource', {type: 'victory', value: 1})
+      }
     }
   },
   SHATTERED_HAND: {
@@ -575,6 +578,7 @@ export const domains = {
     cost: 7,
     victoryPoints: 3,
     rewardDescription: 'Imediatamente ganhe um cidadão do tipo HEAVENLY da pilha central',
+    rewardType: 'IMMEDIATELY',
     reward: () => {
 
     }
@@ -586,6 +590,7 @@ export const domains = {
     cost: 6,
     victoryPoints: 3,
     rewardDescription: 'Você pode imediatamente retornar um monstro para a sua pilha para ganhar 3 pontos de vitória',
+    rewardType: 'IMMEDIATELY',
     reward: () => {
 
     }
@@ -597,8 +602,9 @@ export const domains = {
     cost: 5,
     victoryPoints: 2,
     rewardDescription: 'No início da sua fase de ação você ganha 1 ponto de força',
-    reward: () => {
-
+    rewardType: 'STARTING_ACTION_PHASE',
+    reward: (store) => {
+      store.commit('addResource', {type: 'force', value: 1})
     }
   },
   SHADOWTIDE_HARBOR: { 
@@ -608,6 +614,7 @@ export const domains = {
     cost: 6,
     victoryPoints: 2,
     rewardDescription: 'Imediatamente ganhe um cidadão do tipo FIGHTER das pilhas centrais',
+    rewardType: 'IMMEDIATELY',
     reward: () => {
 
     }
@@ -618,7 +625,8 @@ export const domains = {
     requirements: ['HEAVENLY', 'SOLDIER'],
     cost: 8,
     victoryPoints: 1,
-    rewardDescription: 'Imediatamente ganhe 5 pontos de vitória de você pode derrotar um monstro',
+    rewardDescription: 'Imediatamente ganhe 5 pontos de vitória e você pode derrotar um monstro',
+    rewardType: 'IMMEDIATELY',
     reward: () => {
 
     }
@@ -630,6 +638,7 @@ export const domains = {
     cost: 7,
     victoryPoints: 3,
     rewardDescription: 'Imediatamente ganhe um cidadão do tipo CONSTRUCTOR das pilhas centrais',
+    rewardType: 'IMMEDIATELY',
     reward: () => {
 
     }
@@ -641,8 +650,9 @@ export const domains = {
     cost: 6,
     victoryPoints: 1,
     rewardDescription: 'No final da sua fase de ação, você pode pegar um ponto de magia de um jogador',
-    reward: () => {
-
+    rewardType: 'ENDING_ACTION_PHASE',
+    reward: (store) => {
+      store.commit('addResource', {type: 'magic', value: 1})
     }
   },
   FOX_GROVE_PALACE: { 
@@ -652,6 +662,7 @@ export const domains = {
     cost: 9,
     victoryPoints: 3,
     rewardDescription: 'Durante sua fase de rolagem você pode pagar 2 de ouro para tornar um dado em 6',
+    rewardType: 'ROLLING_DICES_PHASE',
     reward: () => {
 
     }
@@ -663,6 +674,7 @@ export const domains = {
     cost: 10,
     victoryPoints: 2,
     rewardDescription: 'No final de sua fase de Ação você pode trocar dois pontos de mágica por um de vitória',
+    rewardType: 'ENDING_ACTION_PHASE',
     reward: () => {
 
     }
@@ -674,6 +686,7 @@ export const domains = {
     cost: 8,
     victoryPoints: 3,
     rewardDescription: 'Durante sua Fase de Ação Dominios custam a você 1 de ouro a menos',
+    rewardType: 'IN_ACTION_PHASE',
     reward: () => {
 
     }
@@ -685,8 +698,9 @@ export const domains = {
     cost: 6,
     victoryPoints: 2,
     rewardDescription: 'No inicio da sua Fase de Ação você ganha 1 de ouro',
-    reward: () => {
-
+    rewardType: 'STARTING_ACTION_PHASE',
+    reward: (store) => {
+      store.commit('addResource', {type: 'gold', value: 1})
     }
   },
   TRUCE_CUT_THROAT: { 
@@ -696,8 +710,9 @@ export const domains = {
     cost: 5,
     victoryPoints: 1,
     rewardDescription: 'Imediatamente ganhe 3 de ouro de outro jogador',
-    reward: () => {
-
+    rewardType: 'IMMEDIATELY',
+    reward: (store) => {
+      store.commit('addResource', {type: 'gold', value: 3})
     }
   },
   ULLAMALIZATLI_COURT: { 
@@ -707,8 +722,9 @@ export const domains = {
     cost: 11,
     victoryPoints: 3,
     rewardDescription: 'Imediatamente ganhe 1 de magia para cada cidadão que possuir',
-    reward: () => {
-
+    rewardType: 'IMMEDIATELY',
+    reward: (store) => {
+      store.commit('addResource', {type: 'magic', value: store.state.player.hand.length})
     }
   },
   ST_AQUILA_CHURCH: { 
@@ -718,8 +734,9 @@ export const domains = {
     cost: 8,
     victoryPoints: 3,
     rewardDescription: 'No final de sua fase de ação ganhe 1 ouro de outro jogador',
-    reward: () => {
-
+    rewardType: 'ENDING_ACTION_PHASE',
+    reward: (store) => {
+      store.commit('addResource', {type: 'gold', value: 1})
     }
   },
   NAE_GOLDEN_OBELISK: { 
@@ -729,6 +746,7 @@ export const domains = {
     cost: 6,
     victoryPoints: 3,
     rewardDescription: 'Você pode imediatamente trocar 3 de magia por 3 pontos de vitória',
+    rewardType: 'IMMEDIATELY',
     reward: () => {
 
     }
@@ -740,6 +758,7 @@ export const domains = {
     cost: 12,
     victoryPoints: 5,
     rewardDescription: 'Durante sua fase de ação, ignore o (+) ao comprar os cidadãos',
+    rewardType: 'IN_ACTION_PHASE',
     reward: () => {
 
     }
@@ -751,6 +770,7 @@ export const domains = {
     cost: 8,
     victoryPoints: 2,
     rewardDescription: 'Imediatamente ganhe 3 pontos de força e um cidadão do tipo soldado com custo menor ou igual a 2',
+    rewardType: 'IMMEDIATELY',
     reward: () => {
 
     }
@@ -762,6 +782,7 @@ export const domains = {
     cost: 9,
     victoryPoints: 3,
     rewardDescription: 'Durante sua fase de rolagem você pode pagar 1 de ouro pra cada cidadão do tipo heavenly que possuir, para transformar um dado em 1',
+    rewardType: 'ROLLING_DICES_PHASE',
     reward: () => {
 
     }
@@ -773,6 +794,7 @@ export const domains = {
     cost: 13,
     victoryPoints: 3,
     rewardDescription: 'Durante sua fase de colheita ganhe 1 ouro para cada cavaleiro que possuir',
+    rewardType: 'IN_HARVEST_PHASE',
     reward: () => {
 
     }
@@ -784,6 +806,7 @@ export const domains = {
     cost: 7,
     victoryPoints: 3,
     rewardDescription: 'Durante sua fase de ação, quando você derrotar um monstro ganhe 1 de magia.',
+    rewardType: 'IN_ACTION_PHASE',
     reward: () => {
 
     }
@@ -795,8 +818,9 @@ export const domains = {
     cost: 9,
     victoryPoints: 3,
     rewardDescription: 'No início de sua fase de ação você ganha 1 ponto de magia.',
-    reward: () => {
-
+    rewardType: 'STARTING_ACTION_PHASE',
+    reward: (store) => {
+      store.commit('addResource', {type: 'magic', value: 1})
     }
   },
   FORGOTTEN_SORROWS: { 
@@ -806,6 +830,7 @@ export const domains = {
     cost: 9,
     victoryPoints: 3,
     rewardDescription: 'Durante sua fase de ação ganhe 1 ponto de magia toda vez que ganhar um cidadão.',
+    rewardType: 'IN_ACTION_PHASE',
     reward: () => {
 
     }
@@ -817,6 +842,7 @@ export const domains = {
     cost: 6,
     victoryPoints: 3,
     rewardDescription: 'Você pode imediatamente retornar um cidadão para sua pilha para ganhar 3 pontos de vitória.',
+    rewardType: 'IMMEDIATELY',
     reward: () => {
 
     }
@@ -828,6 +854,7 @@ export const domains = {
     cost: 11,
     victoryPoints: 4,
     rewardDescription: 'Durante sua fase de rolagem você pode mudar um dado em -1.',
+    rewardType: 'ROLLING_DICES_PHASE',
     reward: () => {
 
     }
@@ -839,6 +866,7 @@ export const domains = {
     cost: 10,
     victoryPoints: 2,
     rewardDescription: 'Imediatamente pegue um monstro de outro jogador aleatóriamente.',
+    rewardType: 'IMMEDIATELY',
     reward: () => {
 
     }

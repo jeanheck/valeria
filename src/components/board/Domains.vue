@@ -25,10 +25,10 @@ export default {
     setInitialPiles(){
       const domains = [
         [
+          cards.domains.BLOOD_CROW_ARMY,
           cards.domains.AQUA_OBSERVER,
           cards.domains.ASTERATEN_EYE,
           cards.domains.ST_AQUILA_CHURCH,
-          cards.domains.BLOOD_CROW_ARMY,
           cards.domains.COLISEUM,
           cards.domains.CLOUDRIDER_CAMPING,
           cards.domains.TRUCE_CUT_THROAT
@@ -43,9 +43,9 @@ export default {
           cards.domains.FORGOTTEN_SORROWS
         ],
         [
+          cards.domains.GARGAN_HUGHE,
           cards.domains.GRIMMWATER_FORT,
           cards.domains.JUSTA_FIELD,
-          cards.domains.GARGAN_HUGHE,
           cards.domains.NAE_GOLDEN_OBELISK,
           cards.domains.HALFPENNNY_HILL,
           cards.domains.SHATTERED_HAND,

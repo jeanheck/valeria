@@ -62,6 +62,12 @@ export function checkDomainEffectsAfterRollDices(store){
 
 	console.log('phase > ', store.state.game.phase)
 
+	let buildedDomains = store.state.player.buildedDomains.filter(domain => domain.rewardType === 'ROLLING_DICES_PHASE');
+
+	buildedDomains.forEach(domain => {
+		domain.reward(store);
+	});
+
 	startHarvest(store);
 }
 //HARVEST THE RESOURCES
@@ -102,6 +108,12 @@ export function checkDomainEffectsBeforeAction(store){
 
 	console.log('phase > ', store.state.game.phase)
 
+	let buildedDomains = store.state.player.buildedDomains.filter(domain => domain.rewardType === 'STARTING_ACTION_PHASE');
+
+	buildedDomains.forEach(domain => {
+		domain.reward(store);
+	});
+
 	startActionPhase(store);
 }
 
@@ -133,6 +145,12 @@ export function checkDomainEffectsAfterAllActions(store){
 	store.state.game.phase = 'CHECKING_DOMAIN_EFFECTS_AFTER_ALL_ACTIONS';
 
 	console.log('phase > ', store.state.game.phase)
+
+	let buildedDomains = store.state.player.buildedDomains.filter(domain => domain.rewardType === 'ENDING_ACTION_PHASE');
+
+	buildedDomains.forEach(domain => {
+		domain.reward(store);
+	});
 
 	store.state.game.phase = 'ROLLING_PHASE';
 }
