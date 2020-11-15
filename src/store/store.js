@@ -57,6 +57,20 @@ const store = new Vuex.Store({
       state.player.killedMonsters.push(card);
       console.log(`A carta ${card.name} foi adicionada a pilha de monstros mortos!`);
     },
+    removeKilledMonster(state, monsterToRemove) {
+      const indexToRemove = state.player.killedMonsters.findIndex(monster => monster === monsterToRemove);
+      state.player.killedMonsters.splice(indexToRemove, 1);
+      console.log(`A carta ${monsterToRemove.name} foi removida da pilha de monstros mortos!`);
+    },
+    addMonsterToPile(state, monster) {
+      state.board.monsters.forEach(pile => {
+        if(pile[0].area === monster.area){
+          pile.unshift(monster);
+        }
+      })
+
+      console.log(`A carta ${monster.name} foi adicionada a pilha de monstros!`);
+    },
     addMonsterPileToBoard(state, pile) {
       state.board.monsters.push(pile);
       console.log(`Uma pilha de monstros foi adicionada ao board!`);

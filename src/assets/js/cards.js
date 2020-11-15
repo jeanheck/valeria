@@ -553,8 +553,17 @@ export const domains = {
     victoryPoints: 4,
     rewardDescription: 'Imediatamente ganhe um cidadão que custe 3 ou menos',
     rewardType: 'IMMEDIATELY',
-    reward: () => {
+    reward: (store) => {
+      const citizensCardsId = store.state.board.citizens.filter(citizen => citizen.cost <= 3).map(pile => {return pile.id});
+      const message = `Choose one Citizen in the list below. Type the Citizen ID in the field. You need to type the name correctly to continue:\n${citizensCardsId.join('\n')}`;
+      let citizen_choose = undefined;
 
+      do {
+        citizen_choose = prompt(message);
+      } while (!citizensCardsId.find(citizenCardId => citizenCardId === citizen_choose));
+      
+      store.commit('addCitizenToHand', citizens[citizen_choose]);
+      store.commit('removeCitizenFromPile', citizen_choose)
     }
   },
   GARGAN_HUGHE: {
@@ -579,8 +588,17 @@ export const domains = {
     victoryPoints: 3,
     rewardDescription: 'Imediatamente ganhe um cidadão do tipo HEAVENLY da pilha central',
     rewardType: 'IMMEDIATELY',
-    reward: () => {
+    reward: (store) => {
+      const citizensCardsId = store.state.board.citizens.filter(citizen => citizen.type === 'HEAVENLY').map(pile => {return pile.id});
+      const message = `Choose one Citizen in the list below. Type the Citizen ID in the field. You need to type the name correctly to continue:\n${citizensCardsId.join('\n')}`;
+      let citizen_choose = undefined;
 
+      do {
+        citizen_choose = prompt(message);
+      } while (!citizensCardsId.find(citizenCardId => citizenCardId === citizen_choose));
+      
+      store.commit('addCitizenToHand', citizens[citizen_choose]);
+      store.commit('removeCitizenFromPile', citizen_choose)
     }
   },
   AQUA_OBSERVER: {
@@ -591,8 +609,19 @@ export const domains = {
     victoryPoints: 3,
     rewardDescription: 'Você pode imediatamente retornar um monstro para a sua pilha para ganhar 3 pontos de vitória',
     rewardType: 'IMMEDIATELY',
-    reward: () => {
+    reward: (store) => {
+      const MonstersInHandId = store.state.player.killedMonsters.map(monster => {return monster.id});
+      const message = `Choose one Monster in the list below. Type the Monster ID in the field. You need to type the name correctly to continue:\n${MonstersInHandId.join('\n')}`;
+      let monster_choose = undefined;
 
+      do {
+        monster_choose = prompt(message);
+      } while (!MonstersInHandId.find(monsterCardId => monsterCardId === monster_choose));
+      
+      store.commit('removeKilledMonster', monsters[monster_choose]);
+      store.commit('addMonsterToPile', monsters[monster_choose])
+
+      store.commit('addResource', {type: 'victory', value: 3})
     }
   },
   BLOOD_CROW_ARMY: {
@@ -615,8 +644,17 @@ export const domains = {
     victoryPoints: 2,
     rewardDescription: 'Imediatamente ganhe um cidadão do tipo FIGHTER das pilhas centrais',
     rewardType: 'IMMEDIATELY',
-    reward: () => {
+    reward: (store) => {
+      const citizensCardsId = store.state.board.citizens.filter(citizen => citizen.type === 'FIGHTER').map(pile => {return pile.id});
+      const message = `Choose one Citizen in the list below. Type the Citizen ID in the field. You need to type the name correctly to continue:\n${citizensCardsId.join('\n')}`;
+      let citizen_choose = undefined;
 
+      do {
+        citizen_choose = prompt(message);
+      } while (!citizensCardsId.find(citizenCardId => citizenCardId === citizen_choose));
+      
+      store.commit('addCitizenToHand', citizens[citizen_choose]);
+      store.commit('removeCitizenFromPile', citizen_choose)
     }
   },
   ASTERATEN_EYE: { 
@@ -627,8 +665,10 @@ export const domains = {
     victoryPoints: 1,
     rewardDescription: 'Imediatamente ganhe 5 pontos de vitória e você pode derrotar um monstro',
     rewardType: 'IMMEDIATELY',
-    reward: () => {
+    reward: (store) => {
+      store.commit('addResource', {type: 'victory', value: 5})
 
+      //ESSE AQUI AINDA NÃO TÁ PRONTO
     }
   },
   ROGUES_LANDING: { 
@@ -639,8 +679,17 @@ export const domains = {
     victoryPoints: 3,
     rewardDescription: 'Imediatamente ganhe um cidadão do tipo CONSTRUCTOR das pilhas centrais',
     rewardType: 'IMMEDIATELY',
-    reward: () => {
+    reward: (store) => {
+      const citizensCardsId = store.state.board.citizens.filter(citizen => citizen.type === 'CONSTRUCTOR').map(pile => {return pile.id});
+      const message = `Choose one Citizen in the list below. Type the Citizen ID in the field. You need to type the name correctly to continue:\n${citizensCardsId.join('\n')}`;
+      let citizen_choose = undefined;
 
+      do {
+        citizen_choose = prompt(message);
+      } while (!citizensCardsId.find(citizenCardId => citizenCardId === citizen_choose));
+      
+      store.commit('addCitizenToHand', citizens[citizen_choose]);
+      store.commit('removeCitizenFromPile', citizen_choose)
     }
   },
   THE_URDR_ORB: { 
@@ -675,8 +724,13 @@ export const domains = {
     victoryPoints: 2,
     rewardDescription: 'No final de sua fase de Ação você pode trocar dois pontos de mágica por um de vitória',
     rewardType: 'ENDING_ACTION_PHASE',
-    reward: () => {
+    reward: (store) => {
+      const user_choose = prompt(`Type VICTORY if you want to change 2 Magic by one victory point.`);
 
+      if(user_choose === 'VICTORY') {
+        store.commit('addResource', {type: 'victory', value: 1})
+        store.commit('removeResource', {type: 'magic', value: 2})
+      }
     }
   },
   PLATEAU_PRATCHETT: { 

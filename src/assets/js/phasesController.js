@@ -143,6 +143,7 @@ export function checkDomainEffectsAfterOneAction(store){
 
 export function checkDomainEffectsAfterAllActions(store){
 	store.state.game.phase = 'CHECKING_DOMAIN_EFFECTS_AFTER_ALL_ACTIONS';
+  store.state.game.actionsCounter = 0;
 
 	console.log('phase > ', store.state.game.phase)
 

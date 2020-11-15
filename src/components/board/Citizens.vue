@@ -20,6 +20,8 @@ export default {
     createCitizenPile(citizen){
       let pile = {
         id: citizen.id,
+        cost: citizen.cost,
+        type: citizen.type,
         itens: []
       };
       while(pile.itens.length < 5){
