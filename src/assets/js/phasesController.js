@@ -74,7 +74,7 @@ export function checkDomainEffectsAfterRollDices(store){
 export function startHarvest(store){
 	store.state.game.phase = 'HARVEST_RESOURCES_BY_ROLL_DICES_VALUES';
 
-	console.log('phase > ', store.state.game.phase)
+  console.log('phase > ', store.state.game.phase)
 
 	store.state.player.hand.forEach((card) => {
 		card.diceValues.forEach((value) => {

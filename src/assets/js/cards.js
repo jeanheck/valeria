@@ -712,8 +712,22 @@ export const domains = {
     victoryPoints: 3,
     rewardDescription: 'Durante sua fase de rolagem você pode pagar 2 de ouro para tornar um dado em 6',
     rewardType: 'ROLLING_DICES_PHASE',
-    reward: () => {
+    reward: (store) => {
+      const message = `Do you want to pay 2 gold to change one dice value to six? Type YES if you want. Another value will be consider NO.`;
+      const user_want_to_change = prompt(message);
 
+      if(user_want_to_change === 'YES'){
+        store.commit('removeResource', {type: 'gold', value: 2})
+
+        const message = `What the dice that you want to change the value to six? Type 1 if you want to change the value of diceOne. Another value will be consider the dice 2.`;
+        const user_choose_dice = prompt(message);
+
+        if(user_choose_dice === '1'){
+          store.state.game.diceOne = 6;
+        }else{
+          store.state.game.diceTwo = 6;
+        }
+      }
     }
   },
   THE_TOWER: { 
@@ -740,9 +754,9 @@ export const domains = {
     cost: 8,
     victoryPoints: 3,
     rewardDescription: 'Durante sua Fase de Ação Dominios custam a você 1 de ouro a menos',
-    rewardType: 'IN_ACTION_PHASE',
-    reward: () => {
-
+    rewardType: 'IMMEDIATELY',
+    reward: (store) => {
+      store.commit('domainsCostOneGoldLess')
     }
   },
   HALFPENNNY_HILL: { 
@@ -801,8 +815,13 @@ export const domains = {
     victoryPoints: 3,
     rewardDescription: 'Você pode imediatamente trocar 3 de magia por 3 pontos de vitória',
     rewardType: 'IMMEDIATELY',
-    reward: () => {
+    reward: (store) => {
+      const user_choose = prompt(`Type VICTORY if you want to change 3 Magic by 3 Victory points.`);
 
+      if(user_choose === 'VICTORY') {
+        store.commit('addResource', {type: 'victory', value: 3})
+        store.commit('removeResource', {type: 'magic', value: 3})
+      }
     }
   },
   EMERALD_FORTRESS: { 
@@ -812,9 +831,9 @@ export const domains = {
     cost: 12,
     victoryPoints: 5,
     rewardDescription: 'Durante sua fase de ação, ignore o (+) ao comprar os cidadãos',
-    rewardType: 'IN_ACTION_PHASE',
-    reward: () => {
-
+    rewardType: 'IMMEDIATELY',
+    reward: (store) => {
+      store.commit('cancelAdditionalValueToBuy')
     }
   },
   CLOUDRIDER_CAMPING: { 
@@ -825,8 +844,19 @@ export const domains = {
     victoryPoints: 2,
     rewardDescription: 'Imediatamente ganhe 3 pontos de força e um cidadão do tipo soldado com custo menor ou igual a 2',
     rewardType: 'IMMEDIATELY',
-    reward: () => {
+    reward: (store) => {
+      store.commit('addResource', {type: 'force', value: 3})
 
+      const citizensCardsId = store.state.board.citizens.filter(citizen => citizen.type === 'SOLDIER').map(pile => {return pile.id});
+      const message = `Choose one Citizen in the list below. Type the Citizen ID in the field. You need to type the name correctly to continue:\n${citizensCardsId.join('\n')}`;
+      let citizen_choose = undefined;
+
+      do {
+        citizen_choose = prompt(message);
+      } while (!citizensCardsId.find(citizenCardId => citizenCardId === citizen_choose));
+      
+      store.commit('addCitizenToHand', citizens[citizen_choose]);
+      store.commit('removeCitizenFromPile', citizen_choose)
     }
   },
   DESERT_ORCHID: { 
@@ -837,8 +867,24 @@ export const domains = {
     victoryPoints: 3,
     rewardDescription: 'Durante sua fase de rolagem você pode pagar 1 de ouro pra cada cidadão do tipo heavenly que possuir, para transformar um dado em 1',
     rewardType: 'ROLLING_DICES_PHASE',
-    reward: () => {
+    reward: (store) => {
+      const heavenlyCitizensInHand = store.state.player.hand.filter(citizen => citizen.type === 'HEAVENLY').length;
 
+      const message = `Do you want to pay ${heavenlyCitizensInHand} gold(s) to change one dice value to 1? Type YES if you want. Another value will be consider NO.`;
+      const user_want_to_change = prompt(message);
+
+      if(user_want_to_change === 'YES'){
+        store.commit('removeResource', {type: 'gold', value: heavenlyCitizensInHand})
+
+        const message = `What the dice that you want to change the value to 1? Type 1 if you want to change the value of diceOne. Another value will be consider the dice 2.`;
+        const user_choose_dice = prompt(message);
+
+        if(user_choose_dice === '1'){
+          store.state.game.diceOne = 1;
+        }else{
+          store.state.game.diceTwo = 1;
+        }
+      }
     }
   },
   JUSTA_FIELD: { 
@@ -849,8 +895,9 @@ export const domains = {
     victoryPoints: 3,
     rewardDescription: 'Durante sua fase de colheita ganhe 1 ouro para cada cavaleiro que possuir',
     rewardType: 'IN_HARVEST_PHASE',
-    reward: () => {
-
+    reward: (store) => {
+      const knightsAtHand = store.state.player.hand.filter(card => card.name === 'KNIGHT').length;
+      store.commit('addResource', {type: 'gold', value: knightsAtHand})
     }
   },
   VIOLET_THORN: { 
@@ -860,9 +907,9 @@ export const domains = {
     cost: 7,
     victoryPoints: 3,
     rewardDescription: 'Durante sua fase de ação, quando você derrotar um monstro ganhe 1 de magia.',
-    rewardType: 'IN_ACTION_PHASE',
-    reward: () => {
-
+    rewardType: 'IMMEDIATELY',
+    reward: (store) => {
+      store.commit('oneMagicWhenYouKillAMonster')
     }
   },
   OSTENDAR_MONOLITH: { 
@@ -884,9 +931,9 @@ export const domains = {
     cost: 9,
     victoryPoints: 3,
     rewardDescription: 'Durante sua fase de ação ganhe 1 ponto de magia toda vez que ganhar um cidadão.',
-    rewardType: 'IN_ACTION_PHASE',
-    reward: () => {
-
+    rewardType: 'IMMEDIATELY',
+    reward: (store) => {
+      store.commit('oneMagicWhenYouBuyACitizen')
     }
   },
   WEAVING_WITCHS_NEST: { 
@@ -897,8 +944,21 @@ export const domains = {
     victoryPoints: 3,
     rewardDescription: 'Você pode imediatamente retornar um cidadão para sua pilha para ganhar 3 pontos de vitória.',
     rewardType: 'IMMEDIATELY',
-    reward: () => {
+    reward: (store) => {
+      const CitizensInHandId = store.state.player.hand.map(citizen => {return citizen.id});
+      const message = `Choose one Citizen in the list below. Type the Citizen ID in the field. You need to type the name correctly to continue:\n${CitizensInHandId.join('\n')}`;
+      let citizen_choose = undefined;
 
+      do {
+        citizen_choose = prompt(message);
+      } while (!CitizensInHandId.find(monsterCardId => monsterCardId === citizen_choose));
+
+      console.log('citizens[citizen_choose] > ', citizens[citizen_choose])
+      
+      store.commit('removeCitizenFromHand', citizens[citizen_choose]);
+      store.commit('addCitizenToPile', citizens[citizen_choose])
+
+      store.commit('addResource', {type: 'victory', value: 3})
     }
   },
   DAWN_PALACE: { 
@@ -909,8 +969,30 @@ export const domains = {
     victoryPoints: 4,
     rewardDescription: 'Durante sua fase de rolagem você pode mudar um dado em -1.',
     rewardType: 'ROLLING_DICES_PHASE',
-    reward: () => {
+    reward: (store) => {
+      if(store.state.game.diceOne === 1 && store.state.game.diceTwo === 1){
+        return;
+      }else if(store.state.game.diceOne > 1 || store.state.game.diceTwo > 1){
+        const message = `Do you want to change one dice value minus 1? Type YES if you want. Another value will be consider NO.`;
+        const user_want_to_change = prompt(message);
 
+        if(user_want_to_change === 'YES'){
+          const message = `What the dice that you want to change the value minus 1? Type 1 if you want to change the value of diceOne. Another value will be consider the dice 2.`;
+          const user_choose_dice = prompt(message);
+
+          if(user_choose_dice === '1'){
+            if(store.state.game.diceOne === 1){
+              return;
+            }
+            store.state.game.diceOne -= 1;
+          }else{
+            if(store.state.game.diceTwo === 1){
+              return;
+            }
+            store.state.game.diceTwo -= 1;
+          }
+        }
+      }
     }
   },
   PURLOINER_PERCH: { 
@@ -921,8 +1003,12 @@ export const domains = {
     victoryPoints: 2,
     rewardDescription: 'Imediatamente pegue um monstro de outro jogador aleatóriamente.',
     rewardType: 'IMMEDIATELY',
-    reward: () => {
+    reward: (store) => {
+      const randomIndex = Math.floor(Math.random() * 5);
+      const randomMonsterPile = store.state.board.monsters[randomIndex];
 
+      store.commit('addKilledMonster', randomMonsterPile[0])
+      randomMonsterPile.shift();
     }
   },
 }

@@ -39,6 +39,9 @@ export default {
         this.subtractPlayerResources(killedMonster);
         this.$store.commit('addKilledMonster', killedMonster);
         killedMonster.reward(this.$store);
+        if(this.$store.state.game.passiveEffects.oneMagicWhenYouKillAMonster){
+           this.$store.commit('addResource', {type: 'magic', value: 1})
+        }
         this.removeCardAtTop();
         doingOneAction(this.$store);
       }else{

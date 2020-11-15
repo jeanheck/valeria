@@ -26,7 +26,13 @@ const store = new Vuex.Store({
       diceOne: '',
       diceTwo: '',
       sumDices: '',
-      actionsCounter: 0
+      actionsCounter: 0,
+      passiveEffects: {
+        cancelAdditionalValueToBuy: false,
+        domainsCostOneGoldLess: false,
+        oneMagicWhenYouKillAMonster: false,
+        oneMagicWhenYouBuyACitizen: false
+      }
     }
   },
   mutations: {
@@ -42,6 +48,20 @@ const store = new Vuex.Store({
     addCitizenToHand(state, card) {
       state.player.hand.push(card);
       console.log(`A carta ${card.name} foi adicionada a mão do jogador!`);
+    },
+    addCitizenToPile(state, citizen) {
+      state.board.citizens.forEach(pile => {
+        if(pile.id === citizen.id){
+          pile.itens.unshift(citizen);
+        }
+      })
+
+      console.log(`A carta ${citizen.name} foi adicionada a pilha de cidadãos!`);
+    },
+    removeCitizenFromHand(state, citizenToRemove) {
+      const indexToRemove = state.player.hand.findIndex(citizen => citizen === citizenToRemove);
+      state.player.hand.splice(indexToRemove, 1);
+      console.log(`A carta ${citizenToRemove.name} foi removida da mão do jogador!`);
     },
     //Citizen Mutations
     addCitizenPileToBoard(state, pile) {
@@ -83,6 +103,23 @@ const store = new Vuex.Store({
     addBuildedDomain(state, card){
       state.player.buildedDomains.push(card);
       console.log(`A carta ${card.name} foi adicionada a pilha de domínios construidos!`);
+    },
+    //Passive effects
+    cancelAdditionalValueToBuy(state){
+      state.game.passiveEffects.cancelAdditionalValueToBuy = true;
+      console.log(`Efeito Ativado! Cidadãos não tem mais custo adicional!`);
+    },
+    domainsCostOneGoldLess(state){
+      state.game.passiveEffects.domainsCostOneGoldLess = true;
+      console.log(`Efeito Ativado! Domínios custam -1 de ouro!`);
+    },
+    oneMagicWhenYouKillAMonster(state){
+      state.game.passiveEffects.oneMagicWhenYouKillAMonster = true;
+      console.log(`Efeito Ativado! + 1 de mágica sempre que matar um monstro!`);
+    },
+    oneMagicWhenYouBuyACitizen(state){
+      state.game.passiveEffects.oneMagicWhenYouBuyACitizen = true;
+      console.log(`Efeito Ativado! + 1 de mágica sempre que comprar um cidadão!`);
     }
   }
 })

@@ -34,16 +34,16 @@ export default {
           cards.domains.TRUCE_CUT_THROAT
         ],
         [
-          cards.domains.ULLAMALIZATLI_COURT,
           cards.domains.DESERT_ORCHID,
           cards.domains.DAWN_PALACE,
-          cards.domains.EMERALD_FORTRESS,
-          cards.domains.ASTERATEN_EYE,
           cards.domains.FOX_GROVE_PALACE,
-          cards.domains.FORGOTTEN_SORROWS
+          cards.domains.FORGOTTEN_SORROWS,
+          cards.domains.EMERALD_FORTRESS,
+          cards.domains.ULLAMALIZATLI_COURT,
+          cards.domains.ASTERATEN_EYE
         ],
         [
-          cards.domains.SHADOWTIDE_HARBOR,
+          cards.domains.VIOLET_THORN,
           cards.domains.SHATTERED_HAND,
           cards.domains.GRIMMWATER_FORT,
           cards.domains.GARGAN_HUGHE,
@@ -52,13 +52,13 @@ export default {
           cards.domains.HALFPENNNY_HILL,
         ],
         [
+          cards.domains.PLATEAU_PRATCHETT,
+          cards.domains.PURLOINER_PERCH,
+          cards.domains.WEAVING_WITCHS_NEST,
           cards.domains.THE_TOWER,
           cards.domains.ROGUES_LANDING,
           cards.domains.OSTENDAR_MONOLITH,
-          cards.domains.WEAVING_WITCHS_NEST,
-          cards.domains.THE_URDR_ORB,
-          cards.domains.PLATEAU_PRATCHETT,
-          cards.domains.PURLOINER_PERCH
+          cards.domains.THE_URDR_ORB
         ],
       ];
 
