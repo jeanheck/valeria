@@ -11,30 +11,13 @@ export function startGame(store){
 	store.state.game.phase = 'STARTED';
 	
 	//setInitialResources
-	store.commit('addResource', {type: 'gold', value: 300})
-  store.commit('addResource', {type: 'magic', value: 300})
-	store.commit('addResource', {type: 'force', value: 300})	
+	store.commit('addResource', {type: 'gold', value: 2})
+  store.commit('addResource', {type: 'magic', value: 1})
+	store.commit('addResource', {type: 'force', value: 0})	
 
 	//setInitialHand
 	store.commit('addCitizenToHand', cards.citizens.INIT_FARMER)
 	store.commit('addCitizenToHand', cards.citizens.INIT_KNIGHT)
-	store.commit('addCitizenToHand', cards.citizens.CLERIC)
-	store.commit('addCitizenToHand', cards.citizens.MONK)
-	store.commit('addCitizenToHand', cards.citizens.MERCHANT)
-	store.commit('addCitizenToHand', cards.citizens.BLACKSMITH)
-	store.commit('addCitizenToHand', cards.citizens.MERCENARY)
-	store.commit('addCitizenToHand', cards.citizens.ALCHEMIST)
-	store.commit('addCitizenToHand', cards.citizens.ARCHER)
-	store.commit('addCitizenToHand', cards.citizens.SORCERER)
-	store.commit('addCitizenToHand', cards.citizens.FARMER)
-	store.commit('addCitizenToHand', cards.citizens.KNIGHT)
-	store.commit('addCitizenToHand', cards.citizens.THIEF)
-	store.commit('addCitizenToHand', cards.citizens.CHAMPION)
-	store.commit('addCitizenToHand', cards.citizens.LORD_OF_WAR)
-	store.commit('addCitizenToHand', cards.citizens.PALADIN)
-	store.commit('addCitizenToHand', cards.citizens.PRIESTESS)
-	store.commit('addCitizenToHand', cards.citizens.BUTCHER)
-	store.commit('addCitizenToHand', cards.citizens.MINER)
 
 	console.log('phase > ', store.state.game.phase)
 

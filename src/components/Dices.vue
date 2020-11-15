@@ -15,9 +15,6 @@ import { rollDices } from '../assets/js/phasesController.js'
 
 export default {
   name: 'Dice',
-  props: {
-    name: String
-  },
   methods: {
     getDicesValues() {
       rollDices(this.$store);

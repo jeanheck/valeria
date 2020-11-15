@@ -1012,3 +1012,100 @@ export const domains = {
     }
   },
 }
+
+/******************************************************************************************************************* */
+/****************************************** DUKES CARDS ********************************************************** */
+/******************************************************************************************************************* */
+
+export const dukes = {
+  WARYIN_THIEFS_LORD: { 
+    id: 'WARYIN_THIEFS_LORD',
+    name: 'Waryn, Lorde dos Ladinos',
+    requiredCoinsToOneVictoryPoints: 3,
+    rewardDescription: '1 X CONSTRUCTOR // 2 X FIGHTER // 1 by each 3 COINS',
+    reward: () => {
+      
+    }
+  },
+  ISABELLA_THE_JUSTICE: { 
+    id: 'ISABELLA_THE_JUSTICE',
+    name: 'Isabella, a Justa',
+    requiredCoinsToOneVictoryPoints: 3,
+    rewardDescription: '1 X SOLDIER // 2 X HEAVENLY // 1 by each 3 COINS',
+    reward: () => {
+      
+    }
+  },
+  REESE_THE_CRAZYMAN: { 
+    id: 'REESE_THE_CRAZYMAN',
+    name: 'Reese, o Agitador',
+    requiredCoinsToOneVictoryPoints: 4,
+    rewardDescription: '1 X MONSTER, CITIZEN, DOMAIN // 1 by each 4 COINS',
+    reward: () => {
+      
+    }
+  },
+  NODE_MASTER_SWORDSMAN: { 
+    id: 'NODE_MASTER_SWORDSMAN',
+    name: 'Node, Mestre das Espadas',
+    requiredCoinsToOneVictoryPoints: 3,
+    rewardDescription: '1 X SOLDIER // 2 X FIGHTER // 1 by each 3 COINS',
+    reward: () => {
+      
+    }
+  },
+  SIMON_THE_TRASHER: { 
+    id: 'SIMON_THE_TRASHER',
+    name: 'Simon, o Imundo',
+    requiredCoinsToOneVictoryPoints: 2,
+    rewardDescription: '1 X CONSTRUCTOR // 1 X SOLDIER // 1 by each 2 COINS',
+    reward: () => {
+      
+    }
+  },
+  ELYSIUYM_THE_BLACKSMITH: { 
+    id: 'ELYSIUYM_THE_BLACKSMITH',
+    name: 'Elysium, o Ferreiro',
+    requiredCoinsToOneVictoryPoints: 4,
+    rewardDescription: '1 X CONSTRUCTOR, SOLDIER, HEAVENLY, FIGHTER // 1 by each 4 COINS',
+    reward: () => {
+      
+    }
+  },
+  ELSYN_SHADOWS_SAINT: { 
+    id: 'ELSYN_SHADOWS_SAINT',
+    name: 'El\'syn, Santo das Sombras',
+    requiredCoinsToOneVictoryPoints: 4,
+    rewardDescription: '2 X HEAVENLY // 2 x FIGHTER // 1 by each 4 COINS',
+    reward: () => {
+      
+    }
+  },
+  LERZANDR_THE_PROTECTOR: { 
+    id: 'LERZANDR_THE_PROTECTOR',
+    name: 'Lerzand\'r, o Protetor',
+    requiredCoinsToOneVictoryPoints: 3,
+    rewardDescription: '1 X CONSTRUCTOR // 2 x HEAVENLY // 1 by each 3 COINS',
+    reward: () => {
+      
+    }
+  },
+  HROTHGAR_THE_CONQUERER: { 
+    id: 'HROTHGAR_THE_CONQUERER',
+    name: 'Hrothgar, o Conquistador',
+    requiredCoinsToOneVictoryPoints: 4,
+    rewardDescription: '2 X MONSTER // 1 x MONSTERS TITAN TYPE // 1 by each 4 COINS',
+    reward: () => {
+      
+    }
+  },
+  CORNELIUS_THE_DREAMER: { 
+    id: 'CORNELIUS_THE_DREAMER',
+    name: 'Cornelius, o Sonhador',
+    requiredCoinsToOneVictoryPoints: 3,
+    rewardDescription: '3 X DOMAIN // 1 by each 3 COINS',
+    reward: () => {
+      
+    }
+  },
+}
