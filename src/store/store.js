@@ -84,8 +84,8 @@ const store = new Vuex.Store({
     },
     addMonsterToPile(state, monster) {
       state.board.monsters.forEach(pile => {
-        if(pile[0].area === monster.area){
-          pile.unshift(monster);
+        if(pile.area === monster.area){
+          pile.itens.unshift(monster);
         }
       })
 
@@ -120,6 +120,11 @@ const store = new Vuex.Store({
     oneMagicWhenYouBuyACitizen(state){
       state.game.passiveEffects.oneMagicWhenYouBuyACitizen = true;
       console.log(`Efeito Ativado! + 1 de mágica sempre que comprar um cidadão!`);
+    },
+    //Dukes mutations
+    setDuke(state, duke){
+      state.player.duke = duke;
+      console.log(`O duque ${duke.name} será o duque do jogador nesta partida!`);
     }
   }
 })

@@ -340,7 +340,8 @@ export const monsters = {
     force: 9,
     victoryPoints: 3,
     reward: (store) => {
-      const possibleCards = store.state.board.citizens.filter(pile => pile.itens[0].cost <= 3)
+      const possibleWithCards = store.state.board.citizens.filter(pile => pile.itens.length > 0)
+      const possibleCards = possibleWithCards.filter(pile => pile.itens[0].cost <= 3)
       const citizensCardsId = possibleCards.map(pile => {return pile.id});
       const message = `Choose one Citizen in the list below. Type the Citizen ID in the field. You need to type the name correctly to continue:\n${citizensCardsId.join('\n')}`;
 
@@ -1004,11 +1005,15 @@ export const domains = {
     rewardDescription: 'Imediatamente pegue um monstro de outro jogador aleatóriamente.',
     rewardType: 'IMMEDIATELY',
     reward: (store) => {
-      const randomIndex = Math.floor(Math.random() * 5);
+      const pilesWithMonsters = store.state.board.monsters.filter(monsterPile => monsterPile.itens > 0);
+
+      if(pilesWithMonsters.length == 0) return;
+
+      const randomIndex = Math.floor(Math.random() * pilesWithMonsters.length);
       const randomMonsterPile = store.state.board.monsters[randomIndex];
 
-      store.commit('addKilledMonster', randomMonsterPile[0])
-      randomMonsterPile.shift();
+      store.commit('addKilledMonster', randomMonsterPile.itens[0])
+      randomMonsterPile.itens.shift();
     }
   },
 }
@@ -1023,8 +1028,23 @@ export const dukes = {
     name: 'Waryn, Lorde dos Ladinos',
     requiredCoinsToOneVictoryPoints: 3,
     rewardDescription: '1 X CONSTRUCTOR // 2 X FIGHTER // 1 by each 3 COINS',
-    reward: () => {
-      
+    reward: (store) => {
+      console.log('WARYIN_THIEFS_LORD');
+
+      const pointsByConstructor = store.state.player.hand.filter(citizen => citizen.type === 'CONSTRUCTOR').length;
+      const poinstByFighter = store.state.player.hand.filter(citizen => citizen.type === 'FIGHTER').length * 2;
+
+      const goldCoins = store.state.player.resources.gold;
+      const magicCoins = store.state.player.resources.magic;
+      const forceCoins = store.state.player.resources.force;
+
+      const pointsByCoins = Math.floor((goldCoins + magicCoins + forceCoins) / 3);
+
+      console.log('pointsByConstructor > ', pointsByConstructor)
+      console.log('poinstByFighter > ', poinstByFighter)
+      console.log('pointsByCoins > ', pointsByCoins)
+
+      store.commit('addResource', {type: 'victory', value: pointsByConstructor + poinstByFighter + pointsByCoins})
     }
   },
   ISABELLA_THE_JUSTICE: { 
@@ -1032,8 +1052,23 @@ export const dukes = {
     name: 'Isabella, a Justa',
     requiredCoinsToOneVictoryPoints: 3,
     rewardDescription: '1 X SOLDIER // 2 X HEAVENLY // 1 by each 3 COINS',
-    reward: () => {
-      
+    reward: (store) => {
+      console.log('ISABELLA_THE_JUSTICE');
+
+      const pointsBySoldier = store.state.player.hand.filter(citizen => citizen.type === 'SOLDIER').length;
+      const poinstByHeavenly = store.state.player.hand.filter(citizen => citizen.type === 'HEAVENLY').length * 2;
+
+      const goldCoins = store.state.player.resources.gold;
+      const magicCoins = store.state.player.resources.magic;
+      const forceCoins = store.state.player.resources.force;
+
+      const pointsByCoins = Math.floor((goldCoins + magicCoins + forceCoins) / 3);
+
+      console.log('pointsBySoldier > ', pointsBySoldier)
+      console.log('poinstByHeavenly > ', poinstByHeavenly)
+      console.log('pointsByCoins > ', pointsByCoins)
+
+      store.commit('addResource', {type: 'victory', value: pointsBySoldier + poinstByHeavenly + pointsByCoins})
     }
   },
   REESE_THE_CRAZYMAN: { 
@@ -1041,8 +1076,25 @@ export const dukes = {
     name: 'Reese, o Agitador',
     requiredCoinsToOneVictoryPoints: 4,
     rewardDescription: '1 X MONSTER, CITIZEN, DOMAIN // 1 by each 4 COINS',
-    reward: () => {
-      
+    reward: (store) => {
+      console.log('REESE_THE_CRAZYMAN');
+
+      const poinstByMonsters = store.state.player.killedMonsters.length;
+      const poinstByCitizens = store.state.player.hand.length;
+      const poinstByDomains = store.state.player.buildedDomains.length;
+
+      const goldCoins = store.state.player.resources.gold;
+      const magicCoins = store.state.player.resources.magic;
+      const forceCoins = store.state.player.resources.force;
+
+      const pointsByCoins = Math.floor((goldCoins + magicCoins + forceCoins) / 4);
+
+      console.log('poinstByMonsters > ', poinstByMonsters)
+      console.log('poinstByCitizens > ', poinstByCitizens)
+      console.log('poinstByDomains > ', poinstByDomains)
+      console.log('pointsByCoins > ', pointsByCoins)
+
+      store.commit('addResource', {type: 'victory', value: poinstByMonsters + poinstByCitizens + poinstByDomains + pointsByCoins})
     }
   },
   NODE_MASTER_SWORDSMAN: { 
@@ -1050,8 +1102,23 @@ export const dukes = {
     name: 'Node, Mestre das Espadas',
     requiredCoinsToOneVictoryPoints: 3,
     rewardDescription: '1 X SOLDIER // 2 X FIGHTER // 1 by each 3 COINS',
-    reward: () => {
-      
+    reward: (store) => {
+      console.log('NODE_MASTER_SWORDSMAN');
+
+      const pointsBySoldier = store.state.player.hand.filter(citizen => citizen.type === 'SOLDIER').length;
+      const poinstByFighter = store.state.player.hand.filter(citizen => citizen.type === 'FIGHTER').length * 2;
+
+      const goldCoins = store.state.player.resources.gold;
+      const magicCoins = store.state.player.resources.magic;
+      const forceCoins = store.state.player.resources.force;
+
+      const pointsByCoins = Math.floor((goldCoins + magicCoins + forceCoins) / 3);
+
+      console.log('pointsBySoldier > ', pointsBySoldier)
+      console.log('poinstByFighter > ', poinstByFighter)
+      console.log('pointsByCoins > ', pointsByCoins)
+
+      store.commit('addResource', {type: 'victory', value: pointsBySoldier + poinstByFighter + pointsByCoins})
     }
   },
   SIMON_THE_TRASHER: { 
@@ -1059,8 +1126,23 @@ export const dukes = {
     name: 'Simon, o Imundo',
     requiredCoinsToOneVictoryPoints: 2,
     rewardDescription: '1 X CONSTRUCTOR // 1 X SOLDIER // 1 by each 2 COINS',
-    reward: () => {
-      
+    reward: (store) => {
+      console.log('SIMON_THE_TRASHER');
+
+      const pointsBySoldier = store.state.player.hand.filter(citizen => citizen.type === 'SOLDIER').length;
+      const pointsByConstructor = store.state.player.hand.filter(citizen => citizen.type === 'CONSTRUCTOR').length;
+
+      const goldCoins = store.state.player.resources.gold;
+      const magicCoins = store.state.player.resources.magic;
+      const forceCoins = store.state.player.resources.force;
+
+      const pointsByCoins = Math.floor((goldCoins + magicCoins + forceCoins) / 2);
+
+      console.log('pointsByConstructor > ', pointsByConstructor)
+      console.log('pointsBySoldier > ', pointsBySoldier)
+      console.log('pointsByCoins > ', pointsByCoins)
+
+      store.commit('addResource', {type: 'victory', value: pointsBySoldier + pointsByConstructor + pointsByCoins})
     }
   },
   ELYSIUYM_THE_BLACKSMITH: { 
@@ -1068,8 +1150,27 @@ export const dukes = {
     name: 'Elysium, o Ferreiro',
     requiredCoinsToOneVictoryPoints: 4,
     rewardDescription: '1 X CONSTRUCTOR, SOLDIER, HEAVENLY, FIGHTER // 1 by each 4 COINS',
-    reward: () => {
-      
+    reward: (store) => {
+      console.log('ELYSIUYM_THE_BLACKSMITH');
+
+      const pointsByConstructor = store.state.player.hand.filter(citizen => citizen.type === 'CONSTRUCTOR').length;
+      const pointsBySoldier = store.state.player.hand.filter(citizen => citizen.type === 'SOLDIER').length;
+      const pointsByHeavenly = store.state.player.hand.filter(citizen => citizen.type === 'HEAVENLY').length;
+      const pointsByFighter = store.state.player.hand.filter(citizen => citizen.type === 'FIGHTER').length;
+
+      const goldCoins = store.state.player.resources.gold;
+      const magicCoins = store.state.player.resources.magic;
+      const forceCoins = store.state.player.resources.force;
+
+      const pointsByCoins = Math.floor((goldCoins + magicCoins + forceCoins) / 4);
+
+      console.log('pointsByConstructor > ', pointsByConstructor)
+      console.log('pointsBySoldier > ', pointsBySoldier)
+      console.log('pointsByHeavenly > ', pointsByHeavenly)
+      console.log('pointsByFighter > ', pointsByFighter)
+      console.log('pointsByCoins > ', pointsByCoins)
+
+      store.commit('addResource', {type: 'victory', value: pointsBySoldier + pointsByConstructor + pointsByHeavenly + pointsByFighter + pointsByCoins})
     }
   },
   ELSYN_SHADOWS_SAINT: { 
@@ -1077,8 +1178,23 @@ export const dukes = {
     name: 'El\'syn, Santo das Sombras',
     requiredCoinsToOneVictoryPoints: 4,
     rewardDescription: '2 X HEAVENLY // 2 x FIGHTER // 1 by each 4 COINS',
-    reward: () => {
-      
+    reward: (store) => {
+      console.log('ELSYN_SHADOWS_SAINT');
+
+      const pointsByHeavenly = store.state.player.hand.filter(citizen => citizen.type === 'HEAVENLY').length * 2;
+      const pointsByFighter = store.state.player.hand.filter(citizen => citizen.type === 'FIGHTER').length * 2;
+
+      const goldCoins = store.state.player.resources.gold;
+      const magicCoins = store.state.player.resources.magic;
+      const forceCoins = store.state.player.resources.force;
+
+      const pointsByCoins = Math.floor((goldCoins + magicCoins + forceCoins) / 4);
+
+      console.log('pointsByHeavenly > ', pointsByHeavenly)
+      console.log('pointsByFighter > ', pointsByFighter)
+      console.log('pointsByCoins > ', pointsByCoins)
+
+      store.commit('addResource', {type: 'victory', value: pointsByHeavenly + pointsByFighter + pointsByCoins})
     }
   },
   LERZANDR_THE_PROTECTOR: { 
@@ -1086,8 +1202,23 @@ export const dukes = {
     name: 'Lerzand\'r, o Protetor',
     requiredCoinsToOneVictoryPoints: 3,
     rewardDescription: '1 X CONSTRUCTOR // 2 x HEAVENLY // 1 by each 3 COINS',
-    reward: () => {
-      
+    reward: (store) => {
+      console.log('LERZANDR_THE_PROTECTOR');
+
+      const pointsByConstructor = store.state.player.hand.filter(citizen => citizen.type === 'CONSTRUCTOR').length;
+      const pointsByHeavenly = store.state.player.hand.filter(citizen => citizen.type === 'HEAVENLY').length * 2;
+
+      const goldCoins = store.state.player.resources.gold;
+      const magicCoins = store.state.player.resources.magic;
+      const forceCoins = store.state.player.resources.force;
+
+      const pointsByCoins = Math.floor((goldCoins + magicCoins + forceCoins) / 3);
+
+      console.log('pointsByConstructor > ', pointsByConstructor)
+      console.log('pointsByHeavenly > ', pointsByHeavenly)
+      console.log('pointsByCoins > ', pointsByCoins)
+
+      store.commit('addResource', {type: 'victory', value: pointsByHeavenly + pointsByConstructor + pointsByCoins})
     }
   },
   HROTHGAR_THE_CONQUERER: { 
@@ -1095,8 +1226,23 @@ export const dukes = {
     name: 'Hrothgar, o Conquistador',
     requiredCoinsToOneVictoryPoints: 4,
     rewardDescription: '2 X MONSTER // 1 x MONSTERS TITAN TYPE // 1 by each 4 COINS',
-    reward: () => {
-      
+    reward: (store) => {
+      console.log('HROTHGAR_THE_CONQUERER');
+
+      const pointsByMonsters = store.state.player.killedMonsters.length * 2;
+      const pointsByMonstersTitanType = store.state.player.killedMonsters.filter(monster => monster.type === 'TITAN').length * 1;
+
+      const goldCoins = store.state.player.resources.gold;
+      const magicCoins = store.state.player.resources.magic;
+      const forceCoins = store.state.player.resources.force;
+
+      const pointsByCoins = Math.floor((goldCoins + magicCoins + forceCoins) / 4);
+
+      console.log('pointsByMonsters > ', pointsByMonsters)
+      console.log('pointsByMonstersTitanType > ', pointsByMonstersTitanType)
+      console.log('pointsByCoins > ', pointsByCoins)
+
+      store.commit('addResource', {type: 'victory', value: pointsByMonsters + pointsByMonstersTitanType + pointsByCoins})
     }
   },
   CORNELIUS_THE_DREAMER: { 
@@ -1104,8 +1250,21 @@ export const dukes = {
     name: 'Cornelius, o Sonhador',
     requiredCoinsToOneVictoryPoints: 3,
     rewardDescription: '3 X DOMAIN // 1 by each 3 COINS',
-    reward: () => {
-      
+    reward: (store) => {
+      console.log('CORNELIUS_THE_DREAMER');
+
+      const pointsByDomains = store.state.player.buildedDomains.length * 3;
+
+      const goldCoins = store.state.player.resources.gold;
+      const magicCoins = store.state.player.resources.magic;
+      const forceCoins = store.state.player.resources.force;
+
+      const pointsByCoins = Math.floor((goldCoins + magicCoins + forceCoins) / 3);
+
+      console.log('pointsByDomains > ', pointsByDomains)
+      console.log('pointsByCoins > ', pointsByCoins)
+
+      store.commit('addResource', {type: 'victory', value: pointsByDomains + pointsByCoins})
     }
   },
 }

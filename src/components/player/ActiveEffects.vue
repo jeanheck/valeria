@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'Active Effects'
+  name: 'ActiveEffects'
 }
 </script>
 

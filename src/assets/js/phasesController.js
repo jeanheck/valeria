@@ -4,7 +4,11 @@ function rollDice(){
 	return Math.floor(Math.random() * 6) + 1; 
 }
 
-//STARTING GAME
+function getRandomDuke(dukes){
+  const randomNumber = Math.floor(Math.random() * 10);
+	return dukes[Object.keys(dukes)[randomNumber]]; 
+}
+
 export function startGame(store){
 	console.log('phase > ', store.state.game.phase)
 
@@ -19,13 +23,16 @@ export function startGame(store){
 	store.commit('addCitizenToHand', cards.citizens.INIT_FARMER)
 	store.commit('addCitizenToHand', cards.citizens.INIT_KNIGHT)
 
+  //setInitialDuke
+  store.commit('setDuke', getRandomDuke(cards.dukes))
+
 	console.log('phase > ', store.state.game.phase)
 
 	store.state.game.phase = 'ROLLING_PHASE'
 
 	console.log('phase > ', store.state.game.phase)
 }
-//ROLLING THE DICES
+
 export function rollDices(store){
 	store.state.game.phase = 'ROLLING_DICES';
 
@@ -53,7 +60,7 @@ export function checkDomainEffectsAfterRollDices(store){
 
 	startHarvest(store);
 }
-//HARVEST THE RESOURCES
+
 export function startHarvest(store){
 	store.state.game.phase = 'HARVEST_RESOURCES_BY_ROLL_DICES_VALUES';
 
@@ -100,7 +107,6 @@ export function checkDomainEffectsBeforeAction(store){
 	startActionPhase(store);
 }
 
-//ACTION PHASE
 export function startActionPhase(store){
 	store.state.game.phase = 'ACTION_PHASE';
 
@@ -108,7 +114,19 @@ export function startActionPhase(store){
 }
 
 export function doingOneAction(store){
-	store.state.game.actionsCounter++;
+  store.state.game.actionsCounter++;
+
+  const citizensRemain = store.state.board.citizens.filter(citizenPile => citizenPile.itens.length > 0)
+  console.log('citizensRemain > ', citizensRemain);
+  const monstersRemain = store.state.board.monsters.filter(monsterPile => monsterPile.itens.length > 0)
+  console.log('monstersRemain > ', monstersRemain);
+  const domainsRemain = store.state.board.domains.filter(domainPile => domainPile.length > 0)
+  console.log('domainsRemain > ', domainsRemain);
+
+  if(citizensRemain.length === 0 && monstersRemain.length === 0 && domainsRemain.length === 0){
+    checkPointsAccordingByDuke(store);
+    return;
+  }
 
 	if(store.state.game.actionsCounter === 1){
 		checkDomainEffectsAfterOneAction(store)
@@ -116,6 +134,7 @@ export function doingOneAction(store){
 		checkDomainEffectsAfterAllActions(store)
 	}
 }
+
 export function checkDomainEffectsAfterOneAction(store){
 	store.state.game.phase = 'CHECKING_DOMAIN_EFFECTS_AFTER_ONE_ACTION';
 
@@ -137,4 +156,14 @@ export function checkDomainEffectsAfterAllActions(store){
 	});
 
 	store.state.game.phase = 'ROLLING_PHASE';
+}
+
+export function checkPointsAccordingByDuke(store){
+  store.state.game.phase = 'CHECKING_POINTS_ACCORDING_BY_DUKE';
+
+  store.state.player.duke.reward(store);
+
+  store.state.game.phase = 'GAME_ENDED';
+
+  console.log('phase > ', store.state.game.phase)
 }

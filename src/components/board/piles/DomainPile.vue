@@ -55,6 +55,7 @@ export default {
         if(buildedDomain.rewardType === 'IMMEDIATELY'){
           buildedDomain.reward(this.$store);
         }
+        this.$store.commit('addResource', {type: 'victory', value: buildedDomain.victoryPoints})
         this.removeCardAtTop();
         doingOneAction(this.$store);
       }else{

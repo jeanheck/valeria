@@ -17,9 +17,17 @@ export default {
     MonsterPile
   },
   methods: {
+    createMonsterPile(itens){
+      let pile = {
+        area: itens[0].area,
+        itens: itens
+      };
+      
+      return pile;
+    },
     addMonstersToBoard(monstersPiles){
-      monstersPiles.forEach((pile) => {
-        this.$store.commit('addMonsterPileToBoard', pile);
+      monstersPiles.forEach((itens) => {
+        this.$store.commit('addMonsterPileToBoard', this.createMonsterPile(itens));
       })
     },
     setInitialPiles(){

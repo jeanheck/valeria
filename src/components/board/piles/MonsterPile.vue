@@ -1,8 +1,9 @@
 <template>
-  <div v-if="pile.length > 0">
-    <h1>Pile ({{pile.length}})</h1>
+  <div v-if="pile.itens.length > 0">
+    <h1>Pile ({{pile.itens.length}})</h1>
     <span>Name: {{getCardAtTheTop().name}}</span>&nbsp;
     <span>Force: {{getCardAtTheTop().force}}</span>&nbsp;
+    <span>Victory Points: {{getCardAtTheTop().victoryPoints}}</span>&nbsp;
     <button v-on:click="kill()" :disabled="this.$store.state.game.phase != 'ACTION_PHASE'">Kill</button>
   </div>
 </template>
@@ -13,7 +14,7 @@ import { doingOneAction } from '../../../assets/js/phasesController.js'
 export default {
   name: 'Pile',
   props: {
-    pile: Array
+    pile: Object
   },
   methods: {
     playerHaveResourcesToKill(monster){
@@ -27,10 +28,10 @@ export default {
       if(monster.magic) this.$store.commit('removeResource', {type: 'magic', value: monster.magic})
     },
     getCardAtTheTop(){
-      return this.pile[0];
+      return this.pile.itens[0];
     },
     removeCardAtTop(){
-      this.pile.shift();
+      this.pile.itens.shift();
     },
     kill(){
       const killedMonster = this.getCardAtTheTop();
@@ -39,6 +40,7 @@ export default {
         this.subtractPlayerResources(killedMonster);
         this.$store.commit('addKilledMonster', killedMonster);
         killedMonster.reward(this.$store);
+        this.$store.commit('addResource', {type: 'victory', value: killedMonster.victoryPoints})
         if(this.$store.state.game.passiveEffects.oneMagicWhenYouKillAMonster){
            this.$store.commit('addResource', {type: 'magic', value: 1})
         }
