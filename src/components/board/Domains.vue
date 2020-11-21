@@ -34,11 +34,11 @@ export default {
           cards.domains.TRUCE_CUT_THROAT
         ],
         [
+          cards.domains.EMERALD_FORTRESS,
           cards.domains.DESERT_ORCHID,
           cards.domains.DAWN_PALACE,
           cards.domains.FOX_GROVE_PALACE,
           cards.domains.FORGOTTEN_SORROWS,
-          cards.domains.EMERALD_FORTRESS,
           cards.domains.ULLAMALIZATLI_COURT,
           cards.domains.ASTERATEN_EYE
         ],

@@ -3,18 +3,10 @@
     <h1>Active Effects</h1>
 
 		<ul>
-			<li v-if="this.$store.state.game.passiveEffects.cancelAdditionalValueToBuy">
-        Não paga valor adicional em cidadãos
-      </li>
-      <li v-if="this.$store.state.game.passiveEffects.domainsCostOneGoldLess">
-        Domínios custam -1 moeda de ouro
-      </li>
-      <li v-if="this.$store.state.game.passiveEffects.oneMagicWhenYouKillAMonster">
-        + 1 mágica para cada monstro morto
-      </li>
-      <li v-if="this.$store.state.game.passiveEffects.oneMagicWhenYouBuyACitizen">
-        + 1 mágica para cada cidadão comprado
-      </li>
+			<li v-if="this.$store.state.game.passiveEffects.cancelAdditionalValueToBuy">Não paga valor adicional em cidadãos</li>
+      <li v-if="this.$store.state.game.passiveEffects.domainsCostOneGoldLess">Domínios custam -1 moeda de ouro</li>
+      <li v-if="this.$store.state.game.passiveEffects.oneMagicWhenYouKillAMonster">+ 1 mágica para cada monstro que você mate</li>
+      <li v-if="this.$store.state.game.passiveEffects.oneMagicWhenYouBuyACitizen">+ 1 mágica para cada cidadão que você compre</li>
 		</ul>
   </div>
 </template>
