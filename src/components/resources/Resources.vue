@@ -1,24 +1,17 @@
 <template>
   <div>
     <h1>Resources</h1>
-
-    <Victory />
-    <Force />
-    <Magic />
-    <Gold />
+    <Resource v-for="resource in Object.keys(this.$store.state.player.resources)" :key="resource" :resource="resource" />
   </div>
 </template>
 
 <script>
-import Force from './Force'
-import Magic from './Magic'
-import Gold from './Gold'
-import Victory from './Victory'
+import Resource from './Resource'
 
 export default {
   name: 'Resources',
   components: {
-    Gold, Force, Magic, Victory
+    Resource
   }
 }
 </script>
