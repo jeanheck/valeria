@@ -1,22 +1,19 @@
 <template>
   <div id="board">
     <h1>Board</h1>
-
-    <Citizens />
-    <Monsters />
-    <Domains />
+    <Sector :title="'Citizens'" :piles="this.$store.state.board.citizens" :pileType="'CitizenPile'" />
+    <Sector :title="'Monsters'" :piles="this.$store.state.board.monsters" :pileType="'MonsterPile'" />
+    <Sector :title="'Domains'" :piles="this.$store.state.board.domains" :pileType="'DomainPile'" />
   </div>
 </template>
 
 <script>
-import Citizens from './Citizens'
-import Monsters from './Monsters'
-import Domains from './Domains'
+import Sector from './Sector'
 
 export default {
   name: 'Board',
   components: {
-    Citizens, Monsters, Domains
+    Sector
   }
 }
 </script>
