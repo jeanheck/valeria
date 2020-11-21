@@ -25,9 +25,9 @@ export default {
     setInitialPiles(){
       const domains = [
         [
+          cards.domains.ASTERATEN_EYE,
           cards.domains.AQUA_OBSERVER,
           cards.domains.BLOOD_CROW_ARMY,
-          cards.domains.ASTERATEN_EYE,
           cards.domains.ST_AQUILA_CHURCH,
           cards.domains.COLISEUM,
           cards.domains.CLOUDRIDER_CAMPING,

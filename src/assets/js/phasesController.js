@@ -15,9 +15,9 @@ export function startGame(store){
 	store.state.game.phase = 'STARTED';
 	
 	//setInitialResources
-	store.commit('addResource', {type: 'gold', value: 2})
+	store.commit('addResource', {type: 'gold', value: 300})
   store.commit('addResource', {type: 'magic', value: 1})
-	store.commit('addResource', {type: 'force', value: 0})	
+	store.commit('addResource', {type: 'force', value: 300})	
 
 	//setInitialHand
 	store.commit('addCitizenToHand', cards.citizens.INIT_FARMER)

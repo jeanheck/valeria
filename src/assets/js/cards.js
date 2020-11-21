@@ -340,8 +340,11 @@ export const monsters = {
     force: 9,
     victoryPoints: 3,
     reward: (store) => {
-      const possibleWithCards = store.state.board.citizens.filter(pile => pile.itens.length > 0)
-      const possibleCards = possibleWithCards.filter(pile => pile.itens[0].cost <= 3)
+      const pileWithCards = store.state.board.citizens.filter(pile => pile.itens.length > 0)
+      const possibleCards = pileWithCards.filter(pile => pile.itens[0].cost <= 3)
+
+      if(possibleCards.length == 0) return;
+
       const citizensCardsId = possibleCards.map(pile => {return pile.id});
       const message = `Choose one Citizen in the list below. Type the Citizen ID in the field. You need to type the name correctly to continue:\n${citizensCardsId.join('\n')}`;
 
@@ -669,7 +672,48 @@ export const domains = {
     reward: (store) => {
       store.commit('addResource', {type: 'victory', value: 5})
 
-      //ESSE AQUI AINDA NÃO TÁ PRONTO
+      //derrotando o monstro
+
+      const pileWithCards = store.state.board.monsters.filter(pile => pile.itens.length > 0)
+
+      if(pileWithCards.length == 0) return;
+
+      const monstersCardsId = pileWithCards.map(pile => {return pile.itens[0].id});
+      const message = `Choose one Monster in the list below. Type the Monster ID in the field. You need to type the name correctly to continue:\n${monstersCardsId.join('\n')}`;
+
+      let user_choose = undefined;
+      let valid_chose = false;
+
+      do {
+        user_choose = prompt(message);
+
+        if(monstersCardsId.find(monsterCardId => monsterCardId === user_choose)) {
+          valid_chose = true;
+
+          if(monsters[user_choose].cost > store.state.player.resources.force){
+            valid_chose = false;
+            console.log('Não tem recurso pra matar o monstro')
+          }
+        }
+      } while (!valid_chose);
+
+      const killedMonster = monsters[user_choose];
+
+      //subtractPlayerResources(killedMonster);
+      store.commit('removeResource', {type: 'force', value: killedMonster.force})
+      if(killedMonster.magic) store.commit('removeResource', {type: 'magic', value: killedMonster.magic})
+
+      store.commit('addKilledMonster', killedMonster);
+      killedMonster.reward(store);
+      store.commit('addResource', {type: 'victory', value: killedMonster.victoryPoints})
+
+      if(store.state.game.passiveEffects.oneMagicWhenYouKillAMonster){
+        store.commit('addResource', {type: 'magic', value: 1})
+      }
+      
+      //removeCardAtTop();
+      let pileToRemoveTheMonster = store.state.board.monsters.filter(pile => pile.area == killedMonster.area)[0]
+      pileToRemoveTheMonster.itens.shift();
     }
   },
   ROGUES_LANDING: { 
