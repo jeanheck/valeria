@@ -1,8 +1,8 @@
 <template>
-  <div id="hand">
-    <h1>Player cards</h1>
+  <div id="cards">
+    <h1>{{title}}</h1>
 
-		<ul v-for="card in this.$store.state.player.hand" :card="card" :key="card.id + Math.random()">
+		<ul v-for="card in cards" :card="card" :key="card.id + Math.random()">
 			<li>{{card.name}}</li>
 		</ul>
   </div>
@@ -10,15 +10,17 @@
 
 <script>
 export default {
-  name: 'Hand'
+  name: 'Cards',
+  props: {
+    title: String,
+    cards: Array
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-	#hand {
+	#cards {
 		border: 1px solid black;
-		width: 20%;
-		float: right;
 	}
 </style>
