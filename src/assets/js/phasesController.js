@@ -9,11 +9,26 @@ function getRandomDuke(dukes){
 	return dukes[Object.keys(dukes)[randomNumber]]; 
 }
 
+function createCitizenPile(citizen){
+  let pile = {
+    id: citizen.id,
+    cost: citizen.cost,
+    type: citizen.type,
+    itens: []
+  };
+  while(pile.itens.length < 5){
+    pile.itens.push(citizen);
+  }
+  return pile;
+}
+
 export function startGame(store){
 	console.log('phase > ', store.state.game.phase)
 
 	store.state.game.phase = 'STARTED';
-	
+  
+	console.log('phase > ', store.state.game.phase)
+
 	//setInitialResources
 	store.commit('addResource', {type: 'gold', value: 300})
   store.commit('addResource', {type: 'magic', value: 1})
@@ -26,7 +41,23 @@ export function startGame(store){
   //setInitialDuke
   store.commit('setDuke', getRandomDuke(cards.dukes))
 
-	console.log('phase > ', store.state.game.phase)
+  //setInitialCitizens
+  const citizensOnBoard = [ 
+    cards.citizens.CLERIC,
+    cards.citizens.MERCHANT,
+    cards.citizens.MERCENARY,
+    cards.citizens.ARCHER,
+    cards.citizens.FARMER,
+    cards.citizens.KNIGHT,
+    cards.citizens.ROGUE,
+    cards.citizens.CHAMPION,
+    cards.citizens.PALADIN,
+    cards.citizens.BUTCHER
+  ];
+
+  citizensOnBoard.forEach((citizen) => {
+    store.commit('addCitizenPileToBoard', createCitizenPile(citizen));
+  })
 
 	store.state.game.phase = 'ROLLING_PHASE'
 
