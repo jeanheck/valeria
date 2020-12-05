@@ -280,6 +280,7 @@ export const monsters = {
     name: 'Esqueleto',
     force: 2,
     victoryPoints: 2,
+    rewardDescription: '+ 1 ouro',
     reward: (store) => {
       store.commit('addResource', {type: 'gold', value: 1})
     }
@@ -291,6 +292,7 @@ export const monsters = {
     name: 'Esqueleto Flamejante',
     force: 5,
     victoryPoints: 3,
+    rewardDescription: '+ 1 ouro & + 1 mágica',
     reward: (store) => {
       store.commit('addResource', {type: 'gold', value: 1})
       store.commit('addResource', {type: 'magic', value: 1})
@@ -303,6 +305,7 @@ export const monsters = {
     name: 'Rei Esqueleto',
     force: 8,
     victoryPoints: 4,
+    rewardDescription: '+ 2 ouro para cada monstro do tipo Ruína morto.',
     reward: (store) => {
       const killedRuinsMonsters = store.state.player.killedMonsters.filter(monster => monster.area === 'RUINS').length;
       const resourcesToAdd = killedRuinsMonsters * 2;
@@ -317,6 +320,7 @@ export const monsters = {
     name: 'Urso Horrendo',
     force: 5,
     victoryPoints: 3,
+    rewardDescription: '+ 2 ouro OU + 2 mágica',
     reward: (store) => {
       const user_choose = prompt('Type GOLD if you want +2 Gold. Type MAGIC if you want +2 Magic. Other values will consider you choosed the gold option.');
       switch (user_choose) {
@@ -339,6 +343,7 @@ export const monsters = {
     name: 'Guerreiro Orc',
     force: 9,
     victoryPoints: 3,
+    rewardDescription: '+ 1 cidadão que custe 3 ou menos',
     reward: (store) => {
       const pileWithCards = store.state.board.citizens.filter(pile => pile.itens.length > 0)
       const possibleCards = pileWithCards.filter(pile => pile.itens[0].cost <= 3)
@@ -365,6 +370,7 @@ export const monsters = {
     name: 'Orc Chefe',
     force: 14,
     victoryPoints: 6,
+    rewardDescription: '+ 2 de ouro para cada monstro tipo Montanha morto',
     reward: (store) => {
       const killedMountainMonsters = store.state.player.killedMonsters.filter(monster => monster.area === 'MOUNTAIN').length;
       const resourcesToAdd = killedMountainMonsters * 2;
@@ -379,6 +385,7 @@ export const monsters = {
     name: 'Treant',
     force: 3,
     victoryPoints: 1,
+    rewardDescription: '+ 1 ouro & + 1 mágica',
     reward: (store) => {
       store.commit('addResource', {type: 'gold', value: 1})
       store.commit('addResource', {type: 'magic', value: 1})
@@ -391,6 +398,7 @@ export const monsters = {
     name: 'Aranha Amaldiçoada',
     force: 6,
     victoryPoints: 2,
+    rewardDescription: '+ 3 ouro OU 1 Cavaleiro',
     reward: (store) => {
       const user_choose = prompt('Type GOLD if you want +3 Gold. Type KNIGHT if you want a Knight. Other values will consider you choosed the gold option.');
       switch (user_choose) {
@@ -415,6 +423,7 @@ export const monsters = {
     force: 10,
     magic: 3,
     victoryPoints: 5,
+    rewardDescription: '+ 2 ouro para cada monstro tipo Floresta morto OU um cidadão + 1 ponto de vitória',
     reward: (store) => {
       const user_choose = prompt(`Type GOLD if you want 2 Gold by each Forest monster that you killed.\n
                                   Type CITIZEN if you want a Citizen by your choise + 1 victory point.\n
@@ -454,6 +463,7 @@ export const monsters = {
     name: 'Urso-Coruja',
     force: 4,
     victoryPoints: 2,
+    rewardDescription: '+ 2 mágica',
     reward: (store) => {
       store.commit('addResource', {type: 'magic', value: 2})
     },
@@ -465,6 +475,7 @@ export const monsters = {
     name: 'Gigante',
     force: 8,
     victoryPoints: 3,
+    rewardDescription: '+ 1 ouro & + 2 mágica',
     reward: (store) => {
       store.commit('addResource', {type: 'gold', value: 1})
       store.commit('addResource', {type: 'magic', value: 2})
@@ -477,6 +488,7 @@ export const monsters = {
     name: 'Troll',
     force: 12,
     victoryPoints: 6,
+    rewardDescription: '+ 2 mágica para cada monstro tipo Vale morto',
     reward: (store) => {
       const killedValleyMonsters = store.state.player.killedMonsters.filter(monster => monster.area === 'VALLEY').length;
       const resourcesToAdd = killedValleyMonsters * 2;
@@ -491,6 +503,7 @@ export const monsters = {
     name: 'Goblin',
     force: 1,
     victoryPoints: 1,
+    rewardDescription: '+ 1 ouro',
     reward: (store) => {
       store.commit('addResource', {type: 'gold', value: 1})
     },
@@ -502,6 +515,7 @@ export const monsters = {
     name: 'Goblin Mago',
     force: 3,
     victoryPoints: 2,
+    rewardDescription: '+ 1 ouro OU + 1 mágica',
     reward: (store) => {
       const user_choose = prompt('Type GOLD if you want +1 Gold. Type MAGIC if you want +1 Magic. Other values will consider you choosed the gold option.');
       switch (user_choose) {
@@ -524,6 +538,7 @@ export const monsters = {
     name: 'Rei Goblin',
     force: 6,
     victoryPoints: 4,
+    rewardDescription: '+ 1 ouro para cada monstro tipo Hills morto',
     reward: (store) => {
       const killedHillsMonsters = store.state.player.killedMonsters.filter(monster => monster.area === 'HILLS').length;
       const resourcesToAdd = killedHillsMonsters * 1;

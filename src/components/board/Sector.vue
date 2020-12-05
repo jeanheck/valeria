@@ -1,15 +1,12 @@
 <template>
   <div id="sector">
     <h1>{{title}}</h1>
-    <Pile v-for="pile in piles" :key="pile.id" :pile="pile" :is="pileType"/>
+    <Pile v-for="pile in piles" :key="pile.id" :pile="pile" :type="pileType"/>
   </div>
 </template>
 
 <script>
 import Pile from './Pile'
-import CitizenPile from './piles/CitizenPile'
-import MonsterPile from './piles/MonsterPile'
-import DomainPile from './piles/DomainPile'
 
 export default {
   name: 'Sector',
@@ -19,7 +16,7 @@ export default {
     pileType: String
   },
   components: {
-    Pile, CitizenPile, MonsterPile, DomainPile
+    Pile
   }
 }
 </script>

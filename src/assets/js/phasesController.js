@@ -111,7 +111,7 @@ export function startGame(store){
 
   //setInititalDomains
   const domainsOnBoard = [
-    [
+    {itens:[
       cards.domains.ASTERATEN_EYE,
       cards.domains.AQUA_OBSERVER,
       cards.domains.BLOOD_CROW_ARMY,
@@ -119,8 +119,8 @@ export function startGame(store){
       cards.domains.COLISEUM,
       cards.domains.CLOUDRIDER_CAMPING,
       cards.domains.TRUCE_CUT_THROAT
-    ],
-    [
+    ]},
+    {itens:[
       cards.domains.EMERALD_FORTRESS,
       cards.domains.DESERT_ORCHID,
       cards.domains.DAWN_PALACE,
@@ -128,8 +128,8 @@ export function startGame(store){
       cards.domains.FORGOTTEN_SORROWS,
       cards.domains.ULLAMALIZATLI_COURT,
       cards.domains.ASTERATEN_EYE
-    ],
-    [
+    ]},
+    {itens:[
       cards.domains.VIOLET_THORN,
       cards.domains.SHATTERED_HAND,
       cards.domains.GRIMMWATER_FORT,
@@ -137,8 +137,8 @@ export function startGame(store){
       cards.domains.JUSTA_FIELD,
       cards.domains.NAE_GOLDEN_OBELISK,
       cards.domains.HALFPENNNY_HILL,
-    ],
-    [
+    ]},
+    {itens:[
       cards.domains.PLATEAU_PRATCHETT,
       cards.domains.PURLOINER_PERCH,
       cards.domains.WEAVING_WITCHS_NEST,
@@ -146,7 +146,7 @@ export function startGame(store){
       cards.domains.ROGUES_LANDING,
       cards.domains.OSTENDAR_MONOLITH,
       cards.domains.THE_URDR_ORB
-    ],
+    ]},
   ];
 
   domainsOnBoard.forEach((pile) => {

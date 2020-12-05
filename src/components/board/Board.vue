@@ -1,9 +1,10 @@
 <template>
   <div id="board">
     <h1>Board</h1>
-    <Sector :title="'Citizens'" :piles="this.$store.state.board.citizens" :pileType="'CitizenPile'" />
-    <Sector :title="'Monsters'" :piles="this.$store.state.board.monsters" :pileType="'MonsterPile'" />
-    <Sector :title="'Domains'" :piles="this.$store.state.board.domains" :pileType="'DomainPile'" />
+
+    <Sector :title="'Citizens'" :piles="this.$store.state.board.citizens" :pileType="'Citizen'" />
+    <Sector :title="'Monsters'" :piles="this.$store.state.board.monsters" :pileType="'Monster'" />
+    <Sector :title="'Domains'" :piles="this.$store.state.board.domains" :pileType="'Domain'" />
   </div>
 </template>
 

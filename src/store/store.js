@@ -125,7 +125,28 @@ const store = new Vuex.Store({
     setDuke(state, duke){
       state.player.duke = duke;
       console.log(`O duque ${duke.name} será o duque do jogador nesta partida!`);
-    }
+    },
+    //Pile
+    giveTheCardToPlayer(state, {type, card}){
+      let listType;
+
+      switch (type) {
+        case 'Citizen':
+          listType = 'hand';
+          break;
+        case 'Monster':
+          listType = 'killedMonsters';
+          break;
+        case 'Domain':
+          listType = 'buildedDomains';
+          break;
+        default:
+          break;
+      }
+
+      state.player[listType].push(card);
+      console.log(`A carta ${card.name} foi adicionada para o player!`);
+    },
   }
 })
 export default store;
