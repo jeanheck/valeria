@@ -14,7 +14,7 @@
 import Citizen from './piles/Citizen'
 import Monster from './piles/Monster'
 import Domain from './piles/Domain'
-import { doingOneAction } from '../../assets/js/phasesController.js'
+import { doingOneAction } from '../../assets/js/phases/phases.js'
 
 export default {
   name: 'Pile',
@@ -48,7 +48,7 @@ export default {
 
       if(this.$refs.pile.HaveEnoughResourcesToTheAction(card)){
         this.$refs.pile.subtractPlayerResources(card);
-        this.$store.commit('giveTheCardToPlayer', {type, card});
+        this.$store.commit('giveCardToPlayer', {type, card});
 
         this.$refs.pile.checkRewards(card);
 

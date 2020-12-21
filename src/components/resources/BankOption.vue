@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { doingOneAction } from '../../assets/js/phasesController.js'
+import { doingOneAction } from '../../assets/js/phases/phases.js'
 
 export default {
   name: 'BankOption',

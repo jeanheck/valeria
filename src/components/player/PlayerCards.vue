@@ -1,6 +1,6 @@
 <template>
   <div id="player-cards">
-		<Cards :title="'Citizens in Hand'" :cards="this.$store.state.player.hand" />
+		<Cards :title="'Citizens in Hand'" :cards="this.$store.state.player.buyedCitizens" />
     <Cards :title="'Killed Monsters'" :cards="this.$store.state.player.killedMonsters" />
 		<Cards :title="'Builded Domains'" :cards="this.$store.state.player.buildedDomains" />
   </div>

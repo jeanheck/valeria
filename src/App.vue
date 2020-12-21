@@ -21,7 +21,7 @@ import Board from './components/board/Board'
 import ActiveEffects from './components/player/ActiveEffects'
 import PlayerCards from './components/player/PlayerCards'
 
-import { startGame } from './assets/js/phasesController.js'
+import { startGame } from './assets/js/phases/phases.js'
 
 export default {
   name: 'App',

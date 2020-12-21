@@ -18,7 +18,7 @@ export default {
       return haveGoldEnough && this.haveRequirementsToBuild(domain.requirements);
     },
     haveRequirementsToBuild(domainRequirements){
-      const cardsInHandTypes = this.$store.state.player.hand.map((citizen)=>{
+      const cardsInHandTypes = this.$store.state.player.buyedCitizens.map((citizen)=>{
         return citizen.type;
       })
       return domainRequirements.every((requirement) => {

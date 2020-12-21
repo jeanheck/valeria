@@ -25,7 +25,7 @@ export default {
       }
     },
     getAditionalValueToBuy(){
-      const additionalValueToBuy = this.$store.state.player.hand.filter(item => item.id === this.$parent.getCardAtTheTop().id).length
+      const additionalValueToBuy = this.$store.state.player.buyedCitizens.filter(item => item.id === this.$parent.getCardAtTheTop().id).length
       return this.$store.state.game.passiveEffects.cancelAdditionalValueToBuy ? 0 : additionalValueToBuy;
     },
   }
