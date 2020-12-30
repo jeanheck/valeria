@@ -2,6 +2,10 @@
 
 ## Project setup
 ```
+install node;
+install docker;
+install yarn;
+
 yarn install
 ```
 

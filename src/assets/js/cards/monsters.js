@@ -1,5 +1,6 @@
 import {citizens as CITIZENS} from './citizens.js';
 import {getMonsterAreaCount} from './utils.js'
+import {messages as MESSAGES} from './messages.js';
 
 export const monsters = {
   //RUINS MONSTERS
@@ -51,7 +52,7 @@ export const monsters = {
     victoryPoints: 3,
     rewardDescription: '+ 2 ouro OU + 2 mágica',
     reward: (store) => {
-      const user_choose = prompt('Type GOLD if you want +2 Gold. Type MAGIC if you want +2 Magic. Other values will consider you choosed the gold option.');
+      const user_choose = prompt(MESSAGES.CHOOSE_GOLD_OR_MAGIC(2));
       const type_choose = user_choose === 'MAGIC' ? 'magic' : 'gold';
       store.commit('addResource', {type: type_choose, value: 2})
     },
@@ -222,7 +223,7 @@ export const monsters = {
     victoryPoints: 2,
     rewardDescription: '+ 1 ouro OU + 1 mágica',
     reward: (store) => {
-      const user_choose = prompt('Type GOLD if you want +1 Gold. Type MAGIC if you want +1 Magic. Other values will consider you choosed the gold option.');
+      const user_choose = prompt(MESSAGES.CHOOSE_GOLD_OR_MAGIC(1));
       const type_choose = user_choose === 'MAGIC' ? 'magic' : 'gold';
       store.commit('addResource', {type: type_choose, value: 1})
     },

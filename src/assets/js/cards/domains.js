@@ -1,6 +1,7 @@
 import {monsters as MONSTERS} from './monsters.js';
 import {citizens as CITIZENS} from './citizens.js';
 import {getbuyedCitizensCount, getCitizensInBoardIDByType} from './utils.js'
+import {messages as MESSAGES} from './messages.js';
 
 export const domains = {
   COLISEUM: {
@@ -57,7 +58,7 @@ export const domains = {
     requirements: ['HEAVENLY', 'CONSTRUCTOR'],
     cost: 7,
     victoryPoints: 3,
-    rewardDescription: 'Imediatamente ganhe um cidadão do tipo HEAVENLY da pilha central',
+    rewardDescription: MESSAGES.IMMEDIATELY_GAIN_ONE_CITIZEN('HEAVENLY'),
     rewardType: 'IMMEDIATELY',
     reward: (store) => {
       const citizensCardsId = getCitizensInBoardIDByType(store, 'HEAVENLY');
@@ -113,7 +114,7 @@ export const domains = {
     requirements: ['FIGHTER', 'CONSTRUCTOR', 'SOLDIER'],
     cost: 6,
     victoryPoints: 2,
-    rewardDescription: 'Imediatamente ganhe um cidadão do tipo FIGHTER das pilhas centrais',
+    rewardDescription: MESSAGES.IMMEDIATELY_GAIN_ONE_CITIZEN('FIGHTER'),
     rewardType: 'IMMEDIATELY',
     reward: (store) => {
       const citizensCardsId = getCitizensInBoardIDByType(store, 'FIGHTER');
@@ -189,7 +190,7 @@ export const domains = {
     requirements: ['CONSTRUCTOR', 'FIGHTER'],
     cost: 7,
     victoryPoints: 3,
-    rewardDescription: 'Imediatamente ganhe um cidadão do tipo CONSTRUCTOR das pilhas centrais',
+    rewardDescription: MESSAGES.IMMEDIATELY_GAIN_ONE_CITIZEN('CONSTRUCTOR'),
     rewardType: 'IMMEDIATELY',
     reward: (store) => {
       const citizensCardsId = getCitizensInBoardIDByType(store, 'CONSTRUCTOR');

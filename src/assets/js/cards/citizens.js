@@ -1,4 +1,5 @@
 import {getCitizenTypeCount} from './utils.js'
+import {messages as MESSAGES} from './messages.js';
 
 export const citizens = {
   //Init citizen cards
@@ -55,7 +56,7 @@ export const citizens = {
     rewardDescription: "+2 Gold OR +2 Magic",
     cost: 2,
     reward: (store) => {
-      const user_choose = prompt('Type GOLD if you want +2 Gold. Type MAGIC if you want +2 Magic. Other values will consider you choosed the gold option.');
+      const user_choose = prompt(MESSAGES.CHOOSE_GOLD_OR_MAGIC(2));
       const type_choose = user_choose === 'MAGIC' ? 'magic' : 'gold';
       store.commit('addResource', {type: type_choose, value: 2})
     }
@@ -167,7 +168,7 @@ export const citizens = {
     rewardDescription: "+3 Gold OR +3 Magic",
     cost: 2,
     reward: (store) => {
-      const user_choose = prompt('Type GOLD if you want +3 Gold. Type MAGIC if you want +3 Magic. Other values will consider you choosed the gold option.');
+      const user_choose = prompt(MESSAGES.CHOOSE_GOLD_OR_MAGIC(3));
       const type_choose = user_choose === 'MAGIC' ? 'magic' : 'gold';
       store.commit('addResource', {type: type_choose, value: 3})
     }
