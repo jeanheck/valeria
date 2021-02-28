@@ -15,13 +15,44 @@ export default {
     pile: Object
   },
   methods: {
-    HaveEnoughResourcesToTheAction(monster){
-      const haveForceEnough = this.$store.state.player.resources.force >= monster.force;
-      const haveMagicEnough = monster.magic ? this.$store.state.player.resources.magic >= monster.magic : true;
-      return haveForceEnough && haveMagicEnough;
-    },
+    haveEnoughResourcesToTheAction(monster){
+      let player_magic_points = this.$store.state.player.resources.magic;
+      let player_force_points = this.$store.state.player.resources.force;
+
+      let left_player_magic_points = monster.magic ? player_magic_points - monster.magic : player_magic_points;
+
+      if(player_force_points >= 1){
+        if((left_player_magic_points + player_force_points) >= monster.force){
+          return true;
+        }
+      }else{
+        return false;
+      }
+    },  
     subtractPlayerResources(monster){
-      this.$store.commit('removeResource', {type: 'force', value: monster.force})
+      let player_magic_points = this.$store.state.player.resources.magic;
+      let player_force_points = this.$store.state.player.resources.force;
+
+      let left_player_magic_points = monster.magic ? player_magic_points - monster.magic : player_magic_points;
+
+      let minimum_force_require = monster.force - left_player_magic_points;
+      //Se tiver muitos pontos de mágica, ele precisa de só 1 de força
+      //Mas precisa desse 1 ponto, pelo menos. Matar só com mágica não pode
+      minimum_force_require = minimum_force_require <= 0 ? 1 : minimum_force_require;
+
+      let force_amount_choose = 0;
+      do {
+        force_amount_choose = prompt(`Type the Force Amount you want to use:\nYou have: ${player_force_points}\nMinimum required: ${minimum_force_require})\nMonster force: ${monster.force})`);
+      } while (force_amount_choose < minimum_force_require || force_amount_choose > player_force_points || force_amount_choose > monster.force);
+
+      if(force_amount_choose == monster.force){
+        //kill monster
+        this.$store.commit('removeResource', {type: 'force', value: monster.force})
+      }else{
+        //complete with magic points and kill monster
+        this.$store.commit('removeResource', {type: 'force', value: force_amount_choose})
+        this.$store.commit('removeResource', {type: 'magic', value: monster.force - force_amount_choose})
+      }
       if(monster.magic) this.$store.commit('removeResource', {type: 'magic', value: monster.magic})
     },
     checkRewards(monster){

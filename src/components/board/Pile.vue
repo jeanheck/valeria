@@ -46,7 +46,7 @@ export default {
       const card = this.getCardAtTheTop();
       const type = this.type;
 
-      if(this.$refs.pile.HaveEnoughResourcesToTheAction(card)){
+      if(this.$refs.pile.haveEnoughResourcesToTheAction(card)){
         this.$refs.pile.subtractPlayerResources(card);
         this.$store.commit('giveCardToPlayer', {type, card});
 

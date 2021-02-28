@@ -8,9 +8,9 @@ export function startGame(store){
   setPhase(store, 'STARTED');
 
   //setInitialResources
-	store.commit('addResource', {type: 'gold', value: 300})
+	store.commit('addResource', {type: 'gold', value: 2})
   store.commit('addResource', {type: 'magic', value: 1})
-	store.commit('addResource', {type: 'force', value: 300})	
+	store.commit('addResource', {type: 'force', value: 0})	
 	//setInitialHand
 	store.commit('addBuyedCitizen', CITIZENS.INIT_FARMER)
 	store.commit('addBuyedCitizen', CITIZENS.INIT_KNIGHT)
@@ -50,11 +50,11 @@ export function startGame(store){
     MONSTERS.ORC_BOSS,*/
   ];
   const forest_monsters = [ 
-    MONSTERS.TREANT,
     /*MONSTERS.TREANT,
+    MONSTERS.TREANT,
     MONSTERS.CURSED_SPIDER,
-    MONSTERS.CURSED_SPIDER,
-    MONSTERS.SPIDER_QUEEN,*/
+    MONSTERS.CURSED_SPIDER,*/
+    MONSTERS.SPIDER_QUEEN,
   ];
   const valley_monsters = [ 
     MONSTERS.BEAR_OWL,
