@@ -23,3 +23,27 @@ export function getbuyedCitizensCount(store){
 export function getCitizensInBoardIDByType(store, type){
   return store.state.board.citizens.filter(citizen => citizen.type === type).map(pile => {return pile.id});
 }
+export function getPointsByDomain(store, types){
+  let points = [];
+
+  console.log('types > ', types)
+
+  types.forEach(type => {
+    console.log('type > ', type);
+    console.log('store.state.player.buildedDomains > ', store.state.player.buildedDomains);
+
+    store.state.player.buildedDomains.forEach(domain => {
+      console.log('domain.requirements > ', domain.requirements);
+
+      let pontos = domain.requirements.filter(requirement => requirement === type.name).length * type.value;
+
+      console.log('pontos > ', pontos);
+
+      points.push(pontos);
+    })        
+  })
+
+  console.log('points > ', points)
+
+  return getTotalPoints(points);
+}

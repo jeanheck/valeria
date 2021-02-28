@@ -1,4 +1,4 @@
-import {getVictoryPointsByCoins, getCitizenTypeCount, addVictoryPoints, getbuyedCitizensCount} from './utils.js'
+import {getVictoryPointsByCoins, getCitizenTypeCount, addVictoryPoints, getbuyedCitizensCount, getPointsByDomain} from './utils.js'
 
 export const dukes = {
   WARYIN_THIEFS_LORD: { 
@@ -12,7 +12,8 @@ export const dukes = {
       const points = [
         getCitizenTypeCount(store, 'CONSTRUCTOR'), 
         getCitizenTypeCount(store, 'FIGHTER') * 2, 
-        getVictoryPointsByCoins(store, 3)
+        getVictoryPointsByCoins(store, 3),
+        getPointsByDomain(store, [{name: 'CONSTRUCTOR', value: 1}, {name: 'FIGHTER', value: 2}])
       ];
 
       addVictoryPoints(store, points);

@@ -2,7 +2,7 @@ import {citizens as CITIZENS} from '../cards/citizens.js';
 import {monsters as MONSTERS} from '../cards/monsters.js';
 import {domains as DOMAINS} from '../cards/domains.js';
 import {dukes as DUKES} from '../cards/dukes.js';
-import {rollDice, getRandomDuke, createCitizenPile, createMonsterPile, createDomainPile, setPhase, getReward} from './utils.js';
+import {rollDice, createCitizenPile, createMonsterPile, createDomainPile, setPhase, getReward} from './utils.js';
 
 export function startGame(store){
   setPhase(store, 'STARTED');
@@ -15,7 +15,7 @@ export function startGame(store){
 	store.commit('addBuyedCitizen', CITIZENS.INIT_FARMER)
 	store.commit('addBuyedCitizen', CITIZENS.INIT_KNIGHT)
   //setInitialDuke
-  store.commit('setDuke', getRandomDuke(DUKES))
+  store.commit('setDuke', DUKES.WARYIN_THIEFS_LORD)
 
   //setInitialCitizens
   const citizensOnBoard = [ 
@@ -37,38 +37,38 @@ export function startGame(store){
   //setInitialMonsters
   const ruins_monsters = [
     MONSTERS.SKELETON,
-    MONSTERS.SKELETON,
+    /*MONSTERS.SKELETON,
     MONSTERS.SKELETON,
     MONSTERS.FLAMING_SKELETON,
-    MONSTERS.SKELETON_KING,
+    MONSTERS.SKELETON_KING,*/
   ];
   const mountain_monsters = [ 
     MONSTERS.HORRENDOUS_BEAR,
-    MONSTERS.HORRENDOUS_BEAR,
+    /*MONSTERS.HORRENDOUS_BEAR,
     MONSTERS.ORC_WARRIOR,
     MONSTERS.ORC_WARRIOR,
-    MONSTERS.ORC_BOSS,
+    MONSTERS.ORC_BOSS,*/
   ];
   const forest_monsters = [ 
     MONSTERS.TREANT,
-    MONSTERS.TREANT,
+    /*MONSTERS.TREANT,
     MONSTERS.CURSED_SPIDER,
     MONSTERS.CURSED_SPIDER,
-    MONSTERS.SPIDER_QUEEN,
+    MONSTERS.SPIDER_QUEEN,*/
   ];
   const valley_monsters = [ 
     MONSTERS.BEAR_OWL,
-    MONSTERS.BEAR_OWL,
+    /*MONSTERS.BEAR_OWL,
     MONSTERS.BEAR_OWL,
     MONSTERS.GIANT,
-    MONSTERS.TROLL,
+    MONSTERS.TROLL,*/
   ];
   const hills_monsters = [ 
     MONSTERS.GOBLIN,
-    MONSTERS.GOBLIN,
+    /*MONSTERS.GOBLIN,
     MONSTERS.GOBLIN,
     MONSTERS.MAGE_GOBLIN,
-    MONSTERS.GOBLIN_KING,
+    MONSTERS.GOBLIN_KING,*/
   ];
 
   [ruins_monsters, mountain_monsters, forest_monsters, valley_monsters, hills_monsters].forEach((itens) => {
@@ -79,39 +79,39 @@ export function startGame(store){
   const domainsOnBoard = [
     [
       DOMAINS.ASTERATEN_EYE,
-      DOMAINS.AQUA_OBSERVER,
+      /*DOMAINS.AQUA_OBSERVER,
       DOMAINS.BLOOD_CROW_ARMY,
       DOMAINS.ST_AQUILA_CHURCH,
       DOMAINS.COLISEUM,
       DOMAINS.CLOUDRIDER_CAMPING,
-      DOMAINS.TRUCE_CUT_THROAT
+      DOMAINS.TRUCE_CUT_THROAT*/
     ],
     [
       DOMAINS.EMERALD_FORTRESS,
-      DOMAINS.DESERT_ORCHID,
+      /*DOMAINS.DESERT_ORCHID,
       DOMAINS.DAWN_PALACE,
       DOMAINS.FOX_GROVE_PALACE,
       DOMAINS.FORGOTTEN_SORROWS,
       DOMAINS.ULLAMALIZATLI_COURT,
-      DOMAINS.ASTERATEN_EYE
+      DOMAINS.ASTERATEN_EYE*/
     ],
     [
       DOMAINS.VIOLET_THORN,
-      DOMAINS.SHATTERED_HAND,
+      /*DOMAINS.SHATTERED_HAND,
       DOMAINS.GRIMMWATER_FORT,
       DOMAINS.GARGAN_HUGHE,
       DOMAINS.JUSTA_FIELD,
       DOMAINS.NAE_GOLDEN_OBELISK,
-      DOMAINS.HALFPENNNY_HILL,
+      DOMAINS.HALFPENNNY_HILL,*/
     ],
     [
       DOMAINS.PLATEAU_PRATCHETT,
-      DOMAINS.PURLOINER_PERCH,
+      /*DOMAINS.PURLOINER_PERCH,
       DOMAINS.WEAVING_WITCHS_NEST,
       DOMAINS.THE_TOWER,
       DOMAINS.ROGUES_LANDING,
       DOMAINS.OSTENDAR_MONOLITH,
-      DOMAINS.THE_URDR_ORB
+      DOMAINS.THE_URDR_ORB*/
     ],
   ];
 
@@ -188,7 +188,7 @@ export function doingOneAction(store){
 
   const citizensRemain = store.state.board.citizens.filter(citizenPile => citizenPile.itens.length > 0)
   const monstersRemain = store.state.board.monsters.filter(monsterPile => monsterPile.itens.length > 0)
-  const domainsRemain = store.state.board.domains.filter(domainPile => domainPile.length > 0)
+  const domainsRemain = store.state.board.domains.filter(domainPile => domainPile.itens.length > 0)
 
   if(citizensRemain.length === 0 && monstersRemain.length === 0 && domainsRemain.length === 0){
     checkPointsAccordingByDuke(store);

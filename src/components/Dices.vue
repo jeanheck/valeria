@@ -1,4 +1,4 @@
-<template>
+<template v-on:keyup="keyHandler($event)">
   <div>
     <h1>Dices</h1>
     <p>
@@ -19,6 +19,13 @@ export default {
     getDicesValues() {
       rollDices(this.$store);
     }
+  },
+  created() {
+    window.addEventListener('keypress', keyPressed => {
+      if(keyPressed.code === 'KeyR' && this.$store.state.game.phase === 'ROLLING_PHASE'){
+        this.getDicesValues();
+      }
+    });
   }
 }
 </script>

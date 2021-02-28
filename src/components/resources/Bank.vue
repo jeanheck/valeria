@@ -2,7 +2,7 @@
   <div>
     <h1>Bank</h1>
     
-    <BankOption v-for="resource in Object.keys(this.$store.state.player.resources).filter(resource => resource != 'victory')" :key="resource" :resource="resource" />
+    <BankOption v-for="resource in this.resources" :key="resource" :resource="resource" :ref="resource" />
   </div>
 </template>
 
@@ -13,6 +13,20 @@ export default {
   name: 'Bank',
   components: {
     BankOption
+  },
+  data() {
+    return {
+      resources: Object.keys(this.$store.state.player.resources).filter(resource => resource != 'victory')
+    }
+  },
+  mounted() {
+    this.$children.forEach(child => {
+      window.addEventListener('keypress', keyPressed => { 
+        if(keyPressed.code === `Key${child.resource.charAt(0).toUpperCase()}` && this.$store.state.game.phase === 'ACTION_PHASE'){
+          child.getResource();
+        }
+      });
+    })
   }
 }
 </script>
