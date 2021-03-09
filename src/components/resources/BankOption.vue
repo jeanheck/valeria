@@ -55,4 +55,16 @@ export default {
     float: left;
     margin: 4px;
   }
+  .btn-outline-warning:disabled {
+    color: gray;
+    border-color: gray;
+  }
+  .btn-outline-info:disabled {
+    color: gray;
+    border-color: gray;
+  }
+  .btn-outline-danger:disabled {
+    color: gray;
+    border-color: gray;
+  }
 </style>

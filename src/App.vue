@@ -2,24 +2,7 @@
   <div id="app">
     <div class="resources">
       <Bank />
-      
-      <div class="player">
-        <div class="resource gold">
-          user gold
-        </div>
-        <div class="resource magic">
-          user magic
-        </div>
-        <div class="resource force">
-          user force
-        </div>
-        <div class="resource purple">
-          victory points
-        </div>
-        <div class="active-effects">
-          Active effects
-        </div>
-      </div>
+      <Resources />
     </div>
 
     <div class="board">
@@ -81,13 +64,15 @@
 
 <script>
 import Bank from './components/resources/Bank'
+import Resources from './components/resources/Resources.vue';
 
 import { startGame } from './assets/js/phases/phases.js'
 
 export default {
   name: 'App',
   components: {
-    Bank
+    Bank,
+    Resources
   },
   mounted(){
     startGame(this.$store);
