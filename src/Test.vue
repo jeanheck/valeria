@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div style="width: 1900px; height: 100px; border: 1px solid green;">
       <div style="width: 1000px; height: 100px; border: 1px solid yellow; float: left;"><!--bank-->
         <div style="width: 100px; height: 90px; border: 1px solid gray; float: left;">

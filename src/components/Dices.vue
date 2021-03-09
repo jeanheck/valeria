@@ -1,12 +1,24 @@
 <template v-on:keyup="keyHandler($event)">
-  <div>
-    <h1>Dices</h1>
-    <p>
-      Dice One: {{ this.$store.state.game.diceOne }}
-      Dice Two: {{ this.$store.state.game.diceTwo }}
-      Sum Dices: {{ this.$store.state.game.sumDices }}
-    </p>
-    <button v-on:click="getDicesValues()" :disabled="this.$store.state.game.phase != 'ROLLING_PHASE'">Roll Dices</button>
+  <div class="dices">
+    <b-button 
+      variant="outline-secondary" 
+      class="roll-dices"
+      v-on:click="getDicesValues()"
+      :disabled="this.$store.state.game.phase != 'ROLLING_PHASE'">
+      <b-icon icon="dice-3-fill" aria-hidden="true"></b-icon> Roll Dices [R]
+    </b-button>
+
+    <ul>
+      <li>
+        <b-icon icon="dice-6" aria-hidden="true"></b-icon> = {{ this.$store.state.game.diceOne }}
+      </li>
+      <li>
+        <b-icon icon="dice-6-fill" aria-hidden="true"></b-icon> = {{ this.$store.state.game.diceTwo }}
+      </li>
+      <li>
+        <b-icon icon="dice-6" aria-hidden="true"></b-icon> + <b-icon icon="dice-6-fill" aria-hidden="true"></b-icon> = {{ this.$store.state.game.sumDices }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -32,5 +44,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  .dices {
+    width: 40%;
+    float: left;
+  }
+  .roll-dices {
+    width: 70%; 
+    height: 90px; 
+    margin: 4px; 
+    float: left;
+  }
+  ul {
+    list-style: none;
+  }
 </style>
