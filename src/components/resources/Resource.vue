@@ -1,6 +1,6 @@
 <template>
   <b-button 
-    disabled="true"
+    :disabled="true"
     :variant="resources_data[resource].variant"
     :class="resources_data[resource].custom ? `resource ${resources_data[resource].custom}` : 'resource'"
     >

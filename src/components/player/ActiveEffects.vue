@@ -40,7 +40,7 @@ export default {
   ul {
     list-style: none;
     font-size: 15px;
-		margin: 0; /* To remove default bottom margin */ 
-    padding: 0; /* To remove default left padding */
+		margin: 0;
+    padding: 0;
   }
 </style>

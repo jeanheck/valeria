@@ -5,44 +5,11 @@
       <Resources />
     </div>
 
-    <div class="board">
-      <div class="monsters">
-        <div class="monster">monster</div>
-        <div class="monster">monster</div>
-        <div class="monster">monster</div>
-        <div class="monster">monster</div>
-        <div class="monster">monster</div>
-      </div>
-      <div class="citizens">
-        <div class="citizen">citizen</div>
-        <div class="citizen">citizen</div>
-        <div class="citizen">citizen</div>
-        <div class="citizen">citizen</div>
-        <div class="citizen">citizen</div>
-      </div>
-      <div class="citizens">
-        <div class="citizen">citizen</div>
-        <div class="citizen">citizen</div>
-        <div class="citizen">citizen</div>
-        <div class="citizen">citizen</div>
-        <div class="citizen">citizen</div>
-      </div>
-      <div class="domains">
-        <div class="domain">domain</div>
-        <div class="domain">domain</div>
-        <div class="domain">domain</div>
-        <div class="domain">domain</div>
-        <div class="domain">domain</div>
-      </div>
-    </div>
+    <Board />
 
     <div class="menu">
-      <div class="duke">
-        duke
-      </div>
-      <div class="duke-info">
-        duke info
-      </div>
+      <Duke />
+
       <div class="menu-options">
         release soon!
       </div>
@@ -65,6 +32,8 @@
 <script>
 import Bank from './components/resources/Bank'
 import Resources from './components/resources/Resources.vue';
+import Duke from './components/player/Duke.vue';
+import Board from './components/board/Board.vue';
 
 import { startGame } from './assets/js/phases/phases.js'
 
@@ -72,7 +41,9 @@ export default {
   name: 'App',
   components: {
     Bank,
-    Resources
+    Resources,
+    Duke, 
+    Board
   },
   mounted(){
     startGame(this.$store);
@@ -81,57 +52,6 @@ export default {
 </script>
 
 <style scoped>
-  /*resources*/
-  .resources {
-    width: 100%; 
-    height: 100px;
-    border: 1px solid black;
-  }
-  .bank {
-    width: 50%; 
-    height: 100px; 
-    border: 1px solid black; 
-    float: left;
-  }
-  .resource {
-    width: 10%; 
-    height: 90px;
-    float: left;
-    margin: 4px;
-  }
-  .gold {
-    border: 1px solid gold; 
-  }
-  .magic {
-    border: 1px solid lightskyblue; 
-  }
-  .force {
-    border: 1px solid lightcoral; 
-  }
-  .purple {
-    border: 1px solid purple; 
-  }
-  .active-effects {
-    width: 50%; 
-    height: 90px; 
-    border: 1px solid gray;
-    margin: 4px; 
-    float: right;
-  }
-  .dices{
-    width: 20%; 
-    height: 90px; 
-    border: 1px solid gray;
-    margin: 4px; 
-    float: left;
-  }
-  .player {
-    width: 50%; 
-    height: 100px; 
-    border: 1px solid black; 
-    float: left;
-  }
-
   /*board*/
   .board {
     width: 50%; 
@@ -193,20 +113,6 @@ export default {
     height: 350px;
     margin: 10px; 
     border: 1px solid black;
-  }
-
-  /*Duke*/
-  .duke {
-    width: 90%; 
-    height: 200px;
-    margin: 10px; 
-    border: 1px solid purple;
-  }
-  .duke-info {
-    width: 90%; 
-    height: 200px;
-    margin: 10px; 
-    border: 1px solid purple;
   }
 
   /*Player-cards*/

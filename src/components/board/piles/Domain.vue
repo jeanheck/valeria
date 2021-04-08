@@ -1,5 +1,12 @@
 <template>
   <div v-if="pile.itens.length > 0">
+    <ul>
+      <li>{{this.$parent.getCardAtTheTop().name}}</li>
+      <li>{{this.$parent.getCardAtTheTop().rewardDescription}}</li>
+    </ul>
+
+    <button v-on:click="action()" :disabled="this.$store.state.game.phase != 'ACTION_PHASE'">{{this.$parent.getActionType()}}</button>
+
     <span>Cost: {{this.$parent.getCardAtTheTop().cost}}</span><span v-if="this.$store.state.game.passiveEffects.domainsCostOneGoldLess">(-{{getDescountToBuy()}})</span>&nbsp;
     <span>Victory Points: {{this.$parent.getCardAtTheTop().victoryPoints}}</span>&nbsp;
     <span>Requirements: {{this.$parent.getCardAtTheTop().requirements}}</span>&nbsp;
