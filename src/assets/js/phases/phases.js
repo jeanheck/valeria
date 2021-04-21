@@ -2,7 +2,39 @@ import {citizens as CITIZENS} from '../cards/citizens.js';
 import {monsters as MONSTERS} from '../cards/monsters.js';
 import {domains as DOMAINS} from '../cards/domains.js';
 import {dukes as DUKES} from '../cards/dukes.js';
-import {rollDice, createCitizenPile, createMonsterPile, createDomainPile, setPhase, getReward} from './utils.js';
+import {rollDice, createCitizenPile, createMonsterPile, createDomainPile, setPhase, getReward, getRandomDuke} from './utils.js';
+
+export function cleanBoard(store){
+  //player
+  store.state.player.resources = {
+    gold: 0,
+    magic: 0,
+    force: 0,
+    victory: 0
+  }
+  store.state.player.buyedCitizens = [];
+  store.state.player.killedMonsters = [];
+  store.state.player.buildedDomains = [];
+  store.state.player.duke = [];
+
+  //game
+  store.state.game.phase = 'NOT_INITIATED',
+  store.state.game.diceOne = '',
+  store.state.game.diceTwo = '',
+  store.state.game.sumDices = '',
+  store.state.game.actionsCounter = 0,
+  store.state.game.passiveEffects = {
+    cancelAdditionalValueToBuy: false,
+    domainsCostOneGoldLess: false,
+    oneMagicWhenYouKillAMonster: false,
+    oneMagicWhenYouBuyACitizen: false
+  }
+
+  //board
+  store.state.board.citizens = [];
+  store.state.board.monsters = [];
+  store.state.board.domains = [];
+}
 
 export function startGame(store){
   setPhase(store, 'STARTED');
@@ -15,7 +47,7 @@ export function startGame(store){
 	store.commit('addBuyedCitizen', CITIZENS.INIT_FARMER)
 	store.commit('addBuyedCitizen', CITIZENS.INIT_KNIGHT)
   //setInitialDuke
-  store.commit('setDuke', DUKES.WARYIN_THIEFS_LORD)
+  store.commit('setDuke', getRandomDuke(DUKES))
 
   //setInitialCitizens
   const citizensOnBoard = [ 
@@ -37,38 +69,38 @@ export function startGame(store){
   //setInitialMonsters
   const ruins_monsters = [
     MONSTERS.SKELETON,
-    /*MONSTERS.SKELETON,
+    MONSTERS.SKELETON,
     MONSTERS.SKELETON,
     MONSTERS.FLAMING_SKELETON,
-    MONSTERS.SKELETON_KING,*/
+    MONSTERS.SKELETON_KING,
   ];
   const mountain_monsters = [ 
     MONSTERS.HORRENDOUS_BEAR,
-    /*MONSTERS.HORRENDOUS_BEAR,
+    MONSTERS.HORRENDOUS_BEAR,
     MONSTERS.ORC_WARRIOR,
     MONSTERS.ORC_WARRIOR,
-    MONSTERS.ORC_BOSS,*/
+    MONSTERS.ORC_BOSS,
   ];
   const forest_monsters = [ 
-    /*MONSTERS.TREANT,
+    MONSTERS.TREANT,
     MONSTERS.TREANT,
     MONSTERS.CURSED_SPIDER,
-    MONSTERS.CURSED_SPIDER,*/
+    MONSTERS.CURSED_SPIDER,
     MONSTERS.SPIDER_QUEEN,
   ];
   const valley_monsters = [ 
     MONSTERS.BEAR_OWL,
-    /*MONSTERS.BEAR_OWL,
+    MONSTERS.BEAR_OWL,
     MONSTERS.BEAR_OWL,
     MONSTERS.GIANT,
-    MONSTERS.TROLL,*/
+    MONSTERS.TROLL,
   ];
   const hills_monsters = [ 
     MONSTERS.GOBLIN,
-    /*MONSTERS.GOBLIN,
+    MONSTERS.GOBLIN,
     MONSTERS.GOBLIN,
     MONSTERS.MAGE_GOBLIN,
-    MONSTERS.GOBLIN_KING,*/
+    MONSTERS.GOBLIN_KING,
   ];
 
   [ruins_monsters, mountain_monsters, forest_monsters, valley_monsters, hills_monsters].forEach((itens) => {
@@ -78,40 +110,29 @@ export function startGame(store){
   //setInititalDomains
   const domainsOnBoard = [
     [
-      DOMAINS.ASTERATEN_EYE,
-      /*DOMAINS.AQUA_OBSERVER,
+      DOMAINS.AQUA_OBSERVER,
       DOMAINS.BLOOD_CROW_ARMY,
-      DOMAINS.ST_AQUILA_CHURCH,
-      DOMAINS.COLISEUM,
-      DOMAINS.CLOUDRIDER_CAMPING,
-      DOMAINS.TRUCE_CUT_THROAT*/
+      DOMAINS.CLOUDRIDER_CAMPING
     ],
     [
       DOMAINS.EMERALD_FORTRESS,
-      /*DOMAINS.DESERT_ORCHID,
-      DOMAINS.DAWN_PALACE,
-      DOMAINS.FOX_GROVE_PALACE,
-      DOMAINS.FORGOTTEN_SORROWS,
-      DOMAINS.ULLAMALIZATLI_COURT,
-      DOMAINS.ASTERATEN_EYE*/
+      DOMAINS.DESERT_ORCHID,
+      DOMAINS.FORGOTTEN_SORROWS
     ],
     [
-      DOMAINS.VIOLET_THORN,
-      /*DOMAINS.SHATTERED_HAND,
       DOMAINS.GRIMMWATER_FORT,
-      DOMAINS.GARGAN_HUGHE,
       DOMAINS.JUSTA_FIELD,
-      DOMAINS.NAE_GOLDEN_OBELISK,
-      DOMAINS.HALFPENNNY_HILL,*/
+      DOMAINS.NAE_GOLDEN_OBELISK
     ],
     [
-      DOMAINS.PLATEAU_PRATCHETT,
-      /*DOMAINS.PURLOINER_PERCH,
-      DOMAINS.WEAVING_WITCHS_NEST,
-      DOMAINS.THE_TOWER,
+      DOMAINS.PURLOINER_PERCH,
       DOMAINS.ROGUES_LANDING,
-      DOMAINS.OSTENDAR_MONOLITH,
-      DOMAINS.THE_URDR_ORB*/
+      DOMAINS.SHATTERED_HAND
+    ],
+    [
+      DOMAINS.ST_AQUILA_CHURCH,
+      DOMAINS.TRUCE_CUT_THROAT,
+      DOMAINS.WEAVING_WITCHS_NEST
     ],
   ];
 

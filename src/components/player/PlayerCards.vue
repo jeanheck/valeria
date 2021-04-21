@@ -1,27 +1,28 @@
 <template>
-  <div id="player-cards">
-		<Cards :title="'Citizens in Hand'" :cards="this.$store.state.player.buyedCitizens" />
-    <Cards :title="'Killed Monsters'" :cards="this.$store.state.player.killedMonsters" />
-		<Cards :title="'Builded Domains'" :cards="this.$store.state.player.buildedDomains" />
+  <div class="player-cards">
+    <Citizens :title="'Citizens in Hand'" :cards="this.$store.state.player.buyedCitizens" />
+    <Monsters :title="'Killed Monsters'" :cards="this.$store.state.player.killedMonsters" />
+		<Domains :title="'Builded Domains'" :cards="this.$store.state.player.buildedDomains" />
   </div>
 </template>
 
 <script>
-import Cards from './Cards'
+import Citizens from './cards/Citizens'
+import Monsters from './cards/Monsters'
+import Domains from './cards/Domains'
 
 export default {
   name: 'PlayerCards',
   components: {
-    Cards
+    Citizens, Monsters, Domains
   },
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-	#player-cards {
-    border: 1px solid black;
-		width: 20%;
-		float: right;
-	}
+  .player-cards {
+    width: 40%;
+    height: 800px;
+    float: left;
+  }
 </style>

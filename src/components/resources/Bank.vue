@@ -1,18 +1,18 @@
 <template>
-  <div>
-    <h1>Bank</h1>
-    
+  <div class="bank">
+    <Dices />
     <BankOption v-for="resource in this.resources" :key="resource" :resource="resource" :ref="resource" />
   </div>
 </template>
 
 <script>
 import BankOption from './BankOption'
+import Dices from '../Dices'
 
 export default {
   name: 'Bank',
   components: {
-    BankOption
+    BankOption, Dices
   },
   data() {
     return {
@@ -31,7 +31,11 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  .bank {
+    width: 50%; 
+    height: 100px; 
+    border: 1px solid black; 
+    float: left;
+  }
 </style>

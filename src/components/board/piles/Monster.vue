@@ -1,14 +1,54 @@
 <template>
-  <div v-if="pile.itens.length > 0">
-    <span>Force: {{this.$parent.getCardAtTheTop().force}}</span>&nbsp;
-    <span v-if="this.$parent.getCardAtTheTop().magic">Magic: {{this.$parent.getCardAtTheTop().magic}}</span>&nbsp;
-    <span>Victory Points: {{this.$parent.getCardAtTheTop().victoryPoints}}</span>&nbsp;
-    <span>Area: {{this.$parent.getCardAtTheTop().area}}</span>&nbsp;
-    <span>Type: {{this.$parent.getCardAtTheTop().type}}</span>&nbsp;
+  <div class="pile" v-if="pile.itens.length > 0">
+    <ul class="status">
+      <li class="force">
+        <b-button 
+          :disabled="true"
+          variant="danger"
+          >
+          <b-icon icon="lightning-fill" aria-hidden="true"></b-icon> {{this.$parent.getCardAtTheTop().force}}
+        </b-button>
+      </li>
+      <li class="magic" v-if="this.$parent.getCardAtTheTop().magic">
+        <b-button 
+          :disabled="true"
+          variant="info"
+          >
+          <b-icon icon="gem" aria-hidden="true"></b-icon> {{this.$parent.getCardAtTheTop().magic}}
+        </b-button>
+      </li>
+      <li class="victory">
+        <b-button 
+          :disabled="true"
+          class="victory"
+          >
+          <b-icon icon="trophy-fill" aria-hidden="true"></b-icon> {{this.$parent.getCardAtTheTop().victoryPoints}}
+        </b-button>
+      </li>
+    </ul>
+
+    <b-button 
+      variant="danger"
+      class="action"
+      v-on:click="$parent.action()"
+      :disabled="this.$store.state.game.phase != 'ACTION_PHASE'"
+      >
+      {{this.$parent.getActionType()}}    
+    </b-button>
+
+    <ul class="about">
+      <li class="name">{{this.$parent.getCardAtTheTop().name}}</li>
+      <li class="description">{{this.$parent.getCardAtTheTop().rewardDescription}}</li>
+    </ul>
   </div>
 </template>
 
 <script>
+/**
+ * 
+ * 
+  
+ */
 export default {
   name: 'Monster',
   props: {
@@ -68,5 +108,48 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  .pile{
+    position: relative;
+    width: 100%; 
+    height: 175px; 
+    border: 1px solid brown;
+  }
+  ul {
+    list-style: none;
+    font-size: 15px;
+		margin: 0;
+    padding: 0;
+  }
+  .about {
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    bottom: 0px;
+    position: absolute;
+  }
+  .status li button {
+    border-radius: 20px !important;
+    margin-top: 3px;
+    margin-left: 3px;
+  }
+  .about .name {
+    font-size: 20px;
+  }
+  .about .description {
+    font-size: 12px;
+  }
+  .status {
+    left: 0px;
+    top: 0px;
+    position: absolute;
+  }
+  .action {
+    right: 5px;
+    top: 75px;
+    position: absolute;
+  }
+  .victory:disabled {
+    color: white;
+    background-color: purple;
+    border-color: purple;
+  }
 </style>

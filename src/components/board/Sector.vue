@@ -1,6 +1,5 @@
 <template>
-  <div id="sector">
-    <h1>{{title}}</h1>
+  <div :class="sector_data[pileType].class">
     <Pile v-for="pile in piles" :key="pile.id" :pile="pile" :type="pileType"/>
   </div>
 </template>
@@ -11,22 +10,45 @@ import Pile from './Pile'
 export default {
   name: 'Sector',
   props: {
-    title: String,
     piles: Array,
     pileType: String
   },
   components: {
     Pile
-  }
+  },
+  data(){
+    return {
+      sector_data: {
+        Citizen: {
+          class: 'citizens'
+        },
+        Monster: {
+          class: 'monsters'
+        },
+        Domain: {
+          class: 'domains'
+        },
+      }
+    }
+  },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  #sector {
-		border: 1px solid black;
-    float: left;
-		height: 50%;
-    width: 30%;
-	}
+  .monsters {
+    width: 100%; 
+    height: 200px; 
+    border: 1px solid brown;
+  }
+  .citizens {
+    width: 100%; 
+    height: 200px; 
+    border: 1px solid blue;
+  }
+  .domains {
+    width: 100%; 
+    height: 200px; 
+    border: 1px solid green;
+  }
 </style>

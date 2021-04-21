@@ -1,8 +1,31 @@
 <template>
-  <div>
-    <span>Cost: {{this.$parent.getCardAtTheTop().cost}}</span><span v-if="!this.$store.state.game.passiveEffects.cancelAdditionalValueToBuy">(+{{getAditionalValueToBuy()}})</span>&nbsp;
-    <span>Tipo: {{this.$parent.getCardAtTheTop().type}}</span>&nbsp;
-    <span>Dado(s): {{this.$parent.getCardAtTheTop().diceValues}}</span>&nbsp;
+  <div class="pile">
+    <ul class="status">
+      <li class="gold">
+        <b-button 
+          :disabled="true"
+          variant="warning"
+          >
+          <b-icon icon="cash-stack" aria-hidden="true"></b-icon> 
+          {{this.$parent.getCardAtTheTop().cost}}
+          <span v-if="!this.$store.state.game.passiveEffects.cancelAdditionalValueToBuy">(+{{getAditionalValueToBuy()}})</span>
+        </b-button>
+      </li>
+    </ul>
+
+    <b-button 
+      variant="warning"
+      class="action"
+      v-on:click="$parent.action()"
+      :disabled="this.$store.state.game.phase != 'ACTION_PHASE'"
+      >
+      {{this.$parent.getActionType()}}    
+    </b-button>
+
+    <ul class="about">
+      <li class="name">{{this.$parent.getCardAtTheTop().name}}</li>
+      <li class="description">{{this.$parent.getCardAtTheTop().rewardDescription}}</li>
+    </ul>
   </div>
 </template>
 
@@ -63,5 +86,39 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  .pile{
+    position: relative;
+    width: 100%; 
+    height: 175px; 
+  }
+  ul {
+    list-style: none;
+    font-size: 15px;
+		margin: 0;
+    padding: 0;
+  }
+  .status li button {
+    border-radius: 20px !important;
+    margin-top: 3px;
+    margin-left: 3px;
+    position: absolute;
+    top: 45px;
+  }
+  .about {
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    bottom: 0px;
+    position: absolute;
+  }
+  .about .name {
+    font-size: 20px;
+  }
+  .about .description {
+    font-size: 12px;
+  }
+  .action {
+    right: 5px;
+    top: 75px;
+    position: absolute;
+  }
 </style>
