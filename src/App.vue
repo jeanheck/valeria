@@ -10,22 +10,10 @@
     <div class="menu">
       <Duke />
 
-      <div class="menu-options">
-        release soon!
-      </div>
+      <MenuOptions />
     </div>
 
-    <div class="player-cards">
-      <div class="citizens">
-        buyed citizens
-      </div>
-      <div class="monsters">
-        kiled monsters
-      </div>
-      <div class="domains">
-        builded domains
-      </div>
-    </div>
+    <PlayerCards />
   </div>
 </template>
 
@@ -34,6 +22,8 @@ import Bank from './components/resources/Bank'
 import Resources from './components/resources/Resources.vue';
 import Duke from './components/player/Duke.vue';
 import Board from './components/board/Board.vue';
+import PlayerCards from './components/player/PlayerCards.vue';
+import MenuOptions from './components/board/MenuOptions';
 
 import { startGame } from './assets/js/phases/phases.js'
 
@@ -43,7 +33,9 @@ export default {
     Bank,
     Resources,
     Duke, 
-    Board
+    Board,
+    PlayerCards,
+    MenuOptions
   },
   mounted(){
     startGame(this.$store);
@@ -106,37 +98,6 @@ export default {
     width: 10%; 
     height: 800px; 
     border: 1px solid black; 
-    float: left;
-  }
-  .menu-options {
-    width: 90%; 
-    height: 350px;
-    margin: 10px; 
-    border: 1px solid black;
-  }
-
-  /*Player-cards*/
-  .player-cards {
-    width: 40%;
-    height: 800px;
-    float: left;
-  }
-  .player-cards .citizens {
-    width: 220px; 
-    height: 810px; 
-    border: 1px solid blue; 
-    float: left;
-  }
-  .player-cards .monsters {
-    width: 220px; 
-    height: 810px; 
-    border: 1px solid brown; 
-    float: left;
-  }
-  .player-cards .domains {
-    width: 220px; 
-    height: 810px; 
-    border: 1px solid green; 
     float: left;
   }
 </style>

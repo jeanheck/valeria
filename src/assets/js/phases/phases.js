@@ -2,7 +2,39 @@ import {citizens as CITIZENS} from '../cards/citizens.js';
 import {monsters as MONSTERS} from '../cards/monsters.js';
 import {domains as DOMAINS} from '../cards/domains.js';
 import {dukes as DUKES} from '../cards/dukes.js';
-import {rollDice, createCitizenPile, createMonsterPile, createDomainPile, setPhase, getReward} from './utils.js';
+import {rollDice, createCitizenPile, createMonsterPile, createDomainPile, setPhase, getReward, getRandomDuke} from './utils.js';
+
+export function cleanBoard(store){
+  //player
+  store.state.player.resources = {
+    gold: 0,
+    magic: 0,
+    force: 0,
+    victory: 0
+  }
+  store.state.player.buyedCitizens = [];
+  store.state.player.killedMonsters = [];
+  store.state.player.buildedDomains = [];
+  store.state.player.duke = [];
+
+  //game
+  store.state.game.phase = 'NOT_INITIATED',
+  store.state.game.diceOne = '',
+  store.state.game.diceTwo = '',
+  store.state.game.sumDices = '',
+  store.state.game.actionsCounter = 0,
+  store.state.game.passiveEffects = {
+    cancelAdditionalValueToBuy: false,
+    domainsCostOneGoldLess: false,
+    oneMagicWhenYouKillAMonster: false,
+    oneMagicWhenYouBuyACitizen: false
+  }
+
+  //board
+  store.state.board.citizens = [];
+  store.state.board.monsters = [];
+  store.state.board.domains = [];
+}
 
 export function startGame(store){
   setPhase(store, 'STARTED');
@@ -15,7 +47,7 @@ export function startGame(store){
 	store.commit('addBuyedCitizen', CITIZENS.INIT_FARMER)
 	store.commit('addBuyedCitizen', CITIZENS.INIT_KNIGHT)
   //setInitialDuke
-  store.commit('setDuke', DUKES.WARYIN_THIEFS_LORD)
+  store.commit('setDuke', getRandomDuke(DUKES))
 
   //setInitialCitizens
   const citizensOnBoard = [ 

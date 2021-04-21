@@ -24,7 +24,7 @@
     <b-button 
       variant="success"
       class="action"
-      v-on:click="this.$parent.action()"
+      v-on:click="$parent.action()"
       :disabled="this.$store.state.game.phase != 'ACTION_PHASE'"
       >
       {{this.$parent.getActionType()}}    

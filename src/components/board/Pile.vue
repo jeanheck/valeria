@@ -3,26 +3,15 @@
     v-if="pile.itens.length > 0"
     :class="pile_data[type].class" 
     :style="{ 
-      backgroundImage: 'url(' + card + ')', 
+      backgroundImage: 'url(' + getImage() + ')', 
       backgroundSize: pile_data[type].backgroundSize
     }">
 
     <Pile :is="type" :pile="pile" ref="pile" />
   </div>
-
 </template>
 
 <script>
-
-/*
-<div v-if="pile.itens.length > 0" :class="pile_data[type].class" :style="`background-image: url('../../../assets/images/monsters/${this.getCardAtTheTop().id}.jpeg');`">
-    <span>Name: {{getCardAtTheTop().name}}</span>&nbsp;
-    <span>Reward: {{getCardAtTheTop().rewardDescription}}</span>&nbsp;
-
-
-  </div>
-*/
-
 import Citizen from './piles/Citizen'
 import Monster from './piles/Monster'
 import Domain from './piles/Domain'
@@ -53,7 +42,8 @@ export default {
           backgroundSize: '180px 250px'
         },
       },
-      card: require(`../../assets/images/${this.type}/${this.getCardAtTheTop().id}.jpg`)
+      card: require(`../../assets/images/${this.type}/${this.getCardAtTheTop().id}.jpg`),
+      card2: this.getImage()
     }
   },
   methods: {
@@ -84,14 +74,28 @@ export default {
         this.$refs.pile.checkRewards(card);
 
         this.removeCardAtTop();
+
+        //this.applyNewBackgroundImage();
+
         doingOneAction(this.$store);
       }else{
         console.log('A ação não pode ser concluída. Você não tem recursos para realizá-la.')
       }
+    },
+    /*applyNewBackgroundImage(){
+      console.log('this > ', this);
+    }*/
+    getImage(){
+      return require(`../../assets/images/${this.type}/${this.getCardAtTheTop().id}.jpg`);
     }
   },
   mounted(){
     console.log('teste > ', this.type);
+  },
+  watch: {
+    pile: function (val) {
+      console.log('TROCOU AQUI > ', val);
+    }
   }
 }
 </script>

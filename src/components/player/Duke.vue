@@ -4,10 +4,10 @@
       <img :src="require('../../assets/images/Duke/' + this.$store.state.player.duke.id + '.jpeg')">
     </div>
     <div class="duke-info">
-      <p>
+      <p class="name">
         {{this.$store.state.player.duke.name}}
       </p>
-      <p>
+      <p class="reward-description">
         {{this.$store.state.player.duke.rewardDescription}}
       </p>
     </div>
@@ -44,8 +44,12 @@ export default {
     margin: 10px; 
     border: 1px solid purple;
     border-radius: 5px;
+    color: black;
   }
-  p {
-    font-size: 14px;
+  .duke-info .name {
+    font-size: 18px;
+  }
+  .duke-info .reward-description {
+    font-size: 12px;
   }
 </style>
