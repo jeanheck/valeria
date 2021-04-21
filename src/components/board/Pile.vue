@@ -41,9 +41,7 @@ export default {
           class: 'domain',
           backgroundSize: '180px 250px'
         },
-      },
-      card: require(`../../assets/images/${this.type}/${this.getCardAtTheTop().id}.jpg`),
-      card2: this.getImage()
+      }
     }
   },
   methods: {
@@ -75,27 +73,17 @@ export default {
 
         this.removeCardAtTop();
 
-        //this.applyNewBackgroundImage();
-
         doingOneAction(this.$store);
       }else{
         console.log('A ação não pode ser concluída. Você não tem recursos para realizá-la.')
       }
     },
-    /*applyNewBackgroundImage(){
-      console.log('this > ', this);
-    }*/
     getImage(){
       return require(`../../assets/images/${this.type}/${this.getCardAtTheTop().id}.jpg`);
     }
   },
   mounted(){
     console.log('teste > ', this.type);
-  },
-  watch: {
-    pile: function (val) {
-      console.log('TROCOU AQUI > ', val);
-    }
   }
 }
 </script>

@@ -43,7 +43,7 @@ export default {
   }
   .citizens {
     width: 100%; 
-    height: 200px; 
+    height: 380px; 
     border: 1px solid blue;
   }
   .domains {

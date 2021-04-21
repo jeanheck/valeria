@@ -1,5 +1,5 @@
 <template>
-  <div class="player-cards">
+  <div class="player">
     <Citizens :title="'Citizens in Hand'" :cards="this.$store.state.player.buyedCitizens" />
     <Monsters :title="'Killed Monsters'" :cards="this.$store.state.player.killedMonsters" />
 		<Domains :title="'Builded Domains'" :cards="this.$store.state.player.buildedDomains" />
@@ -12,7 +12,7 @@ import Monsters from './cards/Monsters'
 import Domains from './cards/Domains'
 
 export default {
-  name: 'PlayerCards',
+  name: 'Player',
   components: {
     Citizens, Monsters, Domains
   },
@@ -20,7 +20,7 @@ export default {
 </script>
 
 <style scoped>
-  .player-cards {
+  .player {
     width: 40%;
     height: 800px;
     float: left;
