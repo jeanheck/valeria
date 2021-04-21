@@ -10,20 +10,18 @@
 </template>
 
 <script>
-import { startGame, cleanBoard } from '../assets/js/phases/phases.js'
+import { restartGame } from '../assets/js/phases/phases.js'
 
 export default {
   name: 'MenuOptions',
   methods: {
     restart() {
-      cleanBoard(this.$store);
-      startGame(this.$store);
+      restartGame(this.$store);
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .menu-options {
     width: 90%; 

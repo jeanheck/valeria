@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="duke-image">
-      <img :src="require('../../assets/images/Duke/' + this.$store.state.player.duke.id + '.jpeg')">
+      <img :src="getImage()">
     </div>
     <div class="duke-info">
       <p class="name">
@@ -17,13 +17,11 @@
 <script>
 export default {
   name: 'Duke',
-  components: {
-
-  },
-  data() {
-    return {
+  methods: {
+    getImage(){
+      return require(`../../assets/images/Duke/${this.$store.state.player.duke.id}.jpeg`)
     }
-  },
+  }
 }
 </script>
 

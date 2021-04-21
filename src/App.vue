@@ -37,7 +37,7 @@ export default {
     Player,
     MenuOptions
   },
-  mounted(){
+  created(){
     startGame(this.$store);
   }
 }
