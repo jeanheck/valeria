@@ -7,7 +7,7 @@
 
 <script>
 import BankOption from './BankOption'
-import Dices from '../Dices'
+import Dices from '../board/Dices'
 
 export default {
   name: 'Bank',

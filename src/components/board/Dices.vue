@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { rollDices } from '../assets/js/phases/phases.js'
+import { rollDices } from '../../assets/js/phases/phases.js'
 
 export default {
   name: 'Dice',

@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import Bank from './components/resources/Bank'
-import Resources from './components/resources/Resources.vue';
+import Bank from './components/board/Bank'
+import Resources from './components/player/Resources.vue';
 import Duke from './components/player/Duke.vue';
 import Board from './components/board/Board.vue';
 import Player from './components/player/Player.vue';
