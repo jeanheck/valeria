@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { startGame, cleanBoard } from '../../assets/js/phases/phases.js'
+import { startGame, cleanBoard } from '../assets/js/phases/phases.js'
 
 export default {
   name: 'MenuOptions',

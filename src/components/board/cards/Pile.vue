@@ -15,7 +15,7 @@
 import Citizen from './piles/Citizen'
 import Monster from './piles/Monster'
 import Domain from './piles/Domain'
-import { doingOneAction } from '../../assets/js/phases/phases.js'
+import { doingOneAction } from '../../../assets/js/phases/phases.js'
 
 export default {
   name: 'Pile',
@@ -79,7 +79,7 @@ export default {
       }
     },
     getImage(){
-      return require(`../../assets/images/${this.type}/${this.getCardAtTheTop().id}.jpg`);
+      return require(`../../../assets/images/${this.type}/${this.getCardAtTheTop().id}.jpg`);
     }
   },
   mounted(){

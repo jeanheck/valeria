@@ -23,7 +23,7 @@ import Resources from './components/player/Resources.vue';
 import Duke from './components/player/Duke.vue';
 import Board from './components/board/Board.vue';
 import Player from './components/player/Player.vue';
-import MenuOptions from './components/board/MenuOptions';
+import MenuOptions from './components/MenuOptions';
 
 import { startGame } from './assets/js/phases/phases.js'
 

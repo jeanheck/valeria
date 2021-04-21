@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Sector from './Sector'
+import Sector from './cards/Sector'
 
 export default {
   name: 'Board',
