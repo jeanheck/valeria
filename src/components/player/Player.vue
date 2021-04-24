@@ -1,21 +1,32 @@
 <template>
   <div class="player">
-    <Citizens :title="'Citizens in Hand'" :cards="this.$store.state.player.buyedCitizens" />
-    <Monsters :title="'Killed Monsters'" :cards="this.$store.state.player.killedMonsters" />
-		<Domains :title="'Builded Domains'" :cards="this.$store.state.player.buildedDomains" />
+    <Sector title="Citizens in Hand" :cards="getGroupedCards(this.$store.state.player.buyedCitizens)" type='Citizen' />
+		<Sector title="Killed Monsters" :cards="getGroupedCards(this.$store.state.player.killedMonsters)" type='Monster' />
+		<Sector title="Builded Domains" :cards="getGroupedCards(this.$store.state.player.buildedDomains)" type='Domain' />
   </div>
 </template>
 
 <script>
-import Citizens from './cards/Citizens'
-import Monsters from './cards/Monsters'
-import Domains from './cards/Domains'
+import Sector from './cards/Sector'
 
 export default {
   name: 'Player',
   components: {
-    Citizens, Monsters, Domains
+    Sector
   },
+  methods: {
+    getGroupedCards(cards) {
+      let uniqueCards = cards.filter((value, index, self) => {
+        return self.indexOf(value) === index;
+      });
+
+      uniqueCards.forEach(unique => {
+        unique['quantity'] = cards.filter(card => card.id == unique.id).length;
+      });
+
+      return uniqueCards
+    }
+  }
 }
 </script>
 

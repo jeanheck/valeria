@@ -1,21 +1,11 @@
 <template>
   <div class="active-effects">
 		<ul>
-			<li v-if="this.$store.state.game.passiveEffects.cancelAdditionalValueToBuy">
-				<b-icon icon="cash" aria-hidden="true"></b-icon>
-				Não paga valor adicional em cidadãos
-			</li>
-			<li v-if="this.$store.state.game.passiveEffects.domainsCostOneGoldLess">
-				<b-icon icon="building" aria-hidden="true"></b-icon>
-				Domínios custam -1 moeda de ouro
-			</li>
-			<li v-if="this.$store.state.game.passiveEffects.oneMagicWhenYouKillAMonster">
-				<b-icon icon="gem" aria-hidden="true"></b-icon>
-				+ 1 mágica para cada monstro que você mate
-			</li>
-			<li v-if="this.$store.state.game.passiveEffects.oneMagicWhenYouBuyACitizen">
-				<b-icon icon="people-fill" aria-hidden="true"></b-icon>
-				+ 1 mágica para cada cidadão que você compre
+			<li v-for="effect in effects" :key="effect.name">
+				<span v-if="effect.status">
+					<b-icon :icon="effect.icon" aria-hidden="true"></b-icon>
+					{{effect.name}}
+				</span>
 			</li>
 		</ul>
   </div>
@@ -23,7 +13,33 @@
 
 <script>
 export default {
-  name: 'ActiveEffects'
+  name: 'ActiveEffects',
+	data(){
+    return {
+      effects: [
+				{
+					name: 'Não paga valor adicional em cidadãos',
+					status: this.$store.state.game.passiveEffects.cancelAdditionalValueToBuy,
+					icon: 'cash'
+				},
+				{
+					name: 'Domínios custam -1 moeda de ouro',
+					status: this.$store.state.game.passiveEffects.domainsCostOneGoldLess,
+					icon: 'building'
+				},
+				{
+					name: '+ 1 mágica para cada monstro que você mate',
+					status: this.$store.state.game.passiveEffects.oneMagicWhenYouKillAMonster,
+					icon: 'gem'
+				},
+				{
+					name: '+ 1 mágica para cada cidadão que você compre',
+					status: this.$store.state.game.passiveEffects.oneMagicWhenYouBuyACitizen,
+					icon: 'people-fill'
+				},
+			]
+    }
+  },
 }
 </script>
 
@@ -42,5 +58,6 @@ export default {
     font-size: 15px;
 		margin: 0;
     padding: 0;
+		margin-left: 10px;
   }
 </style>

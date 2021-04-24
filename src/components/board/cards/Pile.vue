@@ -81,9 +81,6 @@ export default {
     getImage(){
       return require(`../../../assets/images/${this.type}/${this.getCardAtTheTop().id}.jpg`);
     }
-  },
-  mounted(){
-    console.log('teste > ', this.type);
   }
 }
 </script>

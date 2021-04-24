@@ -21,10 +21,12 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   p {
+    font-size: 20px;
+    font-weight: 400;
     margin-bottom: 10px;
+    text-align: center;
   }
   .domains {
     width: 250px; 

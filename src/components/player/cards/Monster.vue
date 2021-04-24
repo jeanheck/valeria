@@ -1,11 +1,5 @@
 <template>
-  <div 
-    class="monster"
-    :style="{ 
-      backgroundImage: 'url(' + image + ')', 
-      backgroundSize: '210px 250px'
-    }">
-
+  <div>
     <p>
       <b-button 
         :disabled="true"
@@ -24,27 +18,11 @@ export default {
   name: 'Monster',
   props: {
     card: Object
-  },
-  data(){
-    return {
-      image: require(`../../../assets/images/Monster/${this.card.id}.jpg`) ,
-    }
   }
 }
 </script>
 
 <style scoped>
-	.monster {
-    width: 85%; 
-    height: 175px; 
-    border: 1px solid brown;
-    float: right;
-    position: relative;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 5px;
-    margin-bottom: -100px;
-  }
   .name {
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;

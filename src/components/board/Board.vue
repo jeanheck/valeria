@@ -1,8 +1,8 @@
 <template>
   <div class="board">
-    <Sector :piles="this.$store.state.board.monsters" :pileType="'Monster'" />
-    <Sector :piles="this.$store.state.board.citizens" :pileType="'Citizen'" />
-    <Sector :piles="this.$store.state.board.domains" :pileType="'Domain'" />
+    <Sector :piles="this.$store.state.board.monsters" pileType="Monster" />
+    <Sector :piles="this.$store.state.board.citizens" pileType="Citizen" />
+    <Sector :piles="this.$store.state.board.domains" pileType="Domain" />
   </div>
 </template>
 

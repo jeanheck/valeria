@@ -1,22 +1,23 @@
 <template>
-  <div class="monsters">
+  <div class="sector">
     <p>{{title}}</p>
 
-    <Monster v-for="card in cards" :card="card" :key="card.id + Math.random()"/>
+    <Card v-for="card in cards" :card="card" :key="card.id + Math.random()" :type="type"/>
   </div>
 </template>
 
 <script>
-import Monster from './Monster'
+import Card from './Card'
 
 export default {
-  name: 'Monsters',
+  name: 'Sector',
   props: {
     title: String,
+    type: String,
     cards: Array
   },
   components: {
-    Monster
+    Card
   },
 }
 </script>
@@ -28,10 +29,10 @@ export default {
     margin-bottom: 10px;
     text-align: center;
   }
-  .monsters {
+  .sector {
     width: 250px; 
     height: 810px; 
-    border: 1px solid brown; 
+    border: 1px solid black; 
     float: left;
   }
 </style>

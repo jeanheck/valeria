@@ -1,11 +1,5 @@
 <template>
-  <div 
-    class="domain"
-    :style="{ 
-      backgroundImage: 'url(' + image + ')', 
-      backgroundSize: '210px 270px'
-    }">
-
+  <div>
     <p>
       <b-button 
         :disabled="true"
@@ -24,27 +18,11 @@ export default {
   name: 'Domain',
   props: {
     card: Object
-  },
-  data(){
-    return {
-      image: require(`../../../assets/images/Domain/${this.card.id}.jpg`) ,
-    }
   }
 }
 </script>
 
 <style scoped>
-	.domain {
-    width: 85%; 
-    height: 175px; 
-    border: 1px solid green;
-    float: right;
-    position: relative;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 5px;
-    margin-bottom: -110px;
-  }
   .name {
     color: white;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
