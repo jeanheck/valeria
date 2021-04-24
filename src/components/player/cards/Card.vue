@@ -15,9 +15,9 @@
 </template>
 
 <script>
-import Citizen from './Citizen'
-import Monster from './Monster'
-import Domain from './Domain'
+import Citizen from './piles/Citizen'
+import Monster from './piles/Monster'
+import Domain from './piles/Domain'
 
 export default {
   name: 'Card',
