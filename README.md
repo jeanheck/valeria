@@ -1,6 +1,6 @@
 # valeria
 
-I have bought Caleria Card Kingdoms one year ago, and I started to develop this "virtual and local" version. This is not equal to the normal game yet, because I was just using this to practice Vue.js and I don't know how to do all the things yet. It's just a test, to see if I'm able to reproduce this game, that I like a loot, in a virtual environment.
+I have bought Valeria Card Kingdoms one year ago, and I started to develop this "virtual and local" version. This is not equal to the normal game yet, because I was just using this to practice Vue.js and I don't know how to do all the things yet. It's just a test, to see if I'm able to reproduce this game, that I like a loot, in a virtual environment.
 
 ## Project setup
 ```
