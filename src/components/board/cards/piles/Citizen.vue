@@ -41,7 +41,7 @@ export default {
       let player_magic_points = this.$store.state.player.resources.magic;
 
       if(player_gold_points >= 1){
-        if((player_magic_points + player_gold_points) >= citizen.cost - this.getAditionalValueToBuy()){
+        if((player_magic_points + player_gold_points) >= (citizen.cost + this.getAditionalValueToBuy())){
           return true;
         }
       }else{
@@ -51,24 +51,25 @@ export default {
     subtractPlayerResources(citizen){
       let player_gold_points = this.$store.state.player.resources.gold;
       let player_magic_points = this.$store.state.player.resources.magic;
+      const citizen_cost = citizen.cost + this.getAditionalValueToBuy();
 
-      let minimum_gold_require = citizen.cost - player_magic_points;
+      let minimum_gold_require = citizen_cost - player_magic_points;
       //Se tiver muitos pontos de mágica, ele precisa de só 1 de gold
       //Mas precisa desse 1 ponto, pelo menos. Comprar só com mágica não pode
       minimum_gold_require = minimum_gold_require <= 0 ? 1 : minimum_gold_require;
 
       let gold_amount_choose = 0;
       do {
-        gold_amount_choose = prompt(`Type the Gold Amount you want to use:\nYou have: ${player_gold_points}\nMinimum required: ${minimum_gold_require})\nCitizen cost: ${citizen.cost})`);
-      } while (gold_amount_choose < minimum_gold_require || gold_amount_choose > player_gold_points || gold_amount_choose > citizen.cost);
+        gold_amount_choose = prompt(`Type the Gold Amount you want to use:\nYou have: ${player_gold_points}\nMinimum required: ${minimum_gold_require})\nCitizen cost: ${citizen_cost})`);
+      } while (gold_amount_choose < minimum_gold_require || gold_amount_choose > player_gold_points || gold_amount_choose > citizen_cost);
 
-      if(gold_amount_choose == citizen.cost){
+      if(gold_amount_choose == citizen_cost){
         //buy citizen
-        this.$store.commit('removeResource', {type: 'gold', value: citizen.cost})
+        this.$store.commit('removeResource', {type: 'gold', value: citizen_cost})
       }else{
         //complete with magic points and buy citizen
         this.$store.commit('removeResource', {type: 'gold', value: gold_amount_choose})
-        this.$store.commit('removeResource', {type: 'magic', value: citizen.cost - gold_amount_choose})
+        this.$store.commit('removeResource', {type: 'magic', value: citizen_cost - gold_amount_choose})
       }
     },
     checkRewards(){
@@ -78,6 +79,9 @@ export default {
     },
     getAditionalValueToBuy(){
       const additionalValueToBuy = this.$store.state.player.buyedCitizens.filter(item => item.id === this.$parent.getCardAtTheTop().id).length
+      
+      console.log('additionalValueToBuy > ', additionalValueToBuy)
+
       return this.$store.state.game.passiveEffects.cancelAdditionalValueToBuy ? 0 : additionalValueToBuy;
     },
   }
